@@ -8,7 +8,7 @@
     <description>OS optimizations for Windows 10 build 1809</description>
     <category>OS Optimizations</category>
     <author>Ryan Butler</author>
-    <lastupdatedate>12/9/2018</lastupdatedate>
+    <lastupdatedate>12/17/2018</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
