@@ -7,7 +7,7 @@
     <displayname>Windows 10 build 1809 from Citrix</displayname>
     <description>OS optimizations for Windows 10 build 1809</description>
     <category>OS Optimizations</category>
-    <author>Citrix Systems Inc.</author>
+    <author>Ryan Butler</author>
     <lastupdatedate>12/9/2018</lastupdatedate>
   </metadata>
   <group>
