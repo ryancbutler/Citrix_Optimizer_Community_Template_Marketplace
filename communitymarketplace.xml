@@ -9,7 +9,7 @@
   <templates>
     <template>
       <id>Citrix_Windows_10_1709</id>
-      <version>2.0</version>
+      <version>2.1</version>
       <displayname>TEST TEMPLATE</displayname>
       <description>OS optimizations for Windows 10 build 1709</description>
       <category>OS Optimizations</category>
