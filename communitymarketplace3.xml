@@ -1,0 +1,170 @@
+<root>
+  <metadata>
+    <name>Citrix Community Marketplace</name>
+    <description>
+This marketplace contains templates provided by the Citrix Community
+</description>
+    <author>Ryan Butler</author>
+    <email>ryan@ryancbutler.com</email>
+    <website>www.techdrabble.com</website>
+  </metadata>
+  <templates>
+    <template>
+      <id>Citrix_Windows_10_1607</id>
+      <version>1.1</version>
+      <displayname>Windows 10 build 1607 from Citrix</displayname>
+      <description>OS optimizations for Windows 10 build 1607</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1607.xml
+</url>
+      <checksum />
+      <beta>true</beta>
+    </template>
+    <template>
+      <id>Citrix_Windows_10_1703</id>
+      <version>1.1</version>
+      <displayname>Windows 10 build 1703 from Citrix</displayname>
+      <description>OS optimizations for Windows 10 build 1703</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1703.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_10_1709</id>
+      <version>1.1</version>
+      <displayname>Windows 10 build 1709 from Citrix</displayname>
+      <description>OS optimizations for Windows 10 build 1709</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1709.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_10_1803</id>
+      <version>1.1</version>
+      <displayname>Windows 10 build 1803 from Citrix</displayname>
+      <description>OS optimizations for Windows 10 build 1803</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1803.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_10_1809</id>
+      <version>1.2</version>
+      <displayname>Windows 10 build 1809 from Citrix</displayname>
+      <description>OS optimizations for Windows 10 build 1809</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>12/9/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1809.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_7</id>
+      <version>1.1</version>
+      <displayname>Windows 7 SP1 from Citrix</displayname>
+      <description>OS optimizations for Windows 7 SP1</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_7.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_81</id>
+      <version>1.1</version>
+      <displayname>Windows 8.1 from Citrix</displayname>
+      <description>OS optimizations for Windows 8.1</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_81.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_Server_2008R2</id>
+      <version>1.1</version>
+      <displayname>Windows Server 2008 R2 from Citrix</displayname>
+      <description>OS optimizations for Windows Server 2008 R2</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>11/27/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_Server_2008R2.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_Server_2012R2</id>
+      <version>1.1</version>
+      <displayname>Windows Server 2012 R2 from Citrix</displayname>
+      <description>OS optimizations for Windows Server 2012 R2</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>11/27/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_Server_2012R2.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_Server_2016_1607</id>
+      <version>1.1</version>
+      <displayname>Windows Server 2016 build 1607 from Citrix</displayname>
+      <description>OS optimizations for Windows Server 2016</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>11/27/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_Server_2016_1607.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_Server_2019_1809</id>
+      <version>1.2</version>
+      <displayname>Windows Server 2019 build 1809 from Citrix</displayname>
+      <description>OS optimizations for Windows Server 2019</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>12/9/2018</updatedate>
+      <url>
+https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_Server_2019_1809.xml
+</url>
+      <checksum />
+    </template>
+    <template>
+      <id>Citrix_Windows_10_1709</id>
+      <version>2.0</version>
+      <displayname>TEST TEMPLATE</displayname>
+      <description>OS optimizations for Windows 10 build 1709</description>
+      <category>OS Optimizations</category>
+      <author>Citrix Systems Inc.</author>
+      <updatedate>8/24/2018</updatedate>
+      <url>https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1607.xml</url>
+      <checksum>
+      </checksum>
+      <beta>true</beta>
+    </template>
+  </templates>
+</root>
