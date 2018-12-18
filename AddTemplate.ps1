@@ -1,27 +1,39 @@
-﻿[xml]$XML = get-content ".\Citrix_Windows_10_1709.xml"
-[xml]$mpxml = get-content ".\communitymarketplace.xml"
+﻿cls
+[xml]$mpxml = get-content ".\template.xml"
 
-$metadata = $xml.root.metadata
+$rooturl = "https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates"
 
-$newtemplate = $mpxml.root.templates.AppendChild($mpxml.CreateElement("template"))
+$templates = Get-ChildItem -Path ".\templates\*.xml" -Recurse -Force
+$templatesxml = $mpxml.CreateElement("templates")
+$tempxml = $mpxml.root.AppendChild($templatesxml)
+foreach ($template in $templates)
+{
+    
+    [xml]$XML = get-content $template.FullName
+    $metadata = $xml.root.metadata
 
-$newtemp = [ordered]@{
-id = $metadata.id
-version = $metadata.version
-displayname = $metadata.displayname
-description = $metadata.description
-category = $metadata.category
-author = $metadata.author
-updatedate  = $metadata.lastupdatedate
-url = "https://ctxsym.citrix.com/supportabilitytools/citrixoptimizer/templates/Citrix_Windows_10_1607.xml"
-checksum = "" 
-beta = "true"
+    $newtemplatexml = $mpxml.CreateElement("template")
+    $newtemplate = $tempxml.AppendChild($newtemplatexml)
+
+    $newtemp = [ordered]@{
+    id = $metadata.id
+    version = $metadata.version
+    displayname = $metadata.displayname
+    description = $metadata.description
+    category = $metadata.category
+    author = $metadata.author
+    updatedate  = $metadata.lastupdatedate
+    url = "$rooturl/$($metadata.author -replace " ","%20")/$($template.name)"
+    }
+
+    $newtemp.Keys | ForEach-Object {
+        write-host $_
+        $newXmlElement = $newtemplate.AppendChild($mpxml.CreateElement($_));
+        $newXmlTextNode = $newXmlElement.AppendChild($mpxml.CreateTextNode($newtemp.Item($_)));
+    }
+
+    $newXmlChecksumElement = $newtemplatexml.AppendChild($mpxml.CreateElement("checksum"));
 }
 
-$newtemp.Keys | % {
-write-host $_
-$newXmlElement = $newtemplate.AppendChild($mpxml.CreateElement($_));
-$newXmlTextNode = $newXmlElement.AppendChild($mpxml.CreateTextNode($newtemp.Item($_)));
-}
 
-$mpxml.Save(".\communitymarketplace3.xml")
+$mpxml.Save(".\communitymarketplace.xml")

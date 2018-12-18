@@ -8,17 +8,6 @@
   </metadata>
   <templates>
     <template>
-      <id>Citrix_Windows_10_1809</id>
-      <version>1.2</version>
-      <displayname>Windows 10 build 1809 from Citrix</displayname>
-      <description>OS optimizations for Windows 10 build 1809</description>
-      <category>OS Optimizations</category>
-      <author>Citrix Systems Inc.</author>
-      <updatedate>12/9/2018</updatedate>
-      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Citrix%20Systems%20Inc./Citrix_Windows_10_1809.xml</url>
-      <checksum />
-    </template>
-    <template>
       <id>Citrix_Windows_10_1709</id>
       <version>2.2</version>
       <displayname>TEST TEMPLATE</displayname>
