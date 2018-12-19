@@ -1,9 +1,8 @@
-﻿cls
-[xml]$mpxml = get-content "..\template.xml"
+﻿[xml]$mpxml = get-content "$env:APPVEYOR_BUILD_FOLDER\template.xml"
 
 $rooturl = "https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates"
 
-$templates = Get-ChildItem -Path ".\templates\*.xml" -Recurse -Force
+$templates = Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER\templates\*.xml" -Recurse -Force
 $templatesxml = $mpxml.CreateElement("templates")
 $tempxml = $mpxml.root.AppendChild($templatesxml)
 foreach ($template in $templates)

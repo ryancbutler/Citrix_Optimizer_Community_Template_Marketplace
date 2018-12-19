@@ -20,7 +20,7 @@ else
     {
         git checkout master
         git add --all
-        git commit -m "PSGallery Version Update to $newVersion"
+        git commit -m "XML Version Update to $env:APPVEYOR_BUILD_VERSION"
         git push origin master
         Write-Verbose "Repo has been pushed to github"
     }
