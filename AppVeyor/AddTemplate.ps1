@@ -1,5 +1,5 @@
 ﻿cls
-[xml]$mpxml = get-content ".\template.xml"
+[xml]$mpxml = get-content "..\template.xml"
 
 $rooturl = "https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates"
 
@@ -36,4 +36,4 @@ foreach ($template in $templates)
 }
 
 
-$mpxml.Save(".\communitymarketplace.xml")
+$mpxml.Save("$env:APPVEYOR_BUILD_FOLDER\communitymarketplace.xml")
