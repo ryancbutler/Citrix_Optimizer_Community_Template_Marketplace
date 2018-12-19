@@ -33,9 +33,7 @@ deploy_script:
   - git config --global core.safecrlf false
   - ps: |
       Write-Verbose "Deploying..."
-      . .\AppVeyor\Deploying.ps1 -verbose
+      . .\AppVeyor\deploy.ps1 -verbose
 environment:
-  PSGKey:
-    secure: XbgpBX+B+lBgfWt4379Ez1823W4nLM2zPlOWWvw8zGrvKmZD7/uIlpLYrW4zpjMb
   github:
     secure: qJwCE47jamnSv6Au8wD9CcJmovghdkcm/qoX0IjWa3SDGaeZkGQlQMUlfW9RlsHe
