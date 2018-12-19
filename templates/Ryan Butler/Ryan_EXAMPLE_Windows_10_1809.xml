@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.2</version>
-    <id>Citrix_Windows_10_1809</id>
-    <displayname>Windows 10 build 1809 from Citrix</displayname>
-    <description>OS optimizations for Windows 10 build 1809</description>
+    <version>1.0</version>
+    <id>EXAMPLE_Windows_10_1809</id>
+    <displayname>Windows 10 build 1809 EXAMPLE</displayname>
+    <description>Used to show for EXAMPLE of marketplace </description>
     <category>OS Optimizations</category>
     <author>Ryan Butler</author>
-    <lastupdatedate>12/17/2018</lastupdatedate>
+    <lastupdatedate>12/10/2018</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
