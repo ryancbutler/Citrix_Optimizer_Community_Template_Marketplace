@@ -7,7 +7,7 @@ $templatesxml = $mpxml.CreateElement("templates")
 $tempxml = $mpxml.root.AppendChild($templatesxml)
 foreach ($template in $templates)
 {
-    Write-Verbose "Adding $($template.name)"
+    Write-host "Adding $($template.name)"
     [xml]$XML = get-content $template.FullName
     $metadata = $xml.root.metadata
 
