@@ -1,4 +1,4 @@
-﻿[xml]$mpxml = get-content "$env:APPVEYOR_BUILD_FOLDER\template.xml"
+﻿[xml]$mpxml = get-content "$env:APPVEYOR_BUILD_FOLDER\AppVeyor\template.xml"
 
 $rooturl = "https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates"
 
