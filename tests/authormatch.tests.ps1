@@ -39,3 +39,11 @@ $testCase = $templates | Foreach-Object{@{file=$_}}
         $metadata = $xml.root.metadata
         $file.directory.name | should -Match $metadata.author
     }
+
+$testCase = $templates | Foreach-Object{@{file=$_}}         
+    It "Template <file> should be schemaversion 2.0 or greater" -TestCases $testCase {
+        param($file)
+        [xml]$XML = get-content $file.FullName
+        $metadata = $xml.root.metadata
+        $metadata.schemaversion| should -BeGreaterOrEqual 2
+    }
