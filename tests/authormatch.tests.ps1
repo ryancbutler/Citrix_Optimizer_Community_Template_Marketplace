@@ -47,3 +47,10 @@ $testCase = $templates | Foreach-Object{@{file=$_}}
         $metadata = $xml.root.metadata
         $metadata.schemaversion| should -BeGreaterOrEqual 2
     }
+
+Describe "Duplicate XML file name check "{
+    it "Check for unique template file names" {
+        $templatecount = $templates | Group-Object name | Where-Object count -gt 1
+        $templatecount.count | should -Not -BeGreaterThan 0
+    }
+}
