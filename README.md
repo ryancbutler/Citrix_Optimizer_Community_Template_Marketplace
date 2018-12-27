@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ji7x6c05hnv0ik3o/branch/master?svg=true)](https://ci.appveyor.com/project/ryancbutler/citrix-optimizer-community-template-marketplace/branch/master)
+
 # Citrix Optimizer Community Template Marketplace
 Currated list of custom templates created by the Citrix Community that can be added to [Citrix Optimizer](https://support.citrix.com/article/CTX224676)
 
