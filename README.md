@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ji7x6c05hnv0ik3o/branch/master?svg=true)](https://ci.appveyor.com/project/ryancbutler/citrix-optimizer-community-template-marketplace/branch/master)
 
 # Citrix Optimizer Community Template Marketplace
-Currated list of custom templates created by the Citrix Community that can be added to [Citrix Optimizer](https://support.citrix.com/article/CTX224676)
+Currated list of custom templates created by the Citrix Community that can be added to [Citrix Optimizer](https://support.citrix.com/article/CTX224676). See [Blog Post](https://www.techdrabble.com/citrix/35-citrix-optimizer-community-template-marketplace) for more detail.
 
 ## To Use Community Marketplace
 NOTE: You must be using **Citrix Optimizer 2.0** or higher
