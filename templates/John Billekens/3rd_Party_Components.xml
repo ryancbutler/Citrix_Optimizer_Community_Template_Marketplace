@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>0.2</version>
+    <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
+    <displayname>Disable 3rd Party Components</displayname>
+    <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
+    <category>OS Optimizations</category>
+    <author>John Billekens</author>
+    <lastupdatedate>24-01-2019</lastupdatedate>
+  </metadata>
+  <group>
+    <id>Adobe</id>
+    <displayname>Adobe</displayname>
+    <description>Configures Adobe items</description>
+    <entry>
+      <name>Adobe Acrobat Update Task</name>
+      <description>This task keeps your Adobe Reader and Acrobat applications up to date with the latest enhancements and security fixes</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Adobe Acrobat Update Task</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Acrobat Update Service (ARM)</name>
+      <description>Adobe Acrobat Updater keeps your Adobe software up to date.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AdobeARMservice</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Flash Player PPAPI Notifier Task</name>
+      <description>Adobe Flash Player PPAPI Notifier</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Adobe Flash Player PPAPI Notifier</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Flash Player NPAPI Notifier Task</name>
+      <description>Adobe Flash Player NPAPI Notifier</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Adobe Flash Player NPAPI Notifier</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Flash Player Updater Service</name>
+      <description>This service keeps your Adobe Flash Player installation up to date with the latest enhancements</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AdobeFlashPlayerUpdateSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>DropBox</id>
+    <displayname>DropBox</displayname>
+    <description>Configure DropBox items</description>
+    <entry>
+      <name>DropboxUpdateTaskMachineCore Task</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>DropboxUpdateTaskMachineCore</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>DropboxUpdateTaskMachineUA Task</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>DropboxUpdateTaskMachineUA</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Dropbox Update Service (dbupdate)</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>dbupdate</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Dropbox Update Service (dbupdatem)</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>dbupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Google</id>
+    <displayname>Google</displayname>
+    <description>Configures Google items</description>
+    <entry>
+      <name>GoogleUpdateTaskMachineUA Task</name>
+      <description>Google Automatic Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>GoogleUpdateTaskMachineUA</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>GoogleUpdateTaskMachineCore Task</name>
+      <description>Google Automatic Update Core</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>GoogleUpdateTaskMachineCore</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update Service (gupdate)</name>
+      <description>Google Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>gupdate</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update Service (gupdatem)</name>
+      <description>Google Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>gupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Chome Elevation Service</name>
+      <description>Currently the elevation service is only installed for Google Chrome builds. The Primary use case at the moment for the service has to do with the Chrome recovery component. The recovery component is registered only for Google Chrome builds. It repairs Chrome Updater (Google Update) when the algorithm detects that Chrome is not being updated. Since Chrome could be installed per-system or per-user, an elevation service is needed to repair code in the per-system install case.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>GoogleChromeElevationService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Citrix</id>
+    <displayname>Citrix</displayname>
+    <description>XenServer Management Agent Automatic Update Service</description>
+    <entry>
+      <name>Citrix Management Agent Auto-Updater</name>
+      <description>Citrix (Hypervisor) Management Agent Auto-Updater</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Citrix Management Agent Auto-Updater</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Citrix Personal vDisk Service</name>
+      <description>Citrix Personal vDisk Service</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CitrixPvD</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Citrix Profile Manager Service</name>
+      <description>Citrix Profile Manager Service</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CitrixPvD</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Microsoft</id>
+    <displayname>Microsoft</displayname>
+    <description>Configure Microsoft items</description>
+    <entry>
+      <name>Configuration Manager Health Evaluation Task</name>
+      <description>System Center Configuration Manager</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Configuration Manager Health Evaluation</name>
+          <path>\Microsoft\Configuration Manager\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Configuration Manager Idle Detection Task</name>
+      <description>Configuration Manager Idle Detection</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Configuration Manager Idle Detection</name>
+          <path>\Microsoft\Configuration Manager\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Configuration Manager Maintenance Task</name>
+      <description>Configuration Manager Maintenance</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Configuration Manager Maintenance</name>
+          <path>\microsoft\Configuration Manager\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>System Center SMS Agent Host Service</name>
+      <description>System Center SMS Agent Host Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CCMExec</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Mozilla</id>
+    <displayname>Mozilla</displayname>
+    <description>Configure Mozilla items</description>
+    <entry>
+      <name>Mozilla Maintenance Service</name>
+      <description>Mozilla Maintenance Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>MozillaMaintenance</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Ivanti</id>
+    <displayname>Ivanti</displayname>
+    <description>Configure Ivanti items</description>
+    <entry>
+      <name>Ivanti Automation Console Service</name>
+      <description>Ivanti Automation Console Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>RESWCS</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+</root>
