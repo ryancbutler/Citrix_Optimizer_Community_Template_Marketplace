@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.2</version>
+    <version>0.3</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
     <displayname>Disable 3rd Party Components</displayname>
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>24-01-2019</lastupdatedate>
+    <lastupdatedate>05-02-2019</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
@@ -41,7 +41,7 @@
     </entry>
     <entry>
       <name>Adobe Flash Player PPAPI Notifier Task</name>
-      <description>Adobe Flash Player PPAPI Notifier</description>
+      <description>This task keeps your Adobe Flash PPAPI Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -54,12 +54,25 @@
     </entry>
     <entry>
       <name>Adobe Flash Player NPAPI Notifier Task</name>
-      <description>Adobe Flash Player NPAPI Notifier</description>
+      <description>This task keeps your Adobe Flash NPAPI Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
           <name>Adobe Flash Player NPAPI Notifier</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Flash Player Updater</name>
+      <description>This task keeps your Adobe Flash Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Adobe Flash Player Updater</name>
           <path>\</path>
           <value>Disabled</value>
         </params>
