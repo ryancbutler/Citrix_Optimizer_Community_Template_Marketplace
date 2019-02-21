@@ -8,6 +8,17 @@
   </metadata>
   <templates>
     <template>
+      <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
+      <version>0.3</version>
+      <displayname>Disable 3rd Party Components</displayname>
+      <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>05-02-2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/3rd_Party_Components.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>EXAMPLE_Windows_10_1809</id>
       <version>1.0</version>
       <displayname>Windows 10 build 1809 EXAMPLE</displayname>
