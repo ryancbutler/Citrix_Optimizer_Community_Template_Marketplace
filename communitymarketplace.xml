@@ -14,7 +14,7 @@
       <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>05-02-2019</updatedate>
+      <updatedate>02/05/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/3rd_Party_Components.xml</url>
       <checksum />
     </template>
