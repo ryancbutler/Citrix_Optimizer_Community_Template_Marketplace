@@ -9,7 +9,7 @@
   <templates>
     <template>
       <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
-      <version>1.3</version>
+      <version>0.3</version>
       <displayname>Disable 3rd Party Components</displayname>
       <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
       <category>OS Optimizations</category>
