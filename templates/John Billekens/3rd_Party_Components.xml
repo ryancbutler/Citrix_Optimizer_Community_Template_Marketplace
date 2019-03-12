@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.3</version>
+    <version>0.4</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
     <displayname>Disable 3rd Party Components</displayname>
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>05-02-2019</lastupdatedate>
+    <lastupdatedate>3-12-2019</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
@@ -244,12 +244,13 @@
     </entry>
     <entry>
       <name>Citrix Profile Manager Service</name>
-      <description>Citrix Profile Manager Service</description>
+      <description>Citrix Profile Manager Service
+NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000) is required for the Director to measure Login duration.</description>
       <execute>0</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>CitrixPvD</name>
+          <name>ctxProfile</name>
           <value>Disabled</value>
         </params>
       </action>
