@@ -48,6 +48,15 @@ $testCase = $templates | Foreach-Object{@{file=$_}}
         $metadata.schemaversion| should -BeGreaterOrEqual 2
     }
 
+$testCase = $templates | Foreach-Object{@{file=$_}}         
+    It "Template <file> should have a valid date format (MM/DD/YYYY)" -TestCases $testCase {
+        param($file)
+        [xml]$XML = get-content $file.FullName
+        $metadata = $xml.root.metadata
+        (test-date $metadata.lastupdatedate).test| Should -be "True"
+        [DateTime]::ParseExact($metadata.lastupdatedate,'MM\/dd\/yyyy',$null)
+    }
+
 Describe "Duplicate XML file name check "{
     it "Check for unique template file names" {
         $templatecount = $templates | Group-Object name | Where-Object count -gt 1
