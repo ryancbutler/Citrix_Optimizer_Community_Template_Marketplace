@@ -8,6 +8,17 @@
   </metadata>
   <templates>
     <template>
+      <id>Windows_Server_2016_build_1607_dennisspan.com</id>
+      <version>1.0</version>
+      <displayname>Windows Server 2016 1607 (Dennisspan.com)</displayname>
+      <description>OS optimizations for Windows Server 2016 build 1607 (Dennisspan.com)</description>
+      <category>OS Optimizations</category>
+      <author>Dennis Span</author>
+      <updatedate>03/15/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Dennis%20Span/Citrix_Windows_Server_2016_1607_Dennisspan.com.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
       <version>0.4</version>
       <displayname>Disable 3rd Party Components</displayname>
