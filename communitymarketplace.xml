@@ -26,7 +26,18 @@
       <category>OS Optimizations</category>
       <author>John Billekens</author>
       <updatedate>03/12/2019</updatedate>
-      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/3rd_Party_Components.xml</url>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_3rd_Party_Components.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>9F6F8353-6BA1-47D7-815D-51C5B2CC83ED</id>
+      <version>0.1</version>
+      <displayname>Windows 10 build 1903 from John Billekens</displayname>
+      <description>OS optimizations for Windows 10 build 1903</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>05/16/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1903.xml</url>
       <checksum />
     </template>
   </templates>
