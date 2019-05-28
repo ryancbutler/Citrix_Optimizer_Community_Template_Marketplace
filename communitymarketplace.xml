@@ -8,6 +8,17 @@
   </metadata>
   <templates>
     <template>
+      <id>FFD3E515-9D47-465E-AD8C-765FEDAC2523</id>
+      <version>1.0</version>
+      <displayname>Windows Server 2016 build 1607 (Wilkyit.com)</displayname>
+      <description>Windows Server 2016 build 1607 (Wilkyit.com)</description>
+      <category>OS Optimizations</category>
+      <author>David Wilkinson</author>
+      <updatedate>05/27/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_Server_2016_1607_wilkyit.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>Windows_Server_2016_build_1607_dennisspan.com</id>
       <version>1.0</version>
       <displayname>Windows Server 2016 1607 (Dennisspan.com)</displayname>
