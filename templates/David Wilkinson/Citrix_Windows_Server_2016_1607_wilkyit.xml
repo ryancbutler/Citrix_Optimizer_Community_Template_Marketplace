@@ -9,8 +9,6 @@
     <category>OS Optimizations</category>
     <author>David Wilkinson</author>
     <lastupdatedate>05/27/2019</lastupdatedate>
-    <analyze_not_supported />
-    <execute_not_supported />
   </metadata>
   <group>
     <id>DisableServices</id>
