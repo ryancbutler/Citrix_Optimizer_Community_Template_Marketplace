@@ -18,7 +18,6 @@ NOTE: You must be using **Citrix Optimizer 2.0** or higher
 1. Create a fork of this repo
 2. Create a new folder under the *templates* folder reflecting the author of the template
 3. Copy any created templates to this new folder
-    - Checkout "Ryan Butler" folder for example
 4. (Optional) Add a README.md to your author folder if desired with anything you desire
 5. Commit and push any changes to your fork (**NO NEED TO EDIT communitymarketplace.xml**)
 6. Create Pull Request making sure to fill out the questionaire
