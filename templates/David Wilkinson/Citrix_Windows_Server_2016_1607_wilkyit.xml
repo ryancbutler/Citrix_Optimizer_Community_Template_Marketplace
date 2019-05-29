@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.0</version>
+    <version>1.1</version>
     <id>FFD3E515-9D47-465E-AD8C-765FEDAC2523</id>
     <displayname>Windows Server 2016 build 1607 (Wilkyit.com)</displayname>
     <description>Windows Server 2016 build 1607 (Wilkyit.com)</description>
     <category>OS Optimizations</category>
     <author>David Wilkinson</author>
-    <lastupdatedate>05/27/2019</lastupdatedate>
+    <lastupdatedate>05/28/2019</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
@@ -136,7 +136,7 @@
     </entry>
     <entry>
       <name>Function Discovery Provider Host</name>
-      <description>The FDPHOST service hosts the Function Discovery (FD) network discovery providers. These FD providers supply network discovery services for the Simple Services Discovery Protocol (SSDP) and Web Services – Discovery (WS-D) protocol. Stopping or disabling the FDPHOST service will disable network discovery for these protocols when using FD. When this service is unavailable, network services using FD and relying on these discovery protocols will be unable to find network devices or resources.</description>
+      <description>The FDPHOST service hosts the Function Discovery (FD) network discovery providers. These FD providers supply network discovery services for the Simple Services Discovery Protocol (SSDP) and Web Services â€“ Discovery (WS-D) protocol. Stopping or disabling the FDPHOST service will disable network discovery for these protocols when using FD. When this service is unavailable, network services using FD and relying on these discovery protocols will be unable to find network devices or resources.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
@@ -503,7 +503,7 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         <plugin>Services</plugin>
         <params>
           <name>dot3svc</name>
-          <value>Enabled</value>
+          <value>Disabled</value>
         </params>
       </action>
     </entry>
@@ -1006,7 +1006,7 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
     </entry>
     <entry>
       <name>WinSAT</name>
-      <description>Measures a system’s performance and capabilities.</description>
+      <description>Measures a systemâ€™s performance and capabilities.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1045,8 +1045,8 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
     </entry>
   </group>
   <group>
-    <id>Miscellaneous</id>
-    <displayname>Miscellaneous</displayname>
+    <id>Miscellaneous/Tunning</id>
+    <displayname>Miscellaneous/Tunning</displayname>
     <description>Various optimizations and tweaks for VDI\RDS virtual machines</description>
     <entry>
       <name>Disable background auto-layout</name>
@@ -1141,8 +1141,8 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         <params>
           <name>TimeOutValue</name>
           <path>HKLM\SYSTEM\CurrentControlSet\Services\Disk</path>
-          <value>0x000000C8</value>
-          <valuetype>DWORD</valuetype>
+          <value>200</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
@@ -1245,8 +1245,8 @@ Events</description>
       </action>
     </entry>
     <entry>
-      <name>Additional Worker Thread – To Increaase I/O Performance</name>
-      <description>Additional Worker Thread – To Increaase I/O Performance</description>
+      <name>Additional Worker Thread â€“ To Increaase I/O Performance</name>
+      <description>Additional Worker Thread â€“ To Increaase I/O Performance</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
@@ -1254,20 +1254,6 @@ Events</description>
           <name>AdditionalCriticalWorkerThreads</name>
           <path>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive</path>
           <value>64</value>
-          <valuetype>Dword</valuetype>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Remove Quick Access from File Menu</name>
-      <description>Remove Quick Access from File Menu</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Registry</plugin>
-        <params>
-          <name>Attributes</name>
-          <path>HKCR\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\ShellFolder</path>
-          <value>2690646016</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -1460,9 +1446,17 @@ Events</description>
       <execute>1</execute>
       <action>
         <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value>$Global:CTXOE_Result =$false</value>
+        </analyzeparams>
         <executeparams>
-          <value>netsh int tcp set global rss=disabled</value>
+          <value>netsh int tcp set global rss=disabled
+$Global:CTXOE_Result =$true</value>
         </executeparams>
+        <rollbackparams>
+          <value>netsh int tcp set global rss=enabled
+$Global:CTXOE_Result =$true</value>
+        </rollbackparams>
       </action>
     </entry>
     <entry>
@@ -1508,31 +1502,82 @@ Events</description>
       </action>
     </entry>
     <entry>
-      <name>Switch Off Hibernate</name>
-      <description>Switch Off Hibernate</description>
-      <execute>1</execute>
-      <action>
-        <plugin>PowerShell</plugin>
-        <executeparams>
-          <value>Powercfg -h off</value>
-        </executeparams>
-      </action>
-    </entry>
-    <entry>
       <name>Set PowerPlan to High Performance</name>
       <description>Set PowerPlan to High Performance</description>
       <execute>1</execute>
       <action>
         <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value># Get power plan through registry (version 1803 and up)
+
+[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+
+# We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+$Global:CTXOE_Result = $m_CurrentPlanID -eq $m_DesiredPlanID;
+
+If ($Global:CTXOE_Result -eq $True) {
+$Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
+} Else {
+$Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID";
+}
+
+Return;</value>
+        </analyzeparams>
         <executeparams>
-          <value>Try {
-$HighPerf = powercfg -l | %{if($_.contains(“High performance”)) {$_.split()[3]}}
-$CurrPlan = $(powercfg -getactivescheme).split()[3]
-if ($CurrPlan -ne $HighPerf) {powercfg -setactive $HighPerf}
-} Catch {
-Write-Warning -Message “Unable to set power plan to high performance”
-}</value>
+          <value>[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+
+# We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+If ($m_CurrentPlanID -eq $m_DesiredPlanID) {
+              $Global:CTXOE_Result = $True; 
+              $Global:CTXOE_Details = "Mode already configured, skipping";    
+              Return;
+}
+
+# Try to change power management plan
+PowerCfg /SetActive $m_DesiredPlanID;
+
+# Retrieve current power management plan
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+$Global:CTXOE_Result = $m_CurrentPlanID -eq $m_DesiredPlanID;
+
+If ($Global:CTXOE_Result -eq $True) {
+$Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
+} Else {
+$Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID. You cannot use this optimization if power management scheme is configured through Group Policy.";
+}
+</value>
         </executeparams>
+      </action>
+    </entry>
+    <entry>
+      <name>Set Hibernate Off</name>
+      <description>Set Hibernate Off</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value>$Global:CTXOE_Result = $false</value>
+        </analyzeparams>
+        <executeparams>
+          <value>powercfg /H off
+$Global:CTXOE_Result = $true
+Return;</value>
+        </executeparams>
+        <rollbackparams>
+          <value>powercfg /H on
+$Global:CTXOE_Result = $true</value>
+        </rollbackparams>
       </action>
     </entry>
   </group>
