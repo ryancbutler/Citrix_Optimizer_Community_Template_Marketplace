@@ -19,6 +19,50 @@
       <checksum />
     </template>
     <template>
+      <id>81F8119D-2A2F-4B48-B75C-03C5E03868CD</id>
+      <version>1.0</version>
+      <displayname>Windows 10 build 1709 (Wilkyit.com)</displayname>
+      <description>Windows 10 build 1709 (Wilkyit.com)</description>
+      <category>OS Optimizations</category>
+      <author>David Wilkinson</author>
+      <updatedate>05/29/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1709_Wilkyit.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>C63E0C63-4040-4E2B-B677-B0CC93291F59</id>
+      <version>1.0</version>
+      <displayname>Windows 10 build 1803 (Wilkyit.com)</displayname>
+      <description>Windows 10 build 1803 (Wilkyit.com)</description>
+      <category>OS Optimizations</category>
+      <author>David Wilkinson</author>
+      <updatedate>05/31/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1803_Wilkyit.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>14D25531-50CF-48C9-9B10-651F864599AA</id>
+      <version>1.0</version>
+      <displayname>Windows 10 build 1809 (Wilkyit.com)</displayname>
+      <description>Windows 10 build 1809 (Wilkyit.com)</description>
+      <category>OS Optimizations</category>
+      <author>David Wilkinson</author>
+      <updatedate>05/29/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1809_Wilkyit.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>92270B32-A35D-48E5-BCA6-D35B15D6C0C8</id>
+      <version>1.0</version>
+      <displayname>Windows 10 build 1903 (Wilkyit.com)</displayname>
+      <description>Windows 10 build 1903 (Wilkyit.com)</description>
+      <category>OS Optimizations</category>
+      <author>David Wilkinson</author>
+      <updatedate>06/01/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1903_Wilkyit.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>FFD3E515-9D47-465E-AD8C-765FEDAC2523</id>
       <version>1.1</version>
       <displayname>Windows Server 2016 build 1607 (Wilkyit.com)</displayname>
