@@ -49,7 +49,7 @@ $testCase = $templates | Foreach-Object{@{file=$_}}
     }
 
 $testCase = $templates | Foreach-Object{@{file=$_}}         
-    It "Template <file> should have a valid date format (MM/DD/YYYY)" -TestCases $testCase {
+    It "Template <file> should have a valid date format (M/DD/YYYY)" -TestCases $testCase {
         param($file)
         [xml]$XML = get-content $file.FullName
         $metadata = $xml.root.metadata
