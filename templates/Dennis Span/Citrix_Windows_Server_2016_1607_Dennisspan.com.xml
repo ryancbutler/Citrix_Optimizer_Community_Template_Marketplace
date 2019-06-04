@@ -8,7 +8,7 @@
     <description>OS optimizations for Windows Server 2016 build 1607 (Dennisspan.com)</description>
     <category>OS Optimizations</category>
     <author>Dennis Span</author>
-    <lastupdatedate>03/15/2019</lastupdatedate>
+    <lastupdatedate>3/15/2019</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>

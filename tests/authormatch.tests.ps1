@@ -54,7 +54,7 @@ $testCase = $templates | Foreach-Object{@{file=$_}}
         [xml]$XML = get-content $file.FullName
         $metadata = $xml.root.metadata
         #(test-date $metadata.lastupdatedate).test| Should -be "True"
-        [DateTime]::ParseExact($metadata.lastupdatedate,'MM\/dd\/yyyy',$null)
+        [DateTime]::ParseExact($metadata.lastupdatedate,'M\/dd\/yyyy',$null)
     }
 
 Describe "Duplicate XML file name check "{
