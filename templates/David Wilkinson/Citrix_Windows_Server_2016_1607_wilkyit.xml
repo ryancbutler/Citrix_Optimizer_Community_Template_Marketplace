@@ -8,7 +8,7 @@
     <description>Windows Server 2016 build 1607 (Wilkyit.com)</description>
     <category>OS Optimizations</category>
     <author>David Wilkinson</author>
-    <lastupdatedate>05/28/2019</lastupdatedate>
+    <lastupdatedate>5/28/2019</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>

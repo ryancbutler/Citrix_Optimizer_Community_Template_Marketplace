@@ -25,4 +25,4 @@ NOTE: You must be using **Citrix Optimizer 2.0** or higher
     - Author of the template file must match directory name
     - Template display name must be unique for all templates
     - Template ID must be unique for all templates
-    - lastupdatedate date format should be **MM/DD/YYYY**
+    - lastupdatedate date format should be **M/DD/YYYY**
