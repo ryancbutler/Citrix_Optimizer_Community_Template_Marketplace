@@ -14,7 +14,7 @@
       <description>Windows 10 build 1703 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>05/29/2019</updatedate>
+      <updatedate>5/29/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1703_Wilkyit.xml</url>
       <checksum />
     </template>
@@ -25,7 +25,7 @@
       <description>Windows 10 build 1709 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>05/29/2019</updatedate>
+      <updatedate>5/29/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1709_Wilkyit.xml</url>
       <checksum />
     </template>
@@ -36,7 +36,7 @@
       <description>Windows 10 build 1803 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>05/31/2019</updatedate>
+      <updatedate>5/31/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1803_Wilkyit.xml</url>
       <checksum />
     </template>
@@ -47,7 +47,7 @@
       <description>Windows 10 build 1809 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>05/29/2019</updatedate>
+      <updatedate>5/29/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1809_Wilkyit.xml</url>
       <checksum />
     </template>
@@ -58,7 +58,7 @@
       <description>Windows 10 build 1903 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>06/01/2019</updatedate>
+      <updatedate>6/01/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_10_1903_Wilkyit.xml</url>
       <checksum />
     </template>
@@ -69,7 +69,7 @@
       <description>Windows Server 2016 build 1607 (Wilkyit.com)</description>
       <category>OS Optimizations</category>
       <author>David Wilkinson</author>
-      <updatedate>05/28/2019</updatedate>
+      <updatedate>5/28/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/David%20Wilkinson/Citrix_Windows_Server_2016_1607_wilkyit.xml</url>
       <checksum />
     </template>
@@ -80,7 +80,7 @@
       <description>OS optimizations for Windows Server 2016 build 1607 (Dennisspan.com)</description>
       <category>OS Optimizations</category>
       <author>Dennis Span</author>
-      <updatedate>03/15/2019</updatedate>
+      <updatedate>3/15/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Dennis%20Span/Citrix_Windows_Server_2016_1607_Dennisspan.com.xml</url>
       <checksum />
     </template>
@@ -91,7 +91,7 @@
       <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>03/12/2019</updatedate>
+      <updatedate>3/12/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_3rd_Party_Components.xml</url>
       <checksum />
     </template>
@@ -102,7 +102,7 @@
       <description>OS optimizations for Windows 10 build 1903</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>05/16/2019</updatedate>
+      <updatedate>5/16/2019</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1903.xml</url>
       <checksum />
     </template>
