@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>1.0</version>
+    <id>7CA5AB82-A9C8-4B09-8886-F987F3341A6E</id>
+    <displayname>User Profile  Optimizations (Rob Zylowski)</displayname>
+    <description>The most commonly used optimizations for user experience when using VDI or RDSH (Rob Zylowski).  Deployed by modifying the default profile.</description>
+    <category>User Profile Optimizations</category>
+    <author>Rob Zylowski</author>
+    <lastupdatedate>4/24/2019</lastupdatedate>
+  </metadata>
+  <group>
+    <id>General</id>
+    <displayname>General</displayname>
+    <description>General User Profile Based Optimizations</description>
+    <entry>
+      <name>Disable Screensaver</name>
+      <description>Disable default system screensaver</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value>
+$Key = "Microsoft.PowerShell.Core\Registry::HKEY_USERS\.DEFAULT\Control Panel\Desktop";
+$Name = "ScreenSaveActive";
+$type = "dword";
+$Value = "00000000";
+
+#Lets see if its set
+$Test = Get-ItemProperty -Path $Key -Name $Name;
+if ($Test.ScreenSaveActive -eq "$Value")
+{
+ $Global:CTXOE_Result = $True;
+  $Global:CTXOE_Details = "Setting was successfully";
+}
+else
+{
+ $Global:CTXOE_Result = $False;
+  $Global:CTXOE_Details = "Setting Failed";
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value>$Key = "Microsoft.PowerShell.Core\Registry::HKEY_USERS\.DEFAULT\Control Panel\Desktop";
+$Name = "ScreenSaveActive";
+$type = "dword";
+$Value = "00000000";
+
+New-ItemProperty -Path $Key -Name $Name -Value "$Value" -PropertyType $type -Force &gt; $null;
+if (!$?)
+{
+ $ErrorMessage = $Error[0];
+ $CreateKeyError = $ErrorMessage.Exception;
+ $Global:CTXOE_Result = $False;
+  $Global:CTXOE_Details = "Setting Failed with Error creating key :[$CreateKeyError]";
+ exit;
+}
+
+#Lets make sure it set
+$Test = Get-ItemProperty -Path $Key -Name $Name
+if ($Test.ScreenSaveActive -eq "$Value")
+{
+ $Global:CTXOE_Result = $True;
+  $Global:CTXOE_Details = "Setting was successfully";
+}
+else
+{
+ $Global:CTXOE_Result = $False;
+  $Global:CTXOE_Details = "Setting Failed";
+}</value>
+        </executeparams>
+        <rollbackparams>
+          <value>$Key = "Microsoft.PowerShell.Core\Registry::HKEY_USERS\.DEFAULT\Control Panel\Desktop";
+$Name = "ScreenSaveActive";
+$type = "dword";
+$Value = "00000001";
+
+New-ItemProperty -Path $Key -Name $Name -Value "$Value" -PropertyType $type -Force &gt; $null;
+if (!$?)
+{
+ $ErrorMessage = $Error[0];
+ $CreateKeyError = $ErrorMessage.Exception;
+ $Global:CTXOE_Result = $False;
+  $Global:CTXOE_Details = "Setting Failed with Error creating key :[$CreateKeyError]";
+ exit;
+}
+
+#Lets make sure it set
+$Test = Get-ItemProperty -Path $Key -Name $Name;
+if ($Test.ScreenSaveActive -eq "$Value")
+{
+ $Global:CTXOE_Result = $True;
+  $Global:CTXOE_Details = "Setting was successfully";
+}
+else
+{
+ $Global:CTXOE_Result = $False;
+  $Global:CTXOE_Details = "Setting Failed";
+}</value>
+        </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>Set Visual Effects to Custom</name>
+      <description>This setting will enable the custom properties for Visual Effects in Windows</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>VisualFXSetting</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects</path>
+          <value>00000003</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Show Translucent Selection</name>
+      <description>Disable showing translucent selection rectangle</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ListviewAlphaSelect</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>00000000</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Show Shadows</name>
+      <description>Disable showing shadows under windows</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ListviewShadow</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>00000000</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Animating Windows</name>
+      <description>Disable animating windows when minimizing and maximizing</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MinAnimate</name>
+          <path>HKDU\Control Panel\Desktop\WindowMetrics</path>
+          <value>0</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Taskbar Animations</name>
+      <description>Disable animations in the taskbar</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>TaskbarAnimations</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>00000000</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Enable Peek</name>
+      <description>Disable Enable Peek</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableAeroPeek</name>
+          <path>HKDU\Software\Microsoft\Windows\DWM</path>
+          <value>00000000</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Save Taskbar Thumbnail Previews</name>
+      <description>Disable Save Taskbar Thumbnail Previews</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AlwaysHibernateThumbnails</name>
+          <path>HKDU\Software\Microsoft\Windows\DWM</path>
+          <value>00000000</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Clear Type</name>
+      <description>Disable Clear Type ("Smooth edges of screen fonts")</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>FontSmoothing</name>
+          <path>HKDU\Control Panel\Desktop</path>
+          <value>0</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Other Visual Effects</name>
+      <description>Disable most other visual effects</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>UserPreferencesMask</name>
+          <path>HKDU\Control Panel\Desktop</path>
+          <value>0x90,0x12,0x01,0x80</value>
+          <valuetype>Binary</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Cursor Blink</name>
+      <description>Disable Cursor Blink Rate</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>CursorBlinkRate </name>
+          <path>HKDU\Control Panel\Desktop</path>
+          <value>-1</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Reduce Menu Show Delay</name>
+      <description>Disable reduce menu show delay</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MenuShowDelay</name>
+          <path>HKDU\Control Panel\Desktop</path>
+          <value>0</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+</root>
