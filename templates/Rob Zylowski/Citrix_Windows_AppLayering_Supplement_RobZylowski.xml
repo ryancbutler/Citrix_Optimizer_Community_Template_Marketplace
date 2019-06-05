@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>1.2</version>
+    <id>Citrix_AppLayering_Supplement_RobZylowski</id>
+    <displayname>App Layering Supplement (Rob Zylowski)</displayname>
+    <description>OS Optimizations for Citrix App Layering (Rob Zylowski)</description>
+    <category>OS Optimizations</category>
+    <author>Rob Zylowski</author>
+    <lastupdatedate>4/24/2019</lastupdatedate>
+  </metadata>
+  <group>
+    <id>Required</id>
+    <displayname>Required</displayname>
+    <description>Required Optimizations for App Layering</description>
+    <entry>
+      <name>Disable System Restore</name>
+      <description>System Restore must be disbaled when using Elastic Layers</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DisableSR</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore</path>
+          <value>1</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Shadow Volume Copy Service</name>
+      <description>The VSS services interferes with Elastic Layering</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>VSS</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Volume Shadow Copy Provider</name>
+      <description>The SWPRV services interferes with Elastic Layering</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>swprv</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Hybernation in Windows</name>
+      <description>Windows Hybernation must be disabled when using App Layering</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value>$test = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Power -name HibernateEnabled
+if ($test.HibernateEnabled -eq "0")
+{
+  $Global:CTXOE_Result = $True
+  $Global:CTXOE_Details = "Hibernate is disabled"
+}
+else
+{
+  $Global:CTXOE_Result = $False
+  $Global:CTXOE_Details = "Hibernate is enabled"
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value>powercfg.exe -H OFF
+$test = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Power -name HibernateEnabled
+if ($test.HibernateEnabled -eq "0")
+{
+ $Global:CTXOE_Result = $True
+  $Global:CTXOE_Details = "Hibernate is disabled"
+}
+else
+{
+  $Global:CTXOE_Result = $False
+  $Global:CTXOE_Details = "Hibernate is enabled"
+}</value>
+        </executeparams>
+        <rollbackparams>
+          <value>powercfg.exe -H ON
+
+$test = Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Power -name HibernateEnabled
+if ($test.HibernateEnabled -eq "0")
+{
+ $Global:CTXOE_Result = $False
+  $Global:CTXOE_Details = "Hibernate is disabled"
+}
+else
+{
+  $Global:CTXOE_Result = $True
+  $Global:CTXOE_Details = "Hibernate is enabled"
+}</value>
+        </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Windows Update</name>
+      <description>Disable Windows Update</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NoAutoUpdate</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
+          <value>00000001</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Network Location Wizard</name>
+      <description>Disable Network Location Wizard</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>(Default)</name>
+          <path>HKLM\System\CurrentControlSet\Control\Network\NewNetworkWindowOff</path>
+          <value />
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>NGEN_Tasks</id>
+    <displayname>NGEN Tasks</displayname>
+    <description>Disable NGEN Scheduled Tasks</description>
+    <entry>
+      <name>.NET Framework NGEN v4.0.30319</name>
+      <description>Disable NGEN tasks that run when the machine is idle</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>.NET Framework NGEN v4.0.30319</name>
+          <path>\Microsoft\Windows\.NET Framework</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>.NET Framework NGEN v4.0.30319 64</name>
+      <description>Disable NGEN tasks that run when the machine is idle</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>.NET Framework NGEN v4.0.30319 64</name>
+          <path>\Microsoft\Windows\.NET Framework</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>.NET Framework NGEN v4.0.30319 64 Critical</name>
+      <description>Disable NGEN tasks that run when the machine is idle</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>.NET Framework NGEN v4.0.30319 64 Critical</name>
+          <path>\Microsoft\Windows\.NET Framework</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>.NET Framework NGEN v4.0.30319 Critical</name>
+      <description>Disable NGEN tasks that run when the machine is idle</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>.NET Framework NGEN v4.0.30319 Critical</name>
+          <path>\Microsoft\Windows\.NET Framework</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Optional</id>
+    <displayname>Optional</displayname>
+    <description>Various optimizations </description>
+    <entry>
+      <name>Device Manager Show Hidden Devices</name>
+      <description>When enabled admins will be able to see hidden devices in device manager without running a special cmd</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DEVMGR_SHOW_NONPRESENT_DEVICES</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment</path>
+          <value>1</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable TCPIP V6</name>
+      <description>This will configure a reg setting to disable IPv6</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DisabledComponents</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters</path>
+          <value>0x000000ff</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Large Send Offload</name>
+      <description>This will configure a reg setting to disable large send offload</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DisableTaskOffload</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters</path>
+          <value>1</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+</root>
