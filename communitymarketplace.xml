@@ -106,5 +106,27 @@
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1903.xml</url>
       <checksum />
     </template>
+    <template>
+      <id>Citrix_AppLayering_Supplement_RobZylowski</id>
+      <version>1.2</version>
+      <displayname>App Layering Supplement (Rob Zylowski)</displayname>
+      <description>OS Optimizations for Citrix App Layering (Rob Zylowski)</description>
+      <category>OS Optimizations</category>
+      <author>Rob Zylowski</author>
+      <updatedate>4/24/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Rob%20Zylowski/Citrix_Windows_AppLayering_Supplement_RobZylowski.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>7CA5AB82-A9C8-4B09-8886-F987F3341A6E</id>
+      <version>1.0</version>
+      <displayname>User Profile  Optimizations (Rob Zylowski)</displayname>
+      <description>The most commonly used optimizations for user experience when using VDI or RDSH (Rob Zylowski).  Deployed by modifying the default profile.</description>
+      <category>User Profile Optimizations</category>
+      <author>Rob Zylowski</author>
+      <updatedate>4/24/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Rob%20Zylowski/User_Profile_Optimizations_RobZylowski.xml</url>
+      <checksum />
+    </template>
   </templates>
 </root>
