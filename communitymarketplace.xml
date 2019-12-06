@@ -107,6 +107,17 @@
       <checksum />
     </template>
     <template>
+      <id>2DC4BE7D-C875-49BA-B79E-CFF09BFFCA94</id>
+      <version>1.0</version>
+      <displayname>Windows 10 build 1809 and Citrix App Layering</displayname>
+      <description>OS optimizations for Windows 10 build 1809 and Citrix App Layering</description>
+      <category>OS Optimizations</category>
+      <author>Nick Panaccio</author>
+      <updatedate>12/06/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Nick%20Panaccio/Citrix_Windows_10_1809_NickPanaccio.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>Citrix_AppLayering_Supplement_RobZylowski</id>
       <version>1.2</version>
       <displayname>App Layering Supplement (Rob Zylowski)</displayname>
