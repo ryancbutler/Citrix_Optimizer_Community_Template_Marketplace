@@ -74,6 +74,17 @@
       <checksum />
     </template>
     <template>
+      <id>6621AAB5-FDBD-4869-9B82-1F1429F814E1</id>
+      <version>1.0</version>
+      <displayname>Citrix StoreFront Customizations (Dennisspan.com)</displayname>
+      <description>Use this Citrix Optimizer template to customize Citrix StoreFront (https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer)</description>
+      <category>StoreFront Customizations</category>
+      <author>Dennis Span</author>
+      <updatedate>12/13/2019</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/Dennis%20Span/Citrix_StoreFront_Dennisspan.com.xml</url>
+      <checksum />
+    </template>
+    <template>
       <id>Windows_Server_2016_build_1607_dennisspan.com</id>
       <version>1.0</version>
       <displayname>Windows Server 2016 1607 (Dennisspan.com)</displayname>
