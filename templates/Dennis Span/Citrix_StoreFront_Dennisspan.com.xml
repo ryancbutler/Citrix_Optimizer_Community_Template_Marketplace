@@ -1,0 +1,1492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>1.0</version>
+    <id>6621AAB5-FDBD-4869-9B82-1F1429F814E1</id>
+    <displayname>Citrix StoreFront Customizations (Dennisspan.com)</displayname>
+    <description>Use this Citrix Optimizer template to customize Citrix StoreFront (https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer)</description>
+    <category>StoreFront Customizations</category>
+    <author>Dennis Span (Dennisspan.com)</author>
+    <lastupdatedate>12.13.2019</lastupdatedate>
+    <rollback_not_supported />
+  </metadata>
+  <condition>
+    <conditioncode># Check whether or not the current server is a StoreFront server
+if ( Get-Service CitrixStoreFront -ea SilentlyContinue ) {
+    $Global:CTXOE_Condition = $True
+} else {
+    $wshell = New-Object -ComObject Wscript.Shell
+    $wshell.Popup("The customizations in this template only apply to Citrix StoreFront. The Citrix StoreFront service is not present on the local system.",0,"Warning",48) | Out-Null;
+    $Global:CTXOE_Condition = $False
+    $Global:CTXOE_ConditionMessage = "The customizations in this template only apply to Citrix StoreFront. The Citrix StoreFront service is not present on the local system."
+}</conditioncode>
+    <conditionfailedmessage>This is not a StoreFront server</conditionfailedmessage>
+  </condition>
+  <group>
+    <id>DS_SF_UI_Customizations</id>
+    <displayname>UI Customizations</displayname>
+    <description>This section allows a Citrix administrator to enable various UI optimizations in Citrix StoreFront 1808.2 and later</description>
+    <rollback_not_supported />
+    <entry>
+      <name>Add a server identifier to the StoreFront Page</name>
+      <description>Add a unique server identifier on the page. This is a common requirement for customers who have multiple StoreFront servers behind a load balancer. In this scenario, it is useful to provide users with a quick and easy way to identify which StoreFront server they are accessing.
+
+References:
+-https://www.citrix.com/blogs/2018/01/03/how-to-add-a-server-identifier-to-the-storefront-page-footer/
+-https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer/#ServerIdentifier</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: DS_1001: add a server identifier to the StoreFront Page -&gt; ANALYZE
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to analyze (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( ! ( $Path -eq "nothing" ) ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+####################################
+# Check to see if the various modifications have already been done
+# This customization requires the modification of three files
+####################################
+
+$FileNotFound = 0
+$FileNotOptimized = 0
+
+# Check the file 'script.js'
+###################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+   if ( ! (Select-String -Path $File -pattern "DS_1001") ) { $FileNotOptimized++ }
+} else {
+   $FileNotFound++
+}
+
+# Check the file 'style.css'
+####################
+$File = Join-Path $Path "custom\style.css"
+
+if ( Test-Path $File )  {
+   if ( ! (Select-String -Path $File -pattern "DS_1001") ) { $FileNotOptimized++ }
+} else {
+   $FileNotFound++
+}
+
+# Check the file 'DS_ServerIdentifier.aspx'
+############################
+$File = Join-Path $Path "customweb\DS_ServerIdentifier.aspx"
+
+if ( Test-Path $File )  {
+   if ( ! (Select-String -Path $File -pattern "DS_1001") ) { $FileNotOptimized++ }
+} else {
+   $FileNotOptimized++
+}
+
+# Result
+#########
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $True
+}
+if ( $FileNotFound -gt 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: either the file 'script.js' or 'script.css' was not found. These files are present by default on a Citrix StoreFront server. Please make sure you specified the correct path to the Web Service"
+}
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -gt 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: one (or more) of the files ('script.js', 'script.css' or 'DS_ServerIdentifier.aspx') was/were not optimized"
+}
+
+# The path does not exist
+} else {
+      $wshell = New-Object -ComObject Wscript.Shell
+      $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: DS_1001: add a server identifier to the StoreFront Page -&gt; EXECUTE
+# Reference: https://www.citrix.com/blogs/2018/01/03/how-to-add-a-server-identifier-to-the-storefront-page-footer/
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to customize (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+$ASPXFileName = "DS_ServerIdentifier.aspx"
+
+# Quit this script if the user pressed the cancel button
+if ( !($Path -eq "nothing") ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+# Make a copy of the original StoreFront files
+$ScriptJS_File = Join-Path $Path "custom\script.js"
+$ScriptJS_FileCopy = Join-Path $Path "custom\script_DS_copy_of_original.js"
+$StyleCSS_File = Join-Path $Path "custom\style.css"
+$StyleCSS_FileCopy = Join-Path $Path "custom\style_DS_copy_of_original.css"
+# Copy the file 'script.js'
+if ( !( Test-Path $ScriptJS_FileCopy ) ) {
+   try { 
+      Copy-Item $ScriptJS_File -Destination $ScriptJS_FileCopy
+   } catch {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: an error occurred trying to make a copy of the original file ''$($ScriptJS_File)'' (error: $($Error[0]))"
+   }
+}
+# Copy the file 'style.css'
+if ( !( Test-Path $StyleCSS_FileCopy ) ) {
+   try { 
+      Copy-Item $StyleCSS_File -Destination $StyleCSS_FileCopy
+   } catch {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: an error occurred trying to make a copy of the original file ''$($StyleCSS_File)'' (error: $($Error[0]))"
+   }
+}
+
+$DateTime = (Get-Date -format dd-MM-yyyy) + " " + (Get-Date -format HH:mm:ss)
+
+####################################
+# Modify the file 'script.js'
+# Default location: C:\inetpub\wwwroot\Citrix\%StoreWeb%\custom\script.js"
+####################################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+    if ( !( Select-String -Path $File -pattern "DS_1001" ) ) {
+      # Optimization DS_1001 = "Add a server identifier to the StoreFront Page"
+      # Optimization DS_1002 = "Show the Favorites tab if the user favorites, otherwise show the Apps tab"
+      # Optimization DS_1003 = "Show a popup message on the login screen"
+      # Check if the optimization 'DS_1002' has already been configured.
+      # If yes, add the 'loadServerData();' command after the 'CTXS.Extensions.afterDisplayHomeScreen' command.
+      # This is required, because both optimizations 'DS_1001' and 'DS_1002' call the same extension and need to "work together"
+      if ( Select-String -Path $File -pattern "DS_1002" ) {
+         $Contents = Get-Content $File
+         foreach ( $line in $Contents ) {
+            # Add 'loadServerData()' to the function 'CTXS.Extensions.afterDisplayHomeScreen'
+            if ( $line -like '*CTXS.Extensions.afterDisplayHomeScreen*' ) {
+               $NewText += $line + "`r`n"
+               $NewText += "   loadServerData();" + "`r`n"
+            } else {
+               if ([string]::IsNullOrEmpty($line)) {
+                  $NewText += "`r`n"
+               } else {
+                  $NewText += $line + "`r`n"
+               }
+            }
+         }
+
+         # Add the 'loadServerData()' function to the file 'script.js'
+         $NewText +=  "`r`n`n"
+         $NewText += "/* Add a server identifier to the StoreFront Page (by Dennisspan.com) */"  + "`r`n"
+         $NewText += "/* Date/time of modification: $DateTime */" + "`r`n"
+         $NewText += "/* Modified by user: $env:UserName */" + "`r`n"
+         $NewText += "/* DS_1001 (this is control tag, just leave it be) */" + "`r`n"
+         $NewText += "function loadServerData() {" + "`r`n"
+         $NewText += "   CTXS.ExtensionAPI.proxyRequest({" + "`r`n"
+         $NewText += "     url: ""customWeb/$($ASPXFileName)""," + "`r`n"
+         $NewText += "     success: function(serverIdentifier){" + "`r`n"
+         $NewText += "       `$('#customBottom').html(serverIdentifier);" + "`r`n"
+         $NewText += "     }," + "`r`n"
+         $NewText += "     error: function(){" + "`r`n"
+         $NewText += "      //do nothing" + "`r`n"
+         $NewText += "     }" + "`r`n"
+         $NewText += "   });" + "`r`n"
+         $NewText += "};" + "`r`n"
+            
+         # Write the new text to the file 'script.js'
+         try {
+               Set-Content -Path $File -Value $NewText -Encoding UTF8
+               $Global:CTXOE_Result = $True
+               $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+         } catch {
+               $Global:CTXOE_Result = $False
+               $Global:CTXOE_Details = "Error: an error occurred trying to modify the file '$($File)' (error: $($Error[0]))"
+         }
+      } else {
+         try {
+               Add-Content $File -value `r`n
+               Add-Content $File -value "/* Add a server identifier to the StoreFront Page (by Dennisspan.com) */"
+               Add-Content $File -value "/* Date/time of modification: $DateTime */"
+               Add-Content $File -value "/* Modified by user: $env:UserName */"
+               Add-Content $File -value "/* DS_1001 (this is control tag, just leave it be) */"
+               Add-Content $File -value "CTXS.Extensions.afterDisplayHomeScreen = function (callback) {"
+               Add-Content $File -value "   loadServerData();"
+               Add-Content $File -value "};"
+               Add-Content $File -value `n
+               Add-Content $File -value "function loadServerData() {"
+               Add-Content $File -value "   CTXS.ExtensionAPI.proxyRequest({"
+               Add-Content $File -value "     url: ""customWeb/$($ASPXFileName)"","
+               Add-Content $File -value "     success: function(serverIdentifier){"
+               Add-Content $File -value "       `$('#customBottom').html(serverIdentifier);"
+               Add-Content $File -value "     },"
+               Add-Content $File -value "     error: function(){"
+               Add-Content $File -value "      //do nothing"
+               Add-Content $File -value "     }"
+               Add-Content $File -value "   });"
+               Add-Content $File -value "};"
+               $Global:CTXOE_Result = $True
+               $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+         } catch {
+               $Global:CTXOE_Result = $False
+               $Global:CTXOE_Details = "Error: an error occurred trying to modify the file '$($File)' (error: $($Error[0]))"
+         }
+      }
+    } else {
+        $Global:CTXOE_Result = $True
+        $Global:CTXOE_Details = "This customization has already been included in the file '$($File)'. No changes were made"
+    }
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file '$($File)' does not exist"
+}
+
+####################################
+# Modify the file 'style.css'
+# Default location: C:\inetpub\wwwroot\Citrix\%StoreWeb%\custom\style.css"
+####################################
+$File = Join-Path $Path "custom\style.css"
+
+if ( Test-Path $File )  { 
+   if ( !(Select-String -Path $File -pattern "DS_1001") ) {
+      try {
+         Add-Content $File -value `n
+         Add-Content $File -value `n
+         Add-Content $File -value "/* Add a server identifier to the StoreFront Page (by Dennisspan.com) */"
+         Add-Content $File -value "/* Date/time of modification: $DateTime */"
+         Add-Content $File -value "/* Modified by user: $env:UserName */"
+         Add-Content $File -value "/* DS_1001 (this is control tag, just leave it be) */"
+         Add-Content $File -value "#customBottom {"
+         Add-Content $File -value "  text-align:center;"
+         Add-Content $File -value "  color:black;"
+         Add-Content $File -value "  font-size:16px;"
+         Add-Content $File -value "}"
+         $Global:CTXOE_Result = $True
+         $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+      } catch {
+         $Global:CTXOE_Result = $False
+         $Global:CTXOE_Details = "Error: an error occurred trying to modify the file '$($File)' (error: $($Error[0]))"
+      }
+   } else {
+      $Global:CTXOE_Result = $True
+      $Global:CTXOE_Details = "The file '$($File)' was already modified. No changes were made"
+   }
+} 
+
+####################################
+# Create the file 'DS_ServerIdentifier.aspx'
+# Default location: C:\inetpub\wwwroot\Citrix\%StoreWeb%\customweb\DS_ServerIdentifier.aspx"
+####################################
+
+$PathNew = Join-Path $Path "customweb"
+$File = Join-Path $PathNew $ASPXFileName
+
+# Create the file if it does not exist
+if ( !(Test-Path $File ) ) {
+   New-Item -Path $PathNew -Name $ASPXFileName -ItemType "file"
+}
+
+# Write content to the file
+if ( ! (Select-String -Path $File -pattern "DS_1001") ) {
+   try {
+      Add-Content $File -value "&lt;%-- Add a server identifier to the StoreFront Page (by Dennisspan.com) --%&gt;"
+      Add-Content $File -value "&lt;%-- Date/time of modification: $DateTime --%&gt;"
+      Add-Content $File -value "&lt;%-- Modified by user: $env:UserName --%&gt;"
+      Add-Content $File -value "&lt;%-- DS_1001 (this is control tag, just leave it be) --%&gt;"
+      Add-Content $File -value '&lt;%@ Page Language="C#" %&gt;'
+      Add-Content $File -value '&lt;script runat=server&gt;'
+      Add-Content $File -value 'protected String GetServerIdentity()'
+      Add-Content $File -value '{'
+      Add-Content $File -value "   string server = Environment.MachineName;"
+      Add-Content $File -value "   return server;"
+      Add-Content $File -value '}'
+      Add-Content $File -value '&lt;/script&gt;'
+      Add-Content $File -value '&lt;html&gt;'
+      Add-Content $File -value '&lt;body&gt;'
+      Add-Content $File -value 'Current StoreFront server:  &lt;% =GetServerIdentity()%&gt;'
+      Add-Content $File -value '&lt;/body&gt;'
+      Add-Content $File -value '&lt;/html&gt;'
+      $Global:CTXOE_Result = $True
+      $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+   } catch {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: an error occurred trying to modify the file '$($File)' (error: $($Error[0]))"
+   }
+} else {
+   $Global:CTXOE_Result = $True
+   $Global:CTXOE_Details = "The file '$($File)' was already modified. No changes were made"
+} 
+
+# The path does not exist
+} else {
+   $wshell = New-Object -ComObject Wscript.Shell
+   $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </executeparams>
+      </action>
+      <rollback_not_supported />
+    </entry>
+    <entry>
+      <name>Dynamic landing pages in StoreFront</name>
+      <description>Set the user's default landing page to the Favorites tab if the user has selected at least one application as favorite. Otherwise, set the landing page to the Apps tab.
+
+References:
+-https://www.citrix.com/blogs/2019/08/08/how-to-implement-dynamic-landing-pages-in-storefront/
+-https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer/#DynamicLandingPages</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: DS_1002: Dynamic landing pages: show the Favorites tab if the user favorites, otherwise show the Apps tab -&gt; ANALYZE
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to analyze (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( ! ( $Path -eq "nothing" ) ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+####################################
+# Check to see if the various modifications have already been done
+# This customization requires the modification of three files
+####################################
+
+$FileNotFound = 0
+$FileNotOptimized = 0
+
+# Check the file 'script.js'
+#############################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+   if ( ! (Select-String -Path $File -pattern "DS_1002") ) { $FileNotOptimized++ }
+} else {
+   $FileNotFound++
+}
+
+# Result
+#########
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $True
+}
+if ( $FileNotFound -gt 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file 'script.js' was not found. This file is present by default on a Citrix StoreFront server. Please make sure you specified the correct path to the Web Service"
+}
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -gt 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file 'script.js' was not optimized"
+}
+
+# The path does not exist
+} else {
+      $wshell = New-Object -ComObject Wscript.Shell
+      $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: DS_1002: Dynamic landing pages: show the Favorites tab if the user favorites, otherwise show the Apps tab -&gt; EXECUTE
+# Reference: https://www.citrix.com/blogs/2019/08/08/how-to-implement-dynamic-landing-pages-in-storefront/
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to customize (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( !($Path -eq "nothing") ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+# Make a copy of the original StoreFront files
+$ScriptJS_File = Join-Path $Path "custom\script.js"
+$ScriptJS_FileCopy = Join-Path $Path "custom\script_DS_copy_of_original.js"
+# Copy the file 'script.js'
+if ( !( Test-Path $ScriptJS_FileCopy ) ) {
+   try { 
+      Copy-Item $ScriptJS_File -Destination $ScriptJS_FileCopy
+   } catch {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: an error occurred trying to make a copy of the original file ''$($ScriptJS_File)'' (error: $($Error[0]))"
+   }
+}
+
+$DateTime = (Get-Date -format dd-MM-yyyy) + " " + (Get-Date -format HH:mm:ss)
+
+####################################
+# Modify the file 'script.js'
+# Default location: C:\inetpub\wwwroot\Citrix\%StoreWeb%\custom\script.js"
+####################################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+   if ( !(Select-String -Path $File -pattern "DS_1002") ) {
+      # Optimization DS_1001 = "Add a server identifier to the StoreFront Page"
+      # Optimization DS_1002 = "Show the Favorites tab if the user favorites, otherwise show the Apps tab"
+      # Optimization DS_1003 = "Show a popup message on the login screen"
+      # Check if the optimization 'DS_1001' has already been configured.
+      # If yes, add the 'change favorites view' command after the 'CTXS.Extensions.afterDisplayHomeScreen' command.
+      # This is required, because both optimizations 'DS_1001' and 'DS_1002' call the same extension and need to "work together"
+      if ( Select-String -Path $File -pattern "DS_1001" ) {
+         $Contents = Get-Content $File
+         foreach ( $line in $Contents ) {
+            if ( $line -like '*Add a server identifier to the StoreFront Page (by Dennisspan.com)*' ) {
+               # Add 'change favorites view' command lines before the function 'CTXS.Extensions.afterDisplayHomeScreen'
+               $NewText +=  "`r`n`n"
+               $NewText += "/* Show the Favorites tab if the user favorites, otherwise show the Apps tab (by Dennisspan.com) */" + "`r`n"
+               $NewText += "/* Date/time of modification: $DateTime */" + "`r`n"
+               $NewText += "/* Modified by user: $env:UserName */" + "`r`n"
+               $NewText += "/* DS_1002 (this is control tag, just leave it be) */" + "`r`n"
+               $NewText += "var favoritesExist = false;" + "`r`n"
+               $NewText += "`n"
+               $NewText += "CTXS.Extensions.sortMyAppList = function (app_array,defaultSortFn) {" + "`r`n"
+               $NewText += "/* This version checks if the amount of user favorites are greater than or equal to 'favoriteThreshold' */" + "`r`n"
+               $NewText += "   var favoriteThreshold = 1;" + "`r`n"
+               $NewText += "   var favoriteCount = 0;" + "`r`n"
+               $NewText += "   for (var i = 0; i &lt; app_array.length; i++){" + "`r`n"
+               $NewText += "      if (app_array[i].canBeRemoved()){" + "`r`n"
+               $NewText += "         favoriteCount++;" + "`r`n"
+               $NewText += "      }" + "`r`n"
+               $NewText += "   }" + "`r`n"
+               $NewText += "`n"
+               $NewText += "   if (favoriteCount &gt;= favoriteThreshold){" + "`r`n"
+               $NewText += "      favoritesExist = true;" + "`r`n"
+               $NewText += "   }" + "`r`n"
+               $NewText += "`n"
+               $NewText += "   /* This should always be called at the end */" + "`r`n"
+               $NewText += "   defaultSortFn();" + "`r`n"
+               $NewText += "};" + "`r`n"
+               $NewText += $line + "`r`n"
+               $NewText += "`r`n`n"
+            } elseif ( $line -like '*CTXS.Extensions.afterDisplayHomeScreen*' ) {
+               # Add 'change favorites view' to the function 'CTXS.Extensions.afterDisplayHomeScreen'
+               $NewText += $line + "`r`n"
+               $NewText += "   if (favoritesExist == false){" + "`r`n"
+               $NewText += "      CTXS.ExtensionAPI.changeView(""store"");" + "`r`n"
+               $NewText += "   }" + "`r`n"
+            } else {
+               if ([string]::IsNullOrEmpty($line)) {
+                  $NewText += "`r`n"
+               } else {
+                  $NewText += $line + "`r`n"
+               }
+            }
+         }
+       
+         # Write the new text to the file 'script.js'
+         try {
+               Set-Content -Path $File -Value $NewText -Encoding UTF8
+               $Global:CTXOE_Result = $True
+               $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+         } catch {
+               $Global:CTXOE_Result = $False
+               $Global:CTXOE_Details = "Error: an error occurred trying to modify the file ''$($File)'' (error: $($Error[0]))"
+         }
+      } else {
+         try {
+            Add-Content $File -value `n
+            Add-Content $File -value `n
+            Add-Content $File -value "/* Show the Favorites tab if the user favorites, otherwise show the Apps tab (by Dennisspan.com) */"
+            Add-Content $File -value "/* Date/time of modification: $DateTime */"
+            Add-Content $File -value "/* Modified by user: $env:UserName */"
+            Add-Content $File -value "/* DS_1002 (this is control tag, just leave it be) */"
+            Add-Content $File -value "var favoritesExist = false;"
+            Add-Content $File -value `n
+            Add-Content $File -value "CTXS.Extensions.sortMyAppList = function (app_array,defaultSortFn) {"
+            Add-Content $File -value "/* This version checks if the amount of user favorites are greater than or equal to 'favoriteThreshold' */"
+            Add-Content $File -value "   var favoriteThreshold = 1;"
+            Add-Content $File -value "   var favoriteCount = 0;"
+            Add-Content $File -value "   for (var i = 0; i &lt; app_array.length; i++){"
+            Add-Content $File -value "      if (app_array[i].canBeRemoved()){"
+            Add-Content $File -value "         favoriteCount++;"
+            Add-Content $File -value "      }"
+            Add-Content $File -value "   }"
+            Add-Content $File -value `n
+            Add-Content $File -value "   if (favoriteCount &gt;= favoriteThreshold){"
+            Add-Content $File -value "      favoritesExist = true;"
+            Add-Content $File -value "   }"
+            Add-Content $File -value `n
+            Add-Content $File -value "   /* This should always be called at the end */"
+            Add-Content $File -value "   defaultSortFn();"
+            Add-Content $File -value "};"
+            Add-Content $File -value `n
+            Add-Content $File -value "CTXS.Extensions.afterDisplayHomeScreen = function (callback) {"
+            Add-Content $File -value "   if (favoritesExist == false){"
+            Add-Content $File -value "      CTXS.ExtensionAPI.changeView(""store"");"
+            Add-Content $File -value "   }"
+            Add-Content $File -value "};"
+            $Global:CTXOE_Result = $True
+            $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+         } catch {
+            $Global:CTXOE_Result = $False
+            $Global:CTXOE_Details = "Error: an error occurred trying to modify the file ''$($File)'' (error: $($Error[0]))"
+         }
+      }
+   } else {
+      $Global:CTXOE_Result = $True
+      $Global:CTXOE_Details = "This customization has already been included in the file '$($File)'. No changes were made"
+   }
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file '$($File)' does not exist"
+}
+
+# The path does not exist
+} else {
+   $wshell = New-Object -ComObject Wscript.Shell
+   $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </executeparams>
+      </action>
+      <rollback_not_supported />
+    </entry>
+    <entry>
+      <name>Show a popup message on the login screen</name>
+      <description>Display a message before displaying the login window. This customization is included (but disabled) in the default 'script.js' file shipped in Citrix StoreFront.
+
+References:
+-https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer/#ShowPopupMessageLoginScreen</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 16.11.2019
+# Function: DS_1003: Show a popup message on the login screen -&gt; ANALYZE
+# Reference: this customization is included, but disabled, in the default 'script.js' file shipped in Citrix StoreFront
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to analyze (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( ! ( $Path -eq "nothing" ) ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+####################################
+# Check to see if the various modifications have already been done
+# This customization requires the modification of three files
+####################################
+
+$FileNotFound = 0
+$FileNotOptimized = 0
+
+# Check the file 'script.js'
+#############################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+   if ( ! (Select-String -Path $File -pattern "DS_1003") ) { $FileNotOptimized++ }
+} else {
+   $FileNotFound++
+}
+
+# Result
+#########
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $True
+}
+if ( $FileNotFound -gt 0 -And $FileNotOptimized -eq 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file 'script.js' was not found. This file is present by default on a Citrix StoreFront server. Please make sure you specified the correct path to the Web Service"
+}
+if ( $FileNotFound -eq 0 -And $FileNotOptimized -gt 0 ) {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file 'script.js' was not optimized"
+}
+
+# The path does not exist
+} else {
+      $wshell = New-Object -ComObject Wscript.Shell
+      $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 16.11.2019
+# Function: DS_1003: Show a popup message on the login screen -&gt; EXECUTE
+# Reference: this customization is included, but disabled, in the default 'script.js' file shipped in Citrix StoreFront
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to customize (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( !($Path -eq "nothing") ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+# Make a copy of the original StoreFront files
+$ScriptJS_File = Join-Path $Path "custom\script.js"
+$ScriptJS_FileCopy = Join-Path $Path "custom\script_DS_copy_of_original.js"
+# Copy the file 'script.js'
+if ( !( Test-Path $ScriptJS_FileCopy ) ) {
+   try { 
+      Copy-Item $ScriptJS_File -Destination $ScriptJS_FileCopy
+   } catch {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: an error occurred trying to make a copy of the original file ''$($ScriptJS_File)'' (error: $($Error[0]))"
+   }
+}
+
+$DateTime = (Get-Date -format dd-MM-yyyy) + " " + (Get-Date -format HH:mm:ss)
+
+####################################
+# Modify the file 'script.js'
+# Default location: C:\inetpub\wwwroot\Citrix\%StoreWeb%\custom\script.js"
+####################################
+$File = Join-Path $Path "custom\script.js"
+
+if ( Test-Path $File )  {
+   if ( !( Select-String -Path $File -pattern "DS_1003" ) ) {
+      # Optimization DS_1001 = "Add a server identifier to the StoreFront Page Footer"
+      # Optimization DS_1002 = "Show the Favorites tab if the user favorites, otherwise show the Apps tab"
+      # Optimization DS_1003 = "Show a popup message on the login screen"
+      # Check if the optimization 'DS_1003' has already been configured.
+      # If yes, do not maje any further changes.
+      try {
+         Add-Content $File -value `n
+         Add-Content $File -value `n
+         Add-Content $File -value "/* Show a popup message on the login screen (by Dennisspan.com) */"
+         Add-Content $File -value "/* Date/time of modification: $DateTime */"
+         Add-Content $File -value "/* Modified by user: $env:UserName */"
+         Add-Content $File -value "/* DS_1003 (this is control tag, just leave it be) */"
+         Add-Content $File -value "CTXS.Extensions.beforeLogon = function (callback) {"
+         Add-Content $File -value "    doneClickThrough = true;"
+         Add-Content $File -value "    CTXS.ExtensionAPI.showMessage({"
+         Add-Content $File -value "        messageTitle: ""Warning!"","
+         Add-Content $File -value "        messageText: ""This portal may be used by employees only! Illegal attempts to gain access will be reported to the authorities."","
+         Add-Content $File -value "        okButtonText: ""Accept"","
+         Add-Content $File -value "        okAction: callback"
+         Add-Content $File -value "    });"
+         Add-Content $File -value "};"
+         $Global:CTXOE_Result = $True
+         $Global:CTXOE_Details = "Success. The file '$($File)' was modified successfully"
+      } catch {
+         $Global:CTXOE_Result = $False
+         $Global:CTXOE_Details = "Error: an error occurred trying to modify the file '$($File)' (error: $($Error[0]))"
+      }
+   } else {
+      $Global:CTXOE_Result = $True
+      $Global:CTXOE_Details = "This customization has already been included in the file '$($File)'. No changes were made"
+   }
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: the file '$($File)' does not exist"
+}
+
+# The path does not exist
+} else {
+   $wshell = New-Object -ComObject Wscript.Shell
+   $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </executeparams>
+      </action>
+      <rollback_not_supported />
+    </entry>
+  </group>
+  <group>
+    <id>DS_Rollback</id>
+    <displayname>ROLLBACK</displayname>
+    <description>Rollback all StoreFront UI changes</description>
+    <entry>
+      <name>ROLLBACK ALL CHANGES</name>
+      <description>Remove all changes made by this StoreFront template created by Dennisspan.com.
+
+This rollback procedure does the following:
+-In the directory '%StorePath%\custom':
+   -Remove the file 'script.js'
+   -Rename the file 'script_DS_copy_of_original.js' to 'script.js'
+   -Remove the file 'style.css'
+   -Rename the file 'style_DS_copy_of_original.css' to 'style.css'
+-In the directory '%StorePath%\customweb':
+   -Delete all files that start with 'DS_'
+-In the registry:
+   -Remove the registry value 'HKCU\Software\Dennisspan.com'
+
+Don't forget to propagate the changes to the other StoreFront servers in the group!!!
+
+An example of %StorePath% is: C:\inetpub\wwwroot\Citrix\StoreWeb</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: ROLLBACK -&gt; ANALYZE
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to analyze (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( !($Path -eq "nothing") ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+# Add the path to the current user's registry for future use
+If ( !(Test-Path $RegPath) ) {
+   try {
+      New-Item -Path $RegPath -Force | Out-Null
+      Try {
+         New-ItemProperty -Path $RegPath -Name $RegValue -Value $textBox.Text -PropertyType STRING -Force | Out-Null
+      } catch {
+      }
+   } catch {
+   }
+}
+
+####################################
+# Check whether or not customizations have already been made
+# This determines whether a rollback is necessary or not
+####################################
+
+$Rollback = $False
+
+# Check whether or not the file '%StorePath%\custom\script.js' exists
+$ScriptJS_FileCopy = Join-Path $Path "custom\script_DS_copy_of_original.js"
+if ( Test-Path $ScriptJS_FileCopy ) {
+   $Rollback = $True
+}
+
+# Check whether or not the file '%StorePath%\custom\style.css' exists
+$StyleCSS_FileCopy = Join-Path $Path "custom\style_DS_copy_of_original.css"
+if ( Test-Path $StyleCSS_FileCopy ) {
+   $Rollback = $True
+}
+
+# Check whether or not the file '%StorePath%\customweb\DS_*' exists
+$CustomWebPath = Join-Path $Path "customweb"
+if ( Test-Path ( Join-Path $CustomWebPath "DS_*" ) ) {
+   $Rollback = $True
+}
+
+if ( $Rollback ) {
+   $Message = "The StoreFront template from Dennisspan.com has been used to customize this StoreFront group. `n`nIf you would like to revert all changes made by this template, press the 'Optimize' button to rollback all customizations."
+} else {
+   $Message = "The StoreFront template from Dennisspan.com has NOT been used on this StoreFront group. No rollback is possible/needed."
+}
+
+# Show message to inform the user whether or not a rollback is necessary
+$wshell = New-Object -ComObject Wscript.Shell
+$wshell.Popup($Message,0,"Info",0)
+
+# Result
+########
+$Global:CTXOE_Result = $True
+
+# The path does not exist
+} else {
+      $wshell = New-Object -ComObject Wscript.Shell
+      $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </analyzeparams>
+        <executeparams>
+          <value># Citrix Optimizer template for StoreFront customizations (by Dennisspan.com)
+#
+# Date: 28.08.2019
+# Function: ROLLBACK -&gt; EXECUTE
+###########################################################################
+
+
+# Code for the graphical input box
+##################################
+
+$RegPath = "hkcu:\Software\Dennisspan.com"
+$RegValue = "CitrixOptimizer_PathToStore"
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$form = New-Object System.Windows.Forms.Form
+$form.Text = 'Receiver for Web Site path'
+$form.Size = New-Object System.Drawing.Size(350,200)
+$form.StartPosition = 'CenterScreen'
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = 'OK'
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(160,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = 'Cancel'
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(320,50)
+$label.Text = "Please enter the path of the Receiver for Web Site you would like to analyze (replace the example in the text box below with the actual path):"
+$form.Controls.Add($label)
+
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,70)
+$textBox.Size = New-Object System.Drawing.Size(310,50)
+$PathToStore = (get-itemproperty -path $RegPath).$RegValue
+if ( !($PathToStore) ) {
+   $PathToStore = "C:\inetpub\wwwroot\Citrix\StoreWeb"
+}
+$textBox.Text = $PathToStore
+$form.Controls.Add($textBox)
+
+$form.Topmost = $true
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
+   $Path = ($textBox.Text).trim('\')
+} else {
+   $Path = "nothing"
+}
+
+# Quit this script if the user pressed the cancel button
+if ( !($Path -eq "nothing") ) {
+
+# Quit this script is the path does not exist
+if ( Test-Path $Path )  {
+
+####################################
+# Rollback all changes:
+# -Restore original files ('%StorePath%\custom\script.js' and '%StorePath%\custom\style.css')
+# -Remove newly created custom files ('%StorePath%\customweb\DS_*.*')
+# -Remove the registry key 'hkcu:\Software\Dennisspan.com'
+####################################
+
+$Error = 0
+
+# Replace the original 'script.js' file with the customized one
+$ScriptJS_File = Join-Path $Path "custom\script.js"
+$ScriptJS_FileCopy = Join-Path $Path "custom\script_DS_copy_of_original.js"
+if ( Test-Path $ScriptJS_FileCopy ) {
+   try {
+      Remove-Item $ScriptJS_File -force
+      try {
+         Rename-Item -Path $ScriptJS_FileCopy -NewName "script.js"
+      } catch {
+         $Error++
+         $Global:CTXOE_Result = $False
+         $Global:CTXOE_Details = "Error: could not restore the original file '$($ScriptJS_File)' (error: $($Error[0]))"
+      }
+   } catch {
+      $Error++
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: could not delete the customized file '$($ScriptJS_File)' (error: $($Error[0]))"
+   }
+}
+
+# Replace the original 'style.css' file with the customized one
+$StyleCSS_File = Join-Path $Path "custom\style.css"
+$StyleCSS_FileCopy = Join-Path $Path "custom\style_DS_copy_of_original.css"
+if ( Test-Path $StyleCSS_FileCopy ) {
+   try {
+      Remove-Item $StyleCSS_File -force
+      try {
+         Rename-Item -Path $StyleCSS_FileCopy -NewName "style.css"
+      } catch {
+         $Error++
+         $Global:CTXOE_Result = $False
+         $Global:CTXOE_Details = "Error: could not restore the original file '$($StyleCSS_File)' (error: $($Error[0]))"
+      }
+   } catch {
+      $Error++
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: could not delete the customized file '$($StyleCSS_File)' (error: $($Error[0]))"
+   }
+}
+
+# Delete all new custom files starting with 'DS_' from the 'customweb' directory
+$CustomWebPath = Join-Path $Path "customweb"
+try {
+   Remove-Item -Path ( Join-Path $CustomWebPath "DS_*.*" ) -force
+} catch {
+   $Error++
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: could not delete the customized files in the directory '$($CustomWebPath)' (error: $($Error[0]))"
+}
+
+# Delete the registry key 'hkcu:\Software\Dennisspan.com'
+if ( get-item $RegPath -ea SilentlyContinue ) { 
+   try {
+      Remove-Item $RegPath -force
+   } catch {
+      $Error++
+      $Global:CTXOE_Result = $False
+      $Global:CTXOE_Details = "Error: could not delete the customized files in the directory '$($CustomWebPath)' (error: $($Error[0]))"
+   }
+}
+
+# Result
+########
+if ( $Error -eq 0 ) {
+   $Global:CTXOE_Result = $True
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "Error: an unknown error occurred"
+}
+
+# The path does not exist
+} else {
+   $wshell = New-Object -ComObject Wscript.Shell
+   $wshell.Popup("The path '$Path' does not exist! Please enter a valid path.",0,"Error",0x1)
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The path '$Path' does not exist. Please enter a valid path."
+}
+
+# The user pressed the cancel button
+} else {
+   $Global:CTXOE_Result = $False
+   $Global:CTXOE_Details = "The operation was cancelled by the user"
+}</value>
+        </executeparams>
+      </action>
+      <rollback_not_supported />
+    </entry>
+  </group>
+</root>
