@@ -8,7 +8,7 @@
     <description>Use this Citrix Optimizer template to customize Citrix StoreFront (https://dennisspan.com/customize-citrix-storefront-with-citrix-optimizer)</description>
     <category>StoreFront Customizations</category>
     <author>Dennis Span (Dennisspan.com)</author>
-    <lastupdatedate>12.13.2019</lastupdatedate>
+    <lastupdatedate>12/13/2019</lastupdatedate>
     <rollback_not_supported />
   </metadata>
   <condition>
