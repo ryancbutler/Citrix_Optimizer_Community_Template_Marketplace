@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.2</version>
+    <version>2.0</version>
     <id>Citrix_AppLayering_Supplement_RobZylowski</id>
     <displayname>App Layering Supplement (Rob Zylowski)</displayname>
     <description>OS Optimizations for Citrix App Layering (Rob Zylowski)</description>
     <category>OS Optimizations</category>
     <author>Rob Zylowski</author>
-    <lastupdatedate>4/24/2019</lastupdatedate>
+    <lastupdatedate>1/8/2020</lastupdatedate>
   </metadata>
   <group>
     <id>Required</id>
@@ -111,7 +111,7 @@ else
         <params>
           <name>NoAutoUpdate</name>
           <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
-          <value>00000001</value>
+          <value>1</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
