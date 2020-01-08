@@ -8,7 +8,7 @@
     <description>The most commonly used optimizations for user experience when using VDI or RDSH (Rob Zylowski).  Deployed by modifying the default profile.</description>
     <category>User Profile Optimizations</category>
     <author>Rob Zylowski</author>
-    <lastupdatedate>1/8/2020</lastupdatedate>
+    <lastupdatedate>1/08/2020</lastupdatedate>
   </metadata>
   <group>
     <id>General</id>
