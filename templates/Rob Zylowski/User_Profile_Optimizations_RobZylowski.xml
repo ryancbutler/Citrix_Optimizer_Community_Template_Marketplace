@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.0</version>
+    <version>2.0</version>
     <id>7CA5AB82-A9C8-4B09-8886-F987F3341A6E</id>
-    <displayname>User Profile  Optimizations (Rob Zylowski)</displayname>
+    <displayname>User Profile Optimizations (Rob Zylowski)</displayname>
     <description>The most commonly used optimizations for user experience when using VDI or RDSH (Rob Zylowski).  Deployed by modifying the default profile.</description>
     <category>User Profile Optimizations</category>
     <author>Rob Zylowski</author>
-    <lastupdatedate>4/24/2019</lastupdatedate>
+    <lastupdatedate>1/8/2020</lastupdatedate>
   </metadata>
   <group>
     <id>General</id>
@@ -109,7 +109,7 @@ else
         <params>
           <name>VisualFXSetting</name>
           <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects</path>
-          <value>00000003</value>
+          <value>3</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -123,7 +123,7 @@ else
         <params>
           <name>ListviewAlphaSelect</name>
           <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
-          <value>00000000</value>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -137,7 +137,7 @@ else
         <params>
           <name>ListviewShadow</name>
           <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
-          <value>00000000</value>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -165,7 +165,7 @@ else
         <params>
           <name>TaskbarAnimations</name>
           <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
-          <value>00000000</value>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -179,7 +179,7 @@ else
         <params>
           <name>EnableAeroPeek</name>
           <path>HKDU\Software\Microsoft\Windows\DWM</path>
-          <value>00000000</value>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
@@ -193,7 +193,7 @@ else
         <params>
           <name>AlwaysHibernateThumbnails</name>
           <path>HKDU\Software\Microsoft\Windows\DWM</path>
-          <value>00000000</value>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
