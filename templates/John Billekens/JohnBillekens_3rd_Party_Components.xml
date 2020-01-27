@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.4</version>
+    <version>0.7</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
     <displayname>Disable 3rd Party Components</displayname>
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>03/12/2019</lastupdatedate>
+    <lastupdatedate>1-27-2020</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
@@ -86,6 +86,30 @@
         <plugin>Services</plugin>
         <params>
           <name>AdobeFlashPlayerUpdateSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Genuine Monitor Service</name>
+      <description>Adobe Genuine Monitor Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AGMService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Genuine Software Integrity Service</name>
+      <description>Adobe Genuine Software Integrity Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AGSService</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -300,6 +324,19 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
+      <name>OneDrive Per-Machine Standalone Update Task</name>
+      <description>OneDrive Per-Machine Standalone Update Task</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>OneDrive Per-Machine Standalone Update Task</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>System Center SMS Agent Host Service</name>
       <description>System Center SMS Agent Host Service</description>
       <execute>1</execute>
@@ -308,6 +345,55 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
         <params>
           <name>CCMExec</name>
           <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Update voor Microsoft Edge-service (edgeupdate)</name>
+      <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>edgeupdate</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft Edge Update Service (edgeupdatem)</name>
+      <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>edgeupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MicrosoftEdgeUpdateTaskMachineCore Task</name>
+      <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MicrosoftEdgeUpdateTaskMachineCore</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MicrosoftEdgeUpdateTaskMachineUA Task</name>
+      <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MicrosoftEdgeUpdateTaskMachineUA</name>
+          <path>\</path>
         </params>
       </action>
     </entry>
@@ -342,6 +428,123 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
         <params>
           <name>RESWCS</name>
           <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Oracle</id>
+    <displayname>Oracle</displayname>
+    <description>Oracle Java settings</description>
+    <entry>
+      <name>Delete SunJavaUpdateSched (x64)</name>
+      <description>Delete Java update check autostart</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>SunJavaUpdateSched</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run</path>
+          <value>CTXOE_DeleteValue</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Delete SunJavaUpdateSched (x86)</name>
+      <description>Delete Java update check autostart</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>SunJavaUpdateSched</name>
+          <path>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</path>
+          <value>CTXOE_DeleteValue</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Download Notify (x64)</name>
+      <description>Disable Download Notify</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NotifyDownload</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Download Notify (x86)</name>
+      <description>Disable Download Notify</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NotifyDownload</name>
+          <path>HKLM\SOFTWARE\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Java auto update check (x64)</name>
+      <description>Disable Java auto update check</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableAutoUpdateCheck</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Java auto update check (x86)</name>
+      <description>Disable Java auto update check</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableAutoUpdateCheck</name>
+          <path>HKLM\SOFTWARE\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Java update (x64)</name>
+      <description>Disable Java update</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableJavaUpdate</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Java update (x86)</name>
+      <description>Disable Java update</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableJavaUpdate</name>
+          <path>HKLM\SOFTWARE\JavaSoft\Java Update\Policy</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
