@@ -394,6 +394,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
         <params>
           <name>MicrosoftEdgeUpdateTaskMachineUA</name>
           <path>\</path>
+          <value>Disabled</value>
         </params>
       </action>
     </entry>
