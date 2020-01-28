@@ -2,10 +2,10 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.8</version>
+    <version>0.9</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
-    <displayname>Disable 3rd Party Components</displayname>
-    <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
+    <displayname>Disable 3rd Party Components (John Billekens)</displayname>
+    <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
     <lastupdatedate>1-28-2020</lastupdatedate>
@@ -28,7 +28,7 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Acrobat Update Service (ARM)</name>
+      <name>Adobe Acrobat Update Service (AdobeARMservice)</name>
       <description>Adobe Acrobat Updater keeps your Adobe software up to date.</description>
       <execute>1</execute>
       <action>
@@ -66,7 +66,7 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Flash Player Updater</name>
+      <name>Adobe Flash Player Updater Task</name>
       <description>This task keeps your Adobe Flash Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
       <execute>1</execute>
       <action>
@@ -79,7 +79,7 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Flash Player Updater Service</name>
+      <name>Adobe Flash Player Updater Service (AdobeFlashPlayerUpdateSvc)</name>
       <description>This service keeps your Adobe Flash Player installation up to date with the latest enhancements</description>
       <execute>1</execute>
       <action>
@@ -91,7 +91,7 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Genuine Monitor Service</name>
+      <name>Adobe Genuine Monitor Service (AGMService)</name>
       <description>Adobe Genuine Monitor Service</description>
       <execute>1</execute>
       <action>
@@ -103,13 +103,25 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Genuine Software Integrity Service</name>
+      <name>Adobe Genuine Software Integrity Service (AGSService)</name>
       <description>Adobe Genuine Software Integrity Service</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
           <name>AGSService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Creative Cloud desktop app Update Service (AdobeUpdateService)</name>
+      <description>Creative Cloud desktop app Update Service</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AdobeUpdateService</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -225,7 +237,7 @@
       </action>
     </entry>
     <entry>
-      <name>Google Chome Elevation Service</name>
+      <name>Google Chome Elevation Service (GoogleChromeElevationService)</name>
       <description>Currently the elevation service is only installed for Google Chrome builds. The Primary use case at the moment for the service has to do with the Chrome recovery component. The recovery component is registered only for Google Chrome builds. It repairs Chrome Updater (Google Update) when the algorithm detects that Chrome is not being updated. Since Chrome could be installed per-system or per-user, an elevation service is needed to repair code in the per-system install case.</description>
       <execute>1</execute>
       <action>
@@ -242,7 +254,7 @@
     <displayname>Citrix</displayname>
     <description>XenServer Management Agent Automatic Update Service</description>
     <entry>
-      <name>Citrix Management Agent Auto-Updater</name>
+      <name>Citrix Management Agent Auto-Updater Task</name>
       <description>Citrix (Hypervisor) Management Agent Auto-Updater</description>
       <execute>1</execute>
       <action>
@@ -255,7 +267,7 @@
       </action>
     </entry>
     <entry>
-      <name>Citrix Personal vDisk Service</name>
+      <name>Citrix Personal vDisk Service (CitrixPvD)</name>
       <description>Citrix Personal vDisk Service</description>
       <execute>0</execute>
       <action>
@@ -267,7 +279,7 @@
       </action>
     </entry>
     <entry>
-      <name>Citrix Profile Manager Service</name>
+      <name>Citrix Profile Manager Service (ctxProfile)</name>
       <description>Citrix Profile Manager Service
 NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000) is required for the Director to measure Login duration.</description>
       <execute>0</execute>
@@ -337,7 +349,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>System Center SMS Agent Host Service</name>
+      <name>System Center SMS Agent Host Service (CCMExec)</name>
       <description>System Center SMS Agent Host Service</description>
       <execute>1</execute>
       <action>
@@ -404,7 +416,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
     <displayname>Mozilla</displayname>
     <description>Configure Mozilla items</description>
     <entry>
-      <name>Mozilla Maintenance Service</name>
+      <name>Mozilla Maintenance Service (MozillaMaintenance)</name>
       <description>Mozilla Maintenance Service</description>
       <execute>1</execute>
       <action>
@@ -421,7 +433,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
     <displayname>Ivanti</displayname>
     <description>Configure Ivanti items</description>
     <entry>
-      <name>Ivanti Automation Console Service</name>
+      <name>Ivanti Automation Console Service (RESWCS)</name>
       <description>Ivanti Automation Console Service</description>
       <execute>1</execute>
       <action>
