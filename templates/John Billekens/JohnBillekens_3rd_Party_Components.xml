@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.7</version>
+    <version>0.8</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
     <displayname>Disable 3rd Party Components</displayname>
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>1-27-2020</lastupdatedate>
+    <lastupdatedate>1-28-2020</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
@@ -349,7 +349,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>Update voor Microsoft Edge-service (edgeupdate)</name>
+      <name>Microsoft Edge Update Service (edgeupdate)</name>
       <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
