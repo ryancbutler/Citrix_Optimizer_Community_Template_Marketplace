@@ -8,7 +8,7 @@
     <description>OS optimizations for Windows 10 build 1903 (John Billekens)</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>1-28-2020</lastupdatedate>
+    <lastupdatedate>1/28/2020</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
