@@ -8,7 +8,7 @@
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>1-28-2020</lastupdatedate>
+    <lastupdatedate>1/28/2020</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
