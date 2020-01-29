@@ -97,24 +97,35 @@
     </template>
     <template>
       <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
-      <version>0.4</version>
-      <displayname>Disable 3rd Party Components</displayname>
-      <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google</description>
+      <version>0.9</version>
+      <displayname>Disable 3rd Party Components (John Billekens)</displayname>
+      <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>3/12/2019</updatedate>
+      <updatedate>1/28/2020</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_3rd_Party_Components.xml</url>
       <checksum />
     </template>
     <template>
       <id>9F6F8353-6BA1-47D7-815D-51C5B2CC83ED</id>
-      <version>0.1</version>
-      <displayname>Windows 10 build 1903 from John Billekens</displayname>
-      <description>OS optimizations for Windows 10 build 1903</description>
+      <version>0.2</version>
+      <displayname>Windows 10 build 1903 (John Billekens)</displayname>
+      <description>OS optimizations for Windows 10 build 1903 (John Billekens)</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/16/2019</updatedate>
+      <updatedate>1/28/2020</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1903.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>5DE7CFB9-66BF-4395-8107-D31F4073CB9F</id>
+      <version>0.2</version>
+      <displayname>Windows 10 build 1909 (John Billekens)</displayname>
+      <description>OS optimizations for Windows 10 build 1909 (John Billekens)</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>1/28/2020</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1909.xml</url>
       <checksum />
     </template>
     <template>
