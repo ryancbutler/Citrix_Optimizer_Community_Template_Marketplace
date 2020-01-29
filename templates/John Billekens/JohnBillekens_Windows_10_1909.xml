@@ -3,9 +3,9 @@
   <metadata>
     <schemaversion>2.0</schemaversion>
     <version>0.2</version>
-    <id>9F6F8353-6BA1-47D7-815D-51C5B2CC83ED</id>
-    <displayname>Windows 10 build 1903 (John Billekens)</displayname>
-    <description>OS optimizations for Windows 10 build 1903 (John Billekens)</description>
+    <id>5DE7CFB9-66BF-4395-8107-D31F4073CB9F</id>
+    <displayname>Windows 10 build 1909 (John Billekens)</displayname>
+    <description>OS optimizations for Windows 10 build 1909 (John Billekens)</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
     <lastupdatedate>1/28/2020</lastupdatedate>
@@ -106,18 +106,6 @@
         <plugin>Services</plugin>
         <params>
           <name>PeerDistSvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Cellular Time</name>
-      <description>This service sets time based on NITZ messages from a Mobile Network</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>autotimesvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -255,6 +243,18 @@
       </action>
     </entry>
     <entry>
+      <name>Offline Files Driver</name>
+      <description>The Offline Files service performs maintenance activities on the Offline Files cache, responds to user logon and logoff events, implements the internals of the public API, and dispatches interesting events to those interested in Offline Files activities and changes in cache state.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CSC</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Optimize drives</name>
       <description>Helps the computer run more efficiently by optimizing files on storage drives.</description>
       <execute>1</execute>
@@ -274,42 +274,6 @@
         <plugin>Services</plugin>
         <params>
           <name>WpcMonSvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Payments and NFC/SE Manager</name>
-      <description>Manages payments and Near Field Communication (NFC) based secure elements.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>SEMgrSvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Quality Windows Audio Video Experience</name>
-      <description>Quality Windows Audio Video Experience (qWave) is a networking platform for Audio Video (AV) streaming applications on IP home networks. qWave enhances AV streaming performance and reliability by ensuring network quality-of-service (QoS) for AV applications. It provides mechanisms for admission control, run time monitoring and enforcement, application feedback, and traffic prioritization.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>QWAVE</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Recommended Troubleshooting Service</name>
-      <description>Enables automatic mitigation for known problems by applying recommended troubleshooting. If stopped, your device will not get recommended troubleshooting for problems on your device.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>TroubleshootingSvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -351,18 +315,6 @@
       </action>
     </entry>
     <entry>
-      <name>Spatial Data Service</name>
-      <description>This service is used for Spatial Perception scenarios</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>SharedRealitySvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>SSDP Discovery</name>
       <description>Discovers networked devices and services that use the SSDP discovery protocol, such as UPnP devices. Also announces SSDP devices and services running on the local computer.</description>
       <execute>1</execute>
@@ -370,18 +322,6 @@
         <plugin>Services</plugin>
         <params>
           <name>SSDPSRV</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Telephony</name>
-      <description>Provides Telephony API (TAPI) support for programs that control telephony devices on the local computer and, through the LAN, on servers that are also running the service.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>TapiSrv</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -443,18 +383,6 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         <plugin>Services</plugin>
         <params>
           <name>icssvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Update</name>
-      <description>Enables the detection, download, and installation of updates for Windows and other programs.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>wuauserv</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -532,49 +460,13 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
       </action>
     </entry>
     <entry>
-      <name>Windows Perception Service</name>
-      <description>Enables spatial perception, spatial input, and holographic rendering.</description>
+      <name>Distributed Link Tracking Client</name>
+      <description>Maintains links between NTFS files within a computer or across computers in a network domain.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>spectrum</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Perception Simulation Service</name>
-      <description>Enables spatial perception simulation, virtual camera management and spatial input simulation.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>perceptionsimulation</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Insider Service</name>
-      <description>Provides infrastructure support for the Windows Insider Program. This service must remain enabled for the Windows Insider Program to work.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>wisvc</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Wi-Fi Direct Services Connection Manager Service</name>
-      <description>Manages connections to wireless services, including wireless display and docking.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>WFDSConMgrSvc</name>
+          <name>TrkWks</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -839,17 +731,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.WindowsStore</name>
-      <description>Microsoft.WindowsStore</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.WindowsStore</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>Microsoft.Xbox.TCUI</name>
       <description>Microsoft.Xbox.TCUI</description>
       <execute>1</execute>
@@ -916,17 +797,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.YourPhone</name>
-      <description>Provides access to remotely send text messages or access images on Android-based phone.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.YourPhone</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>Microsoft.ZuneMusic</name>
       <description>Microsoft.ZuneMusic</description>
       <execute>1</execute>
@@ -960,13 +830,57 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.Windows.CallingShellApp</name>
-      <description>Microsoft.Windows.CallingShellApp</description>
+      <name>Microsoft.YourPhone</name>
+      <description>Provides access to remotely send text messages or access images on Android-based phone.</description>
       <execute>1</execute>
       <action>
         <plugin>UWP</plugin>
         <params>
-          <name>Microsoft.Windows.CallingShellApp</name>
+          <name>Microsoft.YourPhone</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WindowsCommunicationsApps</name>
+      <description>Disable Windows Mail and Calendar functionality</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>microsoft.windowscommunicationsapps</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.HEIFImageExtension</name>
+      <description>Adds support for High Efficiency Image File (HEIF) format, usually with .heif extension.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.HEIFImageExtension</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.VP9VideoExtensions</name>
+      <description>Adds support for video codec VP9 (part of WebM project by Google)</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.VP9VideoExtensions</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WebpImageExtension</name>
+      <description>Adds support for image format WebP.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WebpImageExtension</name>
         </params>
       </action>
     </entry>
@@ -1010,19 +924,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>Consolidator</name>
           <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Device-Sync</name>
-      <description>Sync device attributes to Azure Active Directory.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Device-Sync</name>
-          <path>\Microsoft\Windows\Workplace Join\Device-Sync</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1088,19 +989,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>WindowsActionDialog</name>
           <path>\Microsoft\Windows\Location</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>MaintenanceTasks</name>
-      <description>Provides required infrastructure support for the application model</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>MaintenanceTasks</name>
-          <path>\Microsoft\Windows\StateRepository\MaintenanceTasks</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1236,32 +1124,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>RecommendedTroubleshootingScanner</name>
-      <description>Check for recommended troubleshooting from Microsoft</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>RecommendedTroubleshootingScanner</name>
-          <path>\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>ReconcileFeatures</name>
-      <description>Task periodically reconciling feature configurations</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>ReconcileFeatures</name>
-          <path>\Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>RegIdleBackup</name>
       <description>Registry idle backup task.</description>
       <execute>1</execute>
@@ -1283,19 +1145,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>ResolutionHost</name>
           <path>\Microsoft\Windows\WDI</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>RetailDemo-CleanupOfflineContent</name>
-      <description>Retail Demo</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>CleanupOfflineContent</name>
-          <path>\Microsoft\Windows\RetailDemo</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1374,32 +1223,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>StartupAppTask</name>
           <path>\Microsoft\Windows\Application Experience</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>sihpostreboot</name>
-      <description>sihpostreboot</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>sihpostreboot</name>
-          <path>\Microsoft\Windows\WindowsUpdate\sihpostreboot</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Universal Orchestrator Start</name>
-      <description>Universal Orchestrator Start</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Universal Orchestrator Start</name>
-          <path>\Microsoft\Windows\UpdateOrchestrator\Universal Orchestrator Start</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1604,8 +1427,8 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>NtfsDisableLastAccessUpdate</name>
           <path>HKLM\SYSTEM\CurrentControlSet\Control\FileSystem</path>
-          <value>2147483649</value>
-          <valuetype>Dword</valuetype>
+          <value>80000001</value>
+          <valuetype>DWORD</valuetype>
         </params>
       </action>
     </entry>
@@ -1652,6 +1475,68 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Turn off Cortana</name>
+      <description>Turn off Cortana.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AllowCortana</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Hibernate</name>
+      <description>Disable Hibernate.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>HibernateEnabled</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\Power</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Storage Sense</name>
+      <description>Disable Storage Sense.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AllowStorageSenseGlobal</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Update</name>
+      <description>Enables the detection, download, and installation of updates for Windows and other programs.
+NOTE: This read-only entry is analyzing if Windows Update has been disabled using Group Policy. This entry does NOT support disabling Windows Update.
+All of the relevant policies are under the path Computer configuration &gt; Administrative Templates &gt; Windows Components &gt; Windows Update.
+For more information, please refer to official Microsoft documentation: https://docs.microsoft.com/en-us/windows/deployment/update/waas-wufb-group-policy
+      </description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NoAutoUpdate</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
+          <value>1</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+      <execute_not_supported />
+      <rollback_not_supported />
+    </entry>
+    <entry>
       <name>Set power plan to High Performance</name>
       <description>Change current power plan to "High performance". If you rollback these changes, power plan will default to "Balanced".</description>
       <execute>1</execute>
@@ -1659,104 +1544,163 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>PowerShell</plugin>
         <analyzeparams>
           <value># Get power plan through registry (version 1803 and up)
-                 If ((Get-ItemPropertyValue -LiteralPath HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes -Name ActivePowerScheme) -eq '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c') {
-                    $Global:CTXOE_Result = $True;
-		    $Global:CTXOE_Details = "High Performance mode selected";
-                    Return;
-                 } Else {
-                    $Global:CTXOE_Result = $False;
-		    $Global:CTXOE_Details = "High Performance mode not selected";
-                    Return;
-                  }
-          </value>
+
+[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+
+# We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+$Global:CTXOE_Result = $m_CurrentPlanID -eq $m_DesiredPlanID;
+
+If ($Global:CTXOE_Result -eq $True) {
+$Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
+} Else {
+$Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID";
+}
+
+Return;</value>
         </analyzeparams>
         <executeparams>
-          <value>
-            # Set power plan to "High Performance"
-            $ModeID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+          <value>[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
 
-            $DesiredMode = Get-ItemPropertyValue -LiteralPath HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes -Name ActivePowerScheme
+# We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
 
-            # Check if mode is currently selected. If yes, skip. 
-            If ($DesiredMode -eq $ModeID) {
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+If ($m_CurrentPlanID -eq $m_DesiredPlanID) {
               $Global:CTXOE_Result = $True; 
               $Global:CTXOE_Details = "Mode already configured, skipping";    
               Return;
-            }
+}
 
-            # Different mode is currently selected. Change the active mode. 
-            PowerCfg /SetActive $ModeID;
-            $Global:CTXOE_Result = $True;
-            $Global:CTXOE_Details = "Power plan changed to High Performance mode";
-          </value>
+# Try to change power management plan
+PowerCfg /SetActive $m_DesiredPlanID;
+
+# Retrieve current power management plan
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+$Global:CTXOE_Result = $m_CurrentPlanID -eq $m_DesiredPlanID;
+
+If ($Global:CTXOE_Result -eq $True) {
+$Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
+} Else {
+$Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID. You cannot use this optimization if power management scheme is configured through Group Policy.";
+}</value>
         </executeparams>
         <rollbackparams>
-          <value>
-          # Rollback power plan to "Balanced"
-          $ModeID = "381b4222-f694-41f0-9685-ff5bb260df2e"; #This is Balanced
+          <value># Rollback power plan to "Balanced"
+[String]$m_DesiredPlanID = "381b4222-f694-41f0-9685-ff5bb260df2e"; #This is Balanced
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
 
-          $DesiredMode = Get-ItemPropertyValue -LiteralPath HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes -Name ActivePowerScheme
+# We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
 
-          # Check if mode is currently selected. If yes, skip. 
-          If ($DesiredMode -eq $ModeID) {
-            $Global:CTXOE_Result = $True; 
-            $Global:CTXOE_Details = "Mode already configured, skipping";    
-            Return;
-          }
+# We want to compare current plan with "Balanced" - this is localized, so we are using scheme ID instead
+If ($m_CurrentPlanID -eq $m_DesiredPlanID) {
+              $Global:CTXOE_Result = $True; 
+              $Global:CTXOE_Details = "Mode already configured, skipping";    
+              Return;
+}
 
-          # Different mode is currently selected. Change the active mode. 
-          PowerCfg /SetActive $ModeID;
-          $Global:CTXOE_Result = $True; 
-          $Global:CTXOE_Details = "Power plan changed to Balanced mode";
-          </value>
+# Try to change power management plan
+PowerCfg /SetActive $m_DesiredPlanID;
+
+# Retrieve current power management plan
+[String]$m_CurrentPlan = powercfg /GetActiveScheme
+[String]$m_CurrentPlanID = $m_CurrentPlan.Substring($m_CurrentPlan.IndexOf(":") + 2).Split(" ")[0];
+
+# We want to compare current plan with "High Performance" - this is localized, so we are using scheme ID instead
+$Global:CTXOE_Result = $m_CurrentPlanID -eq $m_DesiredPlanID;
+
+If ($Global:CTXOE_Result -eq $True) {
+$Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
+} Else {
+$Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID. You cannot use this optimization if power management scheme is configured through Group Policy.";
+}</value>
         </rollbackparams>
       </action>
     </entry>
+  </group>
+  <group>
+    <id>MaintenanceTasks</id>
+    <displayname>Maintenance Tasks</displayname>
+    <description>This group contains maintenance tasks and optimizations that should be executed every time this image is updated.</description>
     <entry>
-      <name>Native Image Generation 32bit (NGEN)</name>
-      <description>THIS IS SLOW, it's normal for this operation to take a long time. This optimization pre-compiles .NET assemblies instead of using the just-in-time compilation using NGEN.exe. 
-Does not support analyze/rollback modes, but it is generally safe to use.</description>
+      <name>Clear All Event Logs</name>
+      <description>Clear all event logs</description>
       <execute>1</execute>
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>. $Env:WinDir\Microsoft.Net\Framework\v4.0.30319\ngen.exe Update;
+          <value>
+            [Array]$EventLogs = wevtutil enum-logs
 
-$Global:CTXOE_Result = $True;
-$Global:CTXOE_Details = ".NET assemblies optimized";</value>
+            Write-Host -ForegroundColor Yellow  'Clear event logs'
+            # Clear all event log entries
+            ForEach ($EventLog in $EventLogs) {
+            Write-Host "Clearing $EventLog"
+            wevtutil cl "$EventLog"
+            }
+            # System event log contains events ID 104 ("Log Clear"), so it needs to be cleared as the last one again
+            wevtutil cl "System"
+
+            $Global:CTXOE_Result = $True;
+            $Global:CTXOE_Details = "Successfully cleaned the event logs";
+          </value>
         </executeparams>
-        <params>
-          <value>Write-Host "This optimization does not support analyze or rollback modes, skipping...";
-$Global:CTXOE_Result = $True;
-$Global:CTXOE_Details = "Analyze/Rollback not supported/required, skipping...";
-Return;</value>
-        </params>
       </action>
+      <analyze_not_supported />
+      <rollback_not_supported />
+    </entry>
+    <entry>
+      <name>Native Image Generation 32bit (NGEN)</name>
+      <description>
+        THIS IS SLOW, it's normal for this operation to take a long time. This optimization pre-compiles .NET assemblies instead of using the just-in-time compilation using NGEN.exe.
+        Does not support analyze/rollback modes, but it is generally safe to use.
+      </description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <executeparams>
+          <value>
+            . $Env:WinDir\Microsoft.Net\Framework\v4.0.30319\ngen.exe Update;
+
+            $Global:CTXOE_Result = $True;
+            $Global:CTXOE_Details = ".NET assemblies optimized";
+          </value>
+        </executeparams>
+      </action>
+      <analyze_not_supported />
+      <rollback_not_supported />
     </entry>
     <entry>
       <name>Native Image Generation 64bit (NGEN)</name>
-      <description>THIS IS SLOW, it's normal for this operation to take a long time. This optimization pre-compiles .NET assemblies instead of using the just-in-time compilation using NGEN.exe. 
-Does not support analyze/rollback modes, but it is generally safe to use.</description>
+      <description>
+        THIS IS SLOW, it's normal for this operation to take a long time. This optimization pre-compiles .NET assemblies instead of using the just-in-time compilation using NGEN.exe.
+        Does not support analyze/rollback modes, but it is generally safe to use.
+      </description>
       <execute>1</execute>
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>If ($(Test-Path $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe) -eq $True) {
-. $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe Update;
- $Global:CTXOE_Details = ".NET assemblies optimized";
-} Else {
- $Global:CTXOE_Details = "Skipping, not 64 bit NGEN not found";
-}
-$Global:CTXOE_Result = $True;
-</value>
+          <value>
+            If ($(Test-Path $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe) -eq $True) {
+            . $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe Update;
+            $Global:CTXOE_Details = ".NET assemblies optimized";
+            } Else {
+            $Global:CTXOE_Details = "Skipping, not 64 bit NGEN not found";
+            }
+            $Global:CTXOE_Result = $True;
+          </value>
         </executeparams>
-        <params>
-          <value>Write-Host "This optimization does not support analyze or rollback modes, skipping...";
-$Global:CTXOE_Result = $True;
-$Global:CTXOE_Details = "Analyze/Rollback not supported/required, skipping...";
-Return;</value>
-        </params>
       </action>
+      <analyze_not_supported />
+      <rollback_not_supported />
     </entry>
   </group>
   <group>
@@ -1765,7 +1709,7 @@ Return;</value>
     <description>Contains components that are often disabled for VDI\RDS machines, however can impact other applications or user experience. It is recommended to review these settings before applying them. </description>
     <entry>
       <name>Microsoft.ScreenSketch</name>
-      <description>Snip &amp; Sketch App</description>
+      <description>Removes "Snip &amp; Sketch" application. Provides functionality of Snipping Tool with additional improvements.</description>
       <execute>0</execute>
       <action>
         <plugin>UWP</plugin>
@@ -1775,8 +1719,19 @@ Return;</value>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.WindowsStore</name>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WindowsStore</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.StorePurchaseApp</name>
-      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications.</description>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
       <execute>0</execute>
       <action>
         <plugin>UWP</plugin>
@@ -1793,17 +1748,6 @@ Return;</value>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.WindowsCalculator</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WindowsCommunicationsapps</name>
-      <description>Remove the Mail app</description>
-      <execute>0</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>microsoft.windowscommunicationsapps</name>
         </params>
       </action>
     </entry>
@@ -1840,6 +1784,20 @@ Return;</value>
         <params>
           <name>WSearch</name>
           <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Windows Customer Experience Improvement program</name>
+      <description>Disable Windows Customer Experience Improvement program.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>CEIPEnable</name>
+          <path>HKLM\SOFTWARE\Microsoft\SQMClient\Windows</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
         </params>
       </action>
     </entry>
