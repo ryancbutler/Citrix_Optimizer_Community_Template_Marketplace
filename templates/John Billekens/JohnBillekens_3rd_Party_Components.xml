@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.9</version>
+    <version>1.0</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
     <displayname>Disable 3rd Party Components (John Billekens)</displayname>
     <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>1/28/2020</lastupdatedate>
+    <lastupdatedate>5/26/2020</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
@@ -117,7 +117,7 @@
     <entry>
       <name>Creative Cloud desktop app Update Service (AdobeUpdateService)</name>
       <description>Creative Cloud desktop app Update Service</description>
-      <execute>0</execute>
+      <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
@@ -248,6 +248,73 @@
         </params>
       </action>
     </entry>
+    <entry>
+      <name>Google Update - Update policy override default Registry</name>
+      <description>Specifies the default policy for software updates from Google.
+(0) Updates disabled
+(1) Always allow updates
+(2) Manual updates only
+(3) Automatic silent updates only</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>UpdateDefault</name>
+          <path>HKLM\SOFTWARE\Policies\Google\Update</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update - Auto-update check period override Registry</name>
+      <description>Minimum number of minutes between automatic update checks.
+Set the value to 0 if you want to disable all auto-update checks</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AutoUpdateCheckPeriodMinutes</name>
+          <path>HKLM\SOFTWARE\Policies\Google\Update</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update - Disable AutoUpdate Checks Registry</name>
+      <description>Disable AutoUpdate Checks
+(1) Disable automatic updates
+(0) Enable automatic updates</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DisableAutoUpdateChecksCheckboxValue</name>
+          <path>HKLM\SOFTWARE\Policies\Google\Update</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Chrome Update - Update policy override Registry</name>
+      <description>Specifies how Google Update handles available Google Chrome updates from Google.
+(0) Updates disabled
+(1) Always allow updates
+(2) Manual updates only
+(3) Automatic silent updates only</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Update{8A69D345-D564-463C-AFF1-A69D9E530F96}</name>
+          <path>HKLM\SOFTWARE\Policies\Google\Update</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
   </group>
   <group>
     <id>Citrix</id>
@@ -297,7 +364,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
     <displayname>Microsoft</displayname>
     <description>Configure Microsoft items</description>
     <entry>
-      <name>Configuration Manager Health Evaluation Task</name>
+      <name>MS SCCM - Configuration Manager Health Evaluation Task</name>
       <description>System Center Configuration Manager</description>
       <execute>1</execute>
       <action>
@@ -310,7 +377,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>Configuration Manager Idle Detection Task</name>
+      <name>MS SCCM - Configuration Manager Idle Detection Task</name>
       <description>Configuration Manager Idle Detection</description>
       <execute>1</execute>
       <action>
@@ -323,7 +390,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>Configuration Manager Maintenance Task</name>
+      <name>MS SCCM - Configuration Manager Maintenance Task</name>
       <description>Configuration Manager Maintenance</description>
       <execute>1</execute>
       <action>
@@ -336,7 +403,19 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>OneDrive Per-Machine Standalone Update Task</name>
+      <name>MS SCCM - System Center SMS Agent Host Service (CCMExec)</name>
+      <description>System Center SMS Agent Host Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CCMExec</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS OneDrive - OneDrive Per-Machine Standalone Update Task</name>
       <description>OneDrive Per-Machine Standalone Update Task</description>
       <execute>1</execute>
       <action>
@@ -349,19 +428,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>System Center SMS Agent Host Service (CCMExec)</name>
-      <description>System Center SMS Agent Host Service</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>CCMExec</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft Edge Update Service (edgeupdate)</name>
+      <name>MS Edge - Microsoft Edge Update Service (edgeupdate)</name>
       <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
@@ -373,7 +440,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>Microsoft Edge Update Service (edgeupdatem)</name>
+      <name>MS Edge - Microsoft Edge Update Service (edgeupdatem)</name>
       <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
@@ -385,7 +452,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>MicrosoftEdgeUpdateTaskMachineCore Task</name>
+      <name>MS Edge - MicrosoftEdgeUpdateTaskMachineCore Task</name>
       <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
@@ -398,7 +465,7 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>MicrosoftEdgeUpdateTaskMachineUA Task</name>
+      <name>MS Edge - MicrosoftEdgeUpdateTaskMachineUA Task</name>
       <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
@@ -406,6 +473,175 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
         <params>
           <name>MicrosoftEdgeUpdateTaskMachineUA</name>
           <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office Automatic Updates 2.0 Task</name>
+      <description>This task ensures that your Microsoft Office installation can check for updates.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office Automatic Updates 2.0</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office ClickToRun Service Monitor Task</name>
+      <description>This task monitors the state of your Microsoft Office ClickToRunSvc and sends crash and error logs to Microsoft.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office ClickToRun Service Monitor</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office Feature Updates Task</name>
+      <description>This task ensures that your Microsoft Office installation can check for feature updates.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office Feature Updates</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office Feature Updates Logon Task</name>
+      <description>This task ensures that your Microsoft Office installation can check for feature updates.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office Feature Updates Logon</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office Subscription Maintenance Task</name>
+      <description>Task used to ensure that the Microsoft Office Subscription licensing is current.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office Subscription Maintenance</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - OfficeBackgroundTaskHandlerLogon Task</name>
+      <description>This task initiates Office Background Task Handler, which updates relevant Office data.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>OfficeBackgroundTaskHandlerLogon</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - OfficeBackgroundTaskHandlerRegistration Task</name>
+      <description>This task initiates Office Background Task Handler, which updates relevant Office data.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>OfficeBackgroundTaskHandlerRegistration</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - OfficeTelemetryAgentFallBack2016 Task</name>
+      <description>This task initiates the background task for Office Telemetry Agent, which scans and uploads usage and error information for Office solutions.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>OfficeTelemetryAgentFallBack2016</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - OfficeTelemetryAgentLogOn2016 Task</name>
+      <description>This task initiates Office Telemetry Agent, which scans and uploads usage and error information for Office solutions when a user logs on to the computer.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>OfficeTelemetryAgentLogOn2016</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Defender - Windows Defender Cache Maintenance Task</name>
+      <description>Periodic maintenance task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cache Maintenance</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Defender - Windows Defender Cleanup Task</name>
+      <description>Periodic cleanup task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cleanup</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Defender - Windows Defender Scheduled Scan Task</name>
+      <description>Periodic scan task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Scheduled Scan</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Defender - Windows Defender Verification Task</name>
+      <description>Periodic verification task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Verification</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
           <value>Disabled</value>
         </params>
       </action>

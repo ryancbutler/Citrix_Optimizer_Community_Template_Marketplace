@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>1.0</version>
+    <id>1BEAA349-54F8-4E9A-B1E1-7779A0A3CEA7</id>
+    <displayname>Windows Server 2016 build 1607 (JohnBillekens)</displayname>
+    <description>OS optimizations for Windows Server 2016</description>
+    <category>OS Optimizations</category>
+    <author>John Billekens</author>
+    <lastupdatedate>5/16/2020</lastupdatedate>
+  </metadata>
+  <group>
+    <id>DisableServices</id>
+    <displayname>Disable Services</displayname>
+    <description>Disable services that are not required for VDI\RDS virtual machines</description>
+    <entry>
+      <name>AllJoyn Router Service</name>
+      <description>Routes AllJoyn messages for the local AllJoyn clients.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>AJRouter</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Application Layer Gateway Service</name>
+      <description>Provides support for 3rd party protocol plug-ins for Internet Connection Sharing.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>ALG</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Bluetooth Support Service</name>
+      <description>The Bluetooth service supports discovery and association of remote Bluetooth devices.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>bthserv</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Computer Browser</name>
+      <description>Maintains an updated list of computers on the network and supplies this list to computers designated as browsers.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>Browser</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Connected User Experiences and Telemetry</name>
+      <description>The Connected User Experiences and Telemetry service enables features that support in-application and connected user experiences. Additionally, this service manages the event driven collection and transmission of diagnostic and usage information (used to improve the experience and quality of the Windows Platform) when the diagnostics and usage privacy option settings are enabled under Feedback and Diagnostics.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DiagTrack</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostic Policy Service</name>
+      <description>The Diagnostic Policy Service enables problem detection, troubleshooting and resolution for Windows components.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DPS</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostic Service Host</name>
+      <description>The Diagnostic Service Host is used by the Diagnostic Policy Service to host diagnostics that need to run in a Local Service context.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>WdiServiceHost</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostic System Host</name>
+      <description>The Diagnostic System Host is used by the Diagnostic Policy Service to host diagnostics that need to run in a Local System context.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>WdiSystemHost</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Downloaded Maps Manager</name>
+      <description>Windows service for application access to downloaded maps. This service is started on-demand by application accessing downloaded maps.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>MapsBroker</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Encrypting File System (EFS)</name>
+      <description>Provides the core file encryption technology used to store encrypted files on NTFS file system volumes.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>EFS</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Function Discovery Provider Host</name>
+      <description>The FDPHOST service hosts the Function Discovery (FD) network discovery providers. These FD providers supply network discovery services for the Simple Services Discovery Protocol (SSDP) and Web Services – Discovery (WS-D) protocol. Stopping or disabling the FDPHOST service will disable network discovery for these protocols when using FD. When this service is unavailable, network services using FD and relying on these discovery protocols will be unable to find network devices or resources.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>fdPHost</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Function Discovery Resource Publication</name>
+      <description>Publishes this computer and resources attached to this computer so they can be discovered over the network.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>FDResPub</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Interactive Services Detection</name>
+      <description>Enables user notification of user input for interactive services, which enables access to dialogs created by interactive services when they appear. If this service is stopped, notifications of new interactive service dialogs will no longer function and there might not be access to interactive service dialogs.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>UI0Detect</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Internet Connection Sharing (ICS)</name>
+      <description>Provides network address translation, addressing, name resolution and/or intrusion prevention services for a home or small office network.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SharedAccess</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Offline Files</name>
+      <description>The Offline Files service performs maintenance activities on the Offline Files cache, responds to user logon and logoff events, implements the internals of the public API, and dispatches interesting events to those interested in Offline Files activities and changes in cache state.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CscService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Offline Files Driver</name>
+      <description>The Offline Files service performs maintenance activities on the Offline Files cache, responds to user logon and logoff events, implements the internals of the public API, and dispatches interesting events to those interested in Offline Files activities and changes in cache state.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CSC</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Optimize drives</name>
+      <description>Helps the computer run more efficiently by optimizing files on storage drives.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>defragsvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Secure Socket Tunneling Protocol Service</name>
+      <description>Provides support for the Secure Socket Tunneling Protocol (SSTP) to connect to remote computers using VPN.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SstpSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Sensor Monitoring Service</name>
+      <description>Monitors various sensors in order to expose data and adapt to system and user state.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SensrSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Shell Hardware Detection</name>
+      <description>Provides notifications for AutoPlay hardware events.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>ShellHWDetection</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>SSDP Discovery</name>
+      <description>Discovers networked devices and services that use the SSDP discovery protocol, such as UPnP devices. Also announces SSDP devices and services running on the local computer.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SSDPSRV</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>UPnP Device Host</name>
+      <description>Allows UPnP devices to be hosted on this computer.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>upnphost</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Mobile Hotspot Service</name>
+      <description>Provides the ability to share a cellular data connection with another device.
+Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>icssvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Xbox Live Auth Manager</name>
+      <description>Provides authentication and authorization services for interacting with Xbox Live.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>XblAuthManager</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Xbox Live Game Save</name>
+      <description>This service syncs save data for Xbox Live save enabled games.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>XblGameSave</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>DisableScheduledTasks</id>
+    <displayname>Disable Scheduled Tasks</displayname>
+    <description>Disable scheduled tasks that are not required for VDI\RDS virtual machines</description>
+    <entry>
+      <name>AnalyzeSystem</name>
+      <description>This job analyzes the system looking for conditions that may cause high energy use.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>AnalyzeSystem</name>
+          <path>\Microsoft\Windows\Power Efficiency Diagnostics</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>BfeOnServiceStartTypeChange</name>
+      <description>Adjusts the start type for firewall-triggered services when the start type of the Base Filtering Engine (BFE) is disabled.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>BfeOnServiceStartTypeChange</name>
+          <path>\Microsoft\Windows\Windows Filtering Platform</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Consolidator</name>
+      <description>Collects and sends usage data to Microsoft if opted-in to the Windows Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Consolidator</name>
+          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>CreateObjectTask</name>
+      <description>Provides support for shell components that access system data.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>CreateObjectTask</name>
+          <path>\Microsoft\Windows\CloudExperienceHost</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>IndexerAutomaticMaintenance</name>
+      <description>Keeps the search index up to date.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>IndexerAutomaticMaintenance</name>
+          <path>\Microsoft\Windows\Shell</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>KernelCeipTask</name>
+      <description>Collects additional information about the system and sends to Microsoft if opted-in to Windows Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>KernelCeipTask</name>
+          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MapsToastTask</name>
+      <description>This task shows various Map related toasts.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MapsToastTask</name>
+          <path>\Microsoft\Windows\Maps</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft Compatibility Appraiser</name>
+      <description>Aggregates and uploads Application Telemetry information if opted-in to the Microsoft Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Microsoft Compatibility Appraiser</name>
+          <path>\Microsoft\Windows\Application Experience</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft-Windows-DiskDiagnosticDataCollector</name>
+      <description>Reports general disk and system information to Microsoft for users participating in the Customer Experience Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Microsoft-Windows-DiskDiagnosticDataCollector</name>
+          <path>\Microsoft\Windows\DiskDiagnostic</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft-Windows-DiskDiagnosticResolver</name>
+      <description>Warns users about faults reported by hard disks that support the Self Monitoring and Reporting Technology (S.M.A.R.T.) standard. This task is triggered automatically by the Diagnostic Policy Service when a S.M.A.R.T. fault is detected.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Microsoft-Windows-DiskDiagnosticResolver</name>
+          <path>\Microsoft\Windows\DiskDiagnostic</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MNO Metadata Parser</name>
+      <description>Mobile broadband account experience metadata parser.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MNO Metadata Parser</name>
+          <path>\Microsoft\Windows\Mobile Broadband Accounts</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MobilityManager</name>
+      <description>Provides support for the switching of mobility enabled VPN connections if their underlying interface goes down.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MobilityManager</name>
+          <path>\Microsoft\Windows\Ras</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Notifications</name>
+      <description>Location notification.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Notifications</name>
+          <path>\Microsoft\Windows\Location</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ProactiveScan</name>
+      <description>NTFS volume health scan.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ProactiveScan</name>
+          <path>\Microsoft\Windows\CHKDSK</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ProcessMemoryDiagnosticEvents</name>
+      <description>Schedules a memory diagnostic in response to system events.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ProcessMemoryDiagnosticEvents</name>
+          <path>\Microsoft\Windows\MemoryDiagnostic</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ProgramDataUpdater</name>
+      <description>Collects program telemetry information if opted-in to the Microsoft Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ProgramDataUpdater</name>
+          <path>\Microsoft\Windows\Application Experience</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Proxy</name>
+      <description>Collects and uploads autochk SQM data if opted-in to the Microsoft Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Proxy</name>
+          <path>\Microsoft\Windows\Autochk</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>QueueReporting</name>
+      <description>Windows Error Reporting task to process queued reports.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>QueueReporting</name>
+          <path>\Microsoft\Windows\Windows Error Reporting</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>RegIdleBackup</name>
+      <description>Registry idle backup task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>RegIdleBackup</name>
+          <path>\Microsoft\Windows\Registry</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ResolutionHost</name>
+      <description>The Windows Diagnostic Infrastructure Resolution host enables interactive resolutions for system problems detected by the Diagnostic Policy Service. It is triggered when necessary by the Diagnostic Policy Service in the appropriate user session. If the Diagnostic Policy Service is not running, the task will not run.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ResolutionHost</name>
+          <path>\Microsoft\Windows\WDI</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>RunFullMemoryDiagnostic</name>
+      <description>Detects and mitigates problems in physical memory (RAM).</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>RunFullMemoryDiagnostic</name>
+          <path>\Microsoft\Windows\MemoryDiagnostic</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Scheduled</name>
+      <description>Performs periodic maintenance of the computer system by fixing problems automatically or reporting them through the Action Center.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Scheduled</name>
+          <path>\Microsoft\Windows\Diagnosis</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ScheduledDefrag</name>
+      <description>This task defragments the computers hard disk drives.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ScheduledDefrag</name>
+          <path>\Microsoft\Windows\Defrag</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ServerManager</name>
+      <description>Task for launching Initial Configuration Tasks or Server Manager at logon.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ServerManager</name>
+          <path>\Microsoft\Windows\Server Manager</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>SmartScreenSpecific</name>
+      <description>Task that collects data for SmartScreen in Windows.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>SmartScreenSpecific</name>
+          <path>\Microsoft\Windows\AppID</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>StartComponentCleanup</name>
+      <description>This job clean up components automatically when the system is not in use. This task is known to cause excessive CPU usage.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>StartComponentCleanup</name>
+          <path>\Microsoft\Windows\Servicing</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>StartupAppTask</name>
+      <description>Scans startup entries and raises notification to the user if there are too many startup entries.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>StartupAppTask</name>
+          <path>\Microsoft\Windows\Application Experience</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>TPM-Maintenance</name>
+      <description>This task supports the Trusted Platform Module (TPM) by performing background actions on behalf of the OS.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>TPM-Maintenance</name>
+          <path>\Microsoft\Windows\TPM</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>UninstallDeviceTask</name>
+      <description>Uninstalls the PnP device associated with the specified Bluetooth service ID.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>UninstallDeviceTask</name>
+          <path>\Microsoft\Windows\Bluetooth</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>UPnPHostConfig</name>
+      <description>Sets UPnPHost service to auto-start.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>UPnPHostConfig</name>
+          <path>\Microsoft\Windows\UPnP</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>UsbCeip</name>
+      <description>Collects Universal Serial Bus related statistics and information about your machine and sends to the Windows Device Connectivity engineering group at Microsoft, if opted-in to Windows Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>UsbCeip</name>
+          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>VerifyWinRE</name>
+      <description>Validates the Windows Recovery Environment.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>VerifyWinRE</name>
+          <path>\Microsoft\Windows\RecoveryEnvironment</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Cache Maintenance</name>
+      <description>Periodic maintenance task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cache Maintenance</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Cleanup</name>
+      <description>Periodic cleanup task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cleanup</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Scheduled Scan</name>
+      <description>Periodic scan task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Scheduled Scan</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Verification</name>
+      <description>Periodic verification task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Verification</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WinSAT</name>
+      <description>Measures a system’s performance and capabilities.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>WinSAT</name>
+          <path>\Microsoft\Windows\Maintenance</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>XblGameSaveTask</name>
+      <description>XblGameSave Standby Task</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>XblGameSaveTask</name>
+          <path>\Microsoft\XblGameSave</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>XblGameSaveTaskLogon</name>
+      <description>XblGameSave Logon Task</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>XblGameSaveTaskLogon</name>
+          <path>\Microsoft\XblGameSave</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Miscellaneous</id>
+    <displayname>Miscellaneous</displayname>
+    <description>Various optimizations and tweaks for VDI\RDS virtual machines</description>
+    <entry>
+      <name>Disable background auto-layout</name>
+      <description>Disabling background auto-layout can help improve EWF performance.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableAutoLayout</name>
+          <path>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OptimalLayout</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable background disk defragmentation</name>
+      <description>Disabling background disk defragmentation can help improve EWF performance.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Enable</name>
+          <path>HKLM\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction</path>
+          <value>N</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable default system screensaver</name>
+      <description>Disable default system screensaver.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ScreenSaveActive</name>
+          <path>HKU\.DEFAULT\Control Panel\Desktop</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable memory dump creation</name>
+      <description>Disable memory dump creation.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>CrashDumpEnabled</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\CrashControl</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable NTFS last access timestamps</name>
+      <description>If you are using NTFS, you can increase the performance of EWF by disabling the last access date/time stamps.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NtfsDisableLastAccessUpdate</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\FileSystem</path>
+          <value>80000001</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide hard error messages</name>
+      <description>Disable system hard error messages.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ErrorMode</name>
+          <path>HKLM\System\CurrentControlSet\Control\Windows</path>
+          <value>2</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Increase Disk I/O Timeout to 200 seconds</name>
+      <description>Increase Disk I/O Timeout to 200 seconds.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>TimeOutValue</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Services\Disk</path>
+          <value>0x000000C8</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Update</name>
+      <description>Enables the detection, download, and installation of updates for Windows and other programs.
+NOTE: This read-only entry is analyzing if Windows Update has been disabled using Group Policy. This entry does NOT support disabling Windows Update.
+All of the relevant policies are under the path Computer configuration &gt; Administrative Templates &gt; Windows Components &gt; Windows Update.
+For more information, please refer to official Microsoft documentation: https://docs.microsoft.com/en-us/windows/deployment/update/waas-wufb-group-policy
+      </description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NoAutoUpdate</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
+          <value>1</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+      <execute_not_supported />
+      <rollback_not_supported />
+    </entry>
+    <entry>
+      <name>Disable Server Manager at logon</name>
+      <description>Disable Server Manager at logon</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ServerManager</name>
+          <path>\Microsoft\Windows\Server Manager</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>MaintenanceTasks</id>
+    <displayname>Maintenance Tasks</displayname>
+    <description>This group contains maintenance tasks and optimizations that should be executed every time this image is updated.</description>
+    <entry>
+      <name>Clear All Event Logs</name>
+      <description>Clear all event logs</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <executeparams>
+          <value>$EAOriginal = $ErrorActionPreference
+$ErrorActionPreference = "SilentlyContinue"
+[Array]$EventLogs = wevtutil enum-logs
+
+Write-Host -ForegroundColor Yellow  'Clear event logs'
+# Clear all event log entries
+ForEach ($EventLog in $EventLogs) {
+    Write-Host "Clearing $EventLog"
+    wevtutil cl "$EventLog"
+}
+# System event log contains events ID 104 ("Log Clear"), so it needs to be cleared as the last one again
+wevtutil cl "System"
+$ErrorActionPreference = $EAOriginal
+
+$Global:CTXOE_Result = $True;
+$Global:CTXOE_Details = "Successfully cleaned the event logs";
+          </value>
+        </executeparams>
+      </action>
+      <analyze_not_supported />
+      <rollback_not_supported />
+    </entry>
+  </group>
+  <group>
+    <id>OptionalComponents</id>
+    <displayname>Optional Components</displayname>
+    <description>Contains components that are often disabled for VDI\RDS machines, however can impact other applications or user experience. It is recommended to review these settings before applying them.</description>
+    <entry>
+      <name>Superfetch</name>
+      <description>Maintains and improves system performance over time. If optimizing a persistent machine you may leave Superfetch enabled. If optimizing a non-persistent machine, disable it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SysMain</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Themes</name>
+      <description>Provides user experience theme management. Disabling Themes will impact the user experience, but can help with server density.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>Themes</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Error Reporting Service</name>
+      <description>Allows errors to be reported when programs stop working or responding and allows existing solutions to be delivered. Also allows logs to be generated for diagnostic and repair services. Disable it if logs are not being gathered and analyzed.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>WerSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Search</name>
+      <description>Provides content indexing, property caching, and search results for files, e-mail, and other content. Consider disabling it as it has a high impact on server density.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>WSearch</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Automatic Maintenance</name>
+      <description>When you are not using your PC, Windows 10 performs automatic maintenance. It is a daily scheduled task that runs out-of-the-box. When enabled, it performs various tasks like app updates, Windows updates, security scans and many other things.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MaintenanceDisabled</name>
+          <path>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+	      <name>Windows Defender Cache Maintenance</name>
+      <description>Periodic maintenance task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cache Maintenance</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Cleanup</name>
+      <description>Periodic cleanup task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Cleanup</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Scheduled Scan</name>
+      <description>Periodic scan task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Scheduled Scan</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Defender Verification</name>
+      <description>Periodic verification task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Windows Defender Verification</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+  </group>
+</root>
