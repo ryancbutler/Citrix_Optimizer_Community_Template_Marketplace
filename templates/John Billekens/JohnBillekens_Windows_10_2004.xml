@@ -3,8 +3,8 @@
   <metadata>
     <schemaversion>2.0</schemaversion>
     <version>1.0</version>
-    <id>DAA5039B-1961-4931-9490-583FD7255AA9</id>
-    <displayname>Windows 10 build 1909 (John Billekens)</displayname>
+    <id>11149C90-A067-46F4-A687-10E93FE4A3F3</id>
+    <displayname>Windows 10 build 2004 (John Billekens)</displayname>
     <description>OS optimizations for Windows 10 build 1909</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
@@ -1649,7 +1649,7 @@ $ErrorActionPreference = $EAOriginal
 
 $Global:CTXOE_Result = $True;
 $Global:CTXOE_Details = "Successfully cleaned the event logs";
-          </value>
+</value>
         </executeparams>
       </action>
       <analyze_not_supported />
