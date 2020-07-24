@@ -10,7 +10,7 @@ NOTE: You must be using **Citrix Optimizer 2.0** or higher
 2. Select Template Marketplace from left
 3. Select "Add New Marketplace" from the bottom left
 4. Add the following URL:
-**https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/communitymarketplace.xml**
+**https://github.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/releases/latest/download/communitymarketplace.xml**
 5. Select Done
 
 ## To Submit a template
