@@ -26,3 +26,16 @@ NOTE: You must be using **Citrix Optimizer 2.0** or higher
     - Template display name must be unique for all templates
     - Template ID must be unique for all templates
     - lastupdatedate date format should be **M/DD/YYYY**
+
+## Validate XML Signature
+If file validation is required
+
+# Import my GPG key.
+invoke-restmethod https://github.com/ryancbutler.gpg | gpg --import -
+
+# Download XML and signature
+Invoke-WebRequest -Uri "https://github.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/releases/latest/download/communitymarketplace.xml" -OutFile "./communitymarketplace.xml"
+Invoke-WebRequest -Uri "https://github.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/releases/latest/download/communitymarketplace.xml.asc" -OutFile "./communitymarketplace.xml.asc"
+
+# Verify signature.
+gpg --verify .\communitymarketplace.xml.asc
