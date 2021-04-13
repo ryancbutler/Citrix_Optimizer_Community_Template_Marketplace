@@ -39,5 +39,5 @@ Invoke-WebRequest -Uri "https://github.com/ryancbutler/Citrix_Optimizer_Communit
 Invoke-WebRequest -Uri "https://github.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/releases/latest/download/communitymarketplace.xml.asc" -OutFile "./communitymarketplace.xml.asc"
 
 # Verify signature.
-gpg --verify .\communitymarketplace.xml.asc
+gpg --verify ./communitymarketplace.xml.asc
 ```
