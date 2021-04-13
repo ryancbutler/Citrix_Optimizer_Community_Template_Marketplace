@@ -30,6 +30,7 @@ NOTE: You must be using **Citrix Optimizer 2.0** or higher
 ## Validate XML Signature
 If file validation is required
 
+```
 # Import my GPG key.
 invoke-restmethod https://github.com/ryancbutler.gpg | gpg --import -
 
@@ -39,3 +40,4 @@ Invoke-WebRequest -Uri "https://github.com/ryancbutler/Citrix_Optimizer_Communit
 
 # Verify signature.
 gpg --verify .\communitymarketplace.xml.asc
+```
