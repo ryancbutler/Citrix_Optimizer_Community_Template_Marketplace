@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.0</version>
+    <version>1.4</version>
     <id>11149C90-A067-46F4-A687-10E93FE4A3F3</id>
-    <displayname>Windows 10 build 2004 (John Billekens)</displayname>
-    <description>OS optimizations for Windows 10 build 1909</description>
+    <displayname>Windows 10 build 2004 by John Billekens</displayname>
+    <description>OS optimizations for Windows 10 build 1909 by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>5/16/2020</lastupdatedate>
+    <lastupdatedate>7/8/2022</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
@@ -111,13 +111,13 @@
       </action>
     </entry>
     <entry>
-      <name>Connected Devices Platform Service</name>
-      <description>This service is used for Connected Devices Platform scenarios. This is per-user service.</description>
+      <name>Cellular Time service</name>
+      <description>This service sets time based on NITZ messages from a Mobile Network.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>CDPSvc</name>
+          <name>autotimesvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -195,6 +195,30 @@
       </action>
     </entry>
     <entry>
+      <name>Distributed Link Tracking Client</name>
+      <description>Maintains links between NTFS files within a computer or across computers in a network domain.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>TrkWks</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Downloaded Maps Manager</name>
+      <description>Windows service for application access to downloaded maps. This service is started on-demand by application accessing downloaded maps. Disabling this service will prevent apps from accessing maps.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>MapsBroker</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Encrypting File System (EFS)</name>
       <description>Provides the core file encryption technology used to store encrypted files on NTFS file system volumes.</description>
       <execute>1</execute>
@@ -255,6 +279,19 @@
       </action>
     </entry>
     <entry>
+      <name>Geolocation Service</name>
+      <description>This service monitors the current location of the system and manages geofences (a geographical location with associated events).
+If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>lfsvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Internet Connection Sharing (ICS)</name>
       <description>Provides network address translation, addressing, name resolution and/or intrusion prevention services for a home or small office network.</description>
       <execute>1</execute>
@@ -303,6 +340,18 @@
       </action>
     </entry>
     <entry>
+      <name>OneCore capture service</name>
+      <description>Enables optional screen capture functionality for applications that call the Windows.Graphics.Capture API.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CaptureService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Optimize drives</name>
       <description>Helps the computer run more efficiently by optimizing files on storage drives.</description>
       <execute>1</execute>
@@ -315,6 +364,30 @@
       </action>
     </entry>
     <entry>
+      <name>OneSync Service</name>
+      <description>This (per-user) service synchronizes mail, contacts, calendar and various other user data.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>OneSyncSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostic Execution Service</name>
+      <description>Diagnostic Execution Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DiagSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Parental Controls</name>
       <description>Enforces parental controls for child accounts in Windows. If this service is stopped or disabled, parental controls may not be enforced.</description>
       <execute>1</execute>
@@ -322,6 +395,18 @@
         <plugin>Services</plugin>
         <params>
           <name>WpcMonSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Payments and NFC/SE Manager</name>
+      <description>Manages payments and Near Field Communication (NFC) based secure elements.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SEMgrSvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -352,12 +437,26 @@
     </entry>
     <entry>
       <name>Shell Hardware Detection</name>
-      <description>Provides notifications for AutoPlay hardware events.</description>
+      <description>Provides notifications for AutoPlay hardware events.
+
+NOTE: Disabling this service will hide "Format" context menu if USB device redirection is used for DVD-RW drives.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
           <name>ShellHWDetection</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft Windows SMS Router Service</name>
+      <description>Routes messages based on rules to appropriate clients.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SmsRouter</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -507,18 +606,6 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         </params>
       </action>
     </entry>
-    <entry>
-      <name>Distributed Link Tracking Client</name>
-      <description>Maintains links between NTFS files within a computer or across computers in a network domain.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>TrkWks</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
   </group>
   <group>
     <id>RemoveApplications</id>
@@ -566,6 +653,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.Getstarted</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>HolographicFirstRun</name>
+      <description>Windows Holographic is practically a VR platform that adds mixed reality experiences available on Microsoft HoloLens, offering a holographic shell, an interaction model, Xbox Live services and perception APIs.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>HolographicFirstRun</name>
         </params>
       </action>
     </entry>
@@ -680,6 +778,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.ScreenSketch</name>
+      <description>Removes "Snip &amp; Sketch" application. Provides functionality of Snipping Tool with additional improvements.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.ScreenSketch</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.SkypeApp</name>
       <description>Microsoft.SkypeApp</description>
       <execute>1</execute>
@@ -709,6 +818,39 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.WebMediaExtensions</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.StorePurchaseApp</name>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.StorePurchaseApp</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WindowsStore</name>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WindowsStore</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WindowsCalculator</name>
+      <description>Built-in Windows Calculator. If your users are using it (mostly desktop sessions rather than published applications), do not remove it unless you have a replacement calculator app.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WindowsCalculator</name>
         </params>
       </action>
     </entry>
@@ -1043,7 +1185,7 @@ DOES NOT SUPPORT ROLLBACK!</description>
     </entry>
     <entry>
       <name>MapsToastTask</name>
-      <description>MapsToastTask</description>
+      <description>Collects program telemetry information if opted-in to the Microsoft Customer Experience Improvement Program.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1108,7 +1250,7 @@ DOES NOT SUPPORT ROLLBACK!</description>
     </entry>
     <entry>
       <name>Mobile Broadband Accounts</name>
-      <description>Mobile Broadband Accounts</description>
+      <description>Mobile broadband account experience metadata parser</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1353,11 +1495,174 @@ DOES NOT SUPPORT ROLLBACK!</description>
         </params>
       </action>
     </entry>
+    <entry>
+      <name>Cellular</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Cellular</name>
+          <path>\Microsoft\Windows\Management\Provisioning\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostics</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Diagnostics</name>
+          <path>\Microsoft\Windows\DiskFootprint\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>NotificationTask</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>NotificationTask</name>
+          <path>\Microsoft\Windows\WwanSvc\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>RecommendedTroubleshootingScanner</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>RecommendedTroubleshootingScanner</name>
+          <path>\Microsoft\Windows\Diagnosis\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ScanForUpdates</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ScanForUpdates</name>
+          <path>\Microsoft\Windows\InstallService\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ScanForUpdatesAsUser</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ScanForUpdatesAsUser</name>
+          <path>\Microsoft\Windows\InstallService\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>SilentCleanup</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>SilentCleanup</name>
+          <path>\Microsoft\Windows\DiskCleanup\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>SpeechModelDownloadTask</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>SpeechModelDownloadTask</name>
+          <path>\Microsoft\Windows\Speech\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Sqm-Tasks</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Sqm-Tasks</name>
+          <path>\Microsoft\Windows\PI\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
   </group>
   <group>
     <id>Miscellaneous</id>
     <displayname>Miscellaneous</displayname>
     <description>Various optimizations and tweaks for VDI\RDS virtual machines</description>
+    <entry>
+      <name>Disable Windows Customer Experience Improvement program</name>
+      <description>Disable Windows Customer Experience Improvement program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>CEIPEnable</name>
+          <path>HKLM\SOFTWARE\Microsoft\SQMClient\Windows</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Automatic Maintenance</name>
+      <description>When you are not using your PC, Windows 10 performs automatic maintenance. It is a daily scheduled task that runs out-of-the-box. When enabled, it performs various tasks like app updates, Windows updates, security scans and many other things.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MaintenanceDisabled</name>
+          <path>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
     <entry>
       <name>Disable background auto-layout</name>
       <description>Disabling background auto-layout can help improve EWF performance.</description>
@@ -1473,14 +1778,25 @@ DOES NOT SUPPORT ROLLBACK!</description>
     <entry>
       <name>Turn off Cortana</name>
       <description>Turn off Cortana.</description>
-      <execute>1</execute>
+      <execute>0</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
           <name>AllowCortana</name>
           <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search</path>
           <value>0</value>
-          <valuetype>DWORD</valuetype>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Cortana</name>
+      <description>Remove the Cortana UWP App</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.549981C3F5F10</name>
         </params>
       </action>
     </entry>
@@ -1513,6 +1829,18 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Update Orchestrator Service</name>
+      <description>Update Orchestrator service, manages Windows Updates. If stopped, your devices will not be able to download and install the latest updates.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>UsoSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Windows Update</name>
       <description>Enables the detection, download, and installation of updates for Windows and other programs.
 NOTE: This read-only entry is analyzing if Windows Update has been disabled using Group Policy. This entry does NOT support disabling Windows Update.
@@ -1539,7 +1867,7 @@ For more information, please refer to official Microsoft documentation: https://
       <action>
         <plugin>PowerShell</plugin>
         <analyzeparams>
-          <value># Get power plan through registry (version 1803 and up)
+          <value><![CDATA[# Get power plan through registry (version 1803 and up)
 
 [String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
 [String]$m_CurrentPlan = powercfg /GetActiveScheme
@@ -1556,10 +1884,10 @@ $Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $
 $Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID";
 }
 
-Return;</value>
+Return;]]></value>
         </analyzeparams>
         <executeparams>
-          <value>[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
+          <value><![CDATA[[String]$m_DesiredPlanID = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"; #This is High Performance
 [String]$m_CurrentPlan = powercfg /GetActiveScheme
 
 # We could use RegEx, but it's just so hard to read. Insetad, using ":" as first delimiter and " " as second delimiter. Output of this command is localized, so we need to keep this as simple as possible. 
@@ -1586,10 +1914,10 @@ If ($Global:CTXOE_Result -eq $True) {
 $Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
 } Else {
 $Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID. You cannot use this optimization if power management scheme is configured through Group Policy.";
-}</value>
+}]]></value>
         </executeparams>
         <rollbackparams>
-          <value># Rollback power plan to "Balanced"
+          <value><![CDATA[# Rollback power plan to "Balanced"
 [String]$m_DesiredPlanID = "381b4222-f694-41f0-9685-ff5bb260df2e"; #This is Balanced
 [String]$m_CurrentPlan = powercfg /GetActiveScheme
 
@@ -1617,8 +1945,51 @@ If ($Global:CTXOE_Result -eq $True) {
 $Global:CTXOE_Details = "Correct mode is selected. Power management schema ID: $m_CurrentPlanID";
 } Else {
 $Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_CurrentPlanID. You cannot use this optimization if power management scheme is configured through Group Policy.";
-}</value>
+}]]></value>
         </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Autoreset FTA</name>
+      <description>Sometimes certain Windows application can reclaim their file type association. This will generate message popups at logon. By disabling "autoreset" this behaviour will be disabled.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <executeparams>
+          <value><![CDATA[$out = fsutil resource setautoreset false C:\ 2>&1 | Out-String
+if ($LASTEXITCODE -eq 0) {
+    $Global:CTXOE_Result = $true
+} else {
+    $Global:CTXOE_Result = $false
+}
+$Global:CTXOE_Details = $out.Trim()]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$out = fsutil resource setautoreset true C:\ 2>&1 | Out-String
+if ($LASTEXITCODE -eq 0) {
+    $Global:CTXOE_Result = $true
+} else {
+    $Global:CTXOE_Result = $false
+}
+$Global:CTXOE_Details = $out.Trim()]]></value>
+        </rollbackparams>
+      </action>
+      <analyze_not_supported />
+    </entry>
+    <entry>
+      <name>DeleteUserAppContainersOnLogoff</name>
+      <description>When new user logs in to Windows OS, new per-user firewall rules are created. These rules are not deleted when user logs off.
+
+This can have significant impact on performance.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DeleteUserAppContainersOnLogoff</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
       </action>
     </entry>
   </group>
@@ -1633,23 +2004,21 @@ $Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>$EAOriginal = $ErrorActionPreference
-$ErrorActionPreference = "SilentlyContinue"
-[Array]$EventLogs = wevtutil enum-logs
+          <value><![CDATA[[Array]$EventLogs = wevtutil enum-logs
 
 Write-Host -ForegroundColor Yellow  'Clear event logs'
 # Clear all event log entries
 ForEach ($EventLog in $EventLogs) {
     Write-Host "Clearing $EventLog"
-    wevtutil cl "$EventLog"
+    wevtutil cl "$EventLog" 2>$null
 }
 # System event log contains events ID 104 ("Log Clear"), so it needs to be cleared as the last one again
 wevtutil cl "System"
-$ErrorActionPreference = $EAOriginal
+                                    
 
 $Global:CTXOE_Result = $True;
 $Global:CTXOE_Details = "Successfully cleaned the event logs";
-</value>
+]]></value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -1665,12 +2034,12 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>
+          <value><![CDATA[
             . $Env:WinDir\Microsoft.Net\Framework\v4.0.30319\ngen.exe Update;
 
             $Global:CTXOE_Result = $True;
             $Global:CTXOE_Details = ".NET assemblies optimized";
-          </value>
+          ]]></value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -1686,7 +2055,7 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>
+          <value><![CDATA[
             If ($(Test-Path $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe) -eq $True) {
             . $Env:WinDir\Microsoft.Net\Framework64\v4.0.30319\ngen.exe Update;
             $Global:CTXOE_Details = ".NET assemblies optimized";
@@ -1694,7 +2063,7 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
             $Global:CTXOE_Details = "Skipping, not 64 bit NGEN not found";
             }
             $Global:CTXOE_Result = $True;
-          </value>
+          ]]></value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -1705,50 +2074,6 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
     <id>OptionalComponents</id>
     <displayname>Optional Components</displayname>
     <description>Contains components that are often disabled for VDI\RDS machines, however can impact other applications or user experience. It is recommended to review these settings before applying them. </description>
-    <entry>
-      <name>Microsoft.ScreenSketch</name>
-      <description>Removes "Snip &amp; Sketch" application. Provides functionality of Snipping Tool with additional improvements.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.ScreenSketch</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WindowsStore</name>
-      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
-      <execute>0</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.WindowsStore</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.StorePurchaseApp</name>
-      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
-      <execute>0</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.StorePurchaseApp</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WindowsCalculator</name>
-      <description>Built-in Windows Calculator. If your users are using it (mostly desktop sessions rather than published applications), do not remove it unless you have a replacement calculator app.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.WindowsCalculator</name>
-        </params>
-      </action>
-    </entry>
     <entry>
       <name>Superfetch</name>
       <description>Maintains and improves system performance over time. If optimizing a persistent machine you may leave Superfetch enabled. If optimizing a non-persistent machine, disable it.</description>
@@ -1785,43 +2110,146 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
         </params>
       </action>
     </entry>
+  </group>
+  <group>
+    <id>Disable Windows Traces</id>
+    <displayname>Optional Disable Windows Traces</displayname>
+    <description>Disable Windows Traces</description>
     <entry>
-      <name>Disable Windows Customer Experience Improvement program</name>
-      <description>Disable Windows Customer Experience Improvement program.</description>
+      <name>Cellcore Trace</name>
+      <description>The “Cellcore” trace has “SMSRouter” in the trace properties.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/cellular-architecture-and-driver-model</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>CEIPEnable</name>
-          <path>HKLM\SOFTWARE\Microsoft\SQMClient\Windows</path>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Cellcore</path>
           <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Disable Automatic Maintenance</name>
-      <description>When you are not using your PC, Windows 10 performs automatic maintenance. It is a daily scheduled task that runs out-of-the-box. When enabled, it performs various tasks like app updates, Windows updates, security scans and many other things.</description>
+      <name>Cloud Experience Host Trace</name>
+      <description>A log generated by the Diagnostic Policy Service.
+DPS enables problem detection, troubleshooting and resolution for Windows components.
+If this service is stopped, diagnostics will no longer function”.
+https://docs.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>MaintenanceDisabled</name>
-          <path>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</path>
-          <value>1</value>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog</path>
+          <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Downloaded Maps Manager</name>
-      <description>Windows service for application access to downloaded maps. This service is started on-demand by application accessing downloaded maps. Disabling this service will prevent apps from accessing maps.</description>
+      <name>Microsoft NFC devices Trace</name>
+      <description>Microsoft NFC devices, one function of which is to enable 'Airplane Mode'.
+This functionality covers Wi-Fi and GPS devices.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/nfc/what-s-new-in-nfc-device-drivers</description>
       <execute>1</execute>
       <action>
-        <plugin>Services</plugin>
+        <plugin>Registry</plugin>
         <params>
-          <name>MapsBroker</name>
-          <value>Disabled</value>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\RadioMgr</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ReadyBoot Trace</name>
+      <description>“ReadyBoot is boot acceleration technology that maintains an in-RAM cache used to service disk reads faster than a slower storage medium such as a disk drive”. 
+VDI does not use “normal” computer disk devices, but usually segments of a shared storage medium.
+ReadyBoot and other optimizations designed to assist normal disk devices do not have equivalent effects on shared storage devices.  And further, for non-persistent VDI, 99.999% of computer state is discarded when the user logs off.  
+This includes any optimizations performed by the OS during runtime.  Therefore, why allow Windows “normal” optimizations when all that computer and I/O work will be discarded at logoff for NP VDI?
+For persistent, the choice is yours.  Another consideration is again, pooled VDI. 
+The users will normally not log into the same VM twice.
+Therefore, any RAM caching of predicted I/O will have unknown impact because the underlying disk extent being utilized for that logon session will be different from session to session.
+https://docs.microsoft.com/en-us/previous-versions/windows/desktop/xperf/readyboot-analysis</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\ReadyBoot</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Continuous Startup Trace</name>
+      <description>This is a startup trace that runs all the time, with these loggers: "Microsoft-Windows-Kernel-PnP":0x48000:0x4
+"Microsoft-Windows-Kernel-WDI":0x100000000:0xff
+"Microsoft-Windows-Wininit":0x20000:0x4
+"Microsoft-Windows-Kernel-BootDiagnostics":0xffffffffffffffff:0x4
+"Microsoft-Windows-Kernel-Power":0x1:0x4
+"Microsoft-Windows-Winlogon":0x20000:0x4
+"Microsoft-Windows-Shell-Core":0x6000000:0x4
+On a clean state VM, this trace is running and using a very small amount of resources.  Current buffers are 4, buffer size is 16.  Those numbers reflect the amount of physical RAM reserved for this trace.  Because the VM does not use WLAN, AKA “wireless”, this trace is doing nothing for my VM now, and will not as long as I do not use wireless.  Therefore the recommendation to disable this trace and free these resources.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/wifi-universal-driver-model</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WDIContextLog</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>User-Initiated Feedback Trace</name>
+      <description>This log is a container for “user-initiated feedback” for wireless networking (Wi-Fi).  If the VMs were to emulate wireless networking, you might just leave this one alone.  Also, this trace is enabled by default, but not run until triggered, presumably from a user-initiated feedback for a wireless issue.  The Windows diagnostics would run, gather some information from the current system including an event trace, and then send that information to Microsoft.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/user-initiated-feedback-normal-mode</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WiFiDriverIHVSession</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WiFiSession Trace</name>
+      <description>Not documented, but not hard to understand.
+This is another diagnostic log for the Windows Diagnostics. If your VMs are not using Wi-Fi, this log is not needed.
+You could though leave this alone as it would almost never be started unless a user started a troubleshooter, and troubleshooters are usually disabled in VDI environments.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WiFiSession</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WinPhoneCritical Trace</name>
+      <description>Not documented, but not hard to determine its use: diagnostics for phone.
+If not using or allowing phones to be attached to your VMs, no need to leave a trace enabled that will never be used.
+Or just leave this one alone.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WinPhoneCritical</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>

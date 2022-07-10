@@ -2,10 +2,10 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.2</version>
-    <id>1BEAA349-54F8-4E9A-B1E1-7779A0A3CEA7</id>
-    <displayname>Windows Server 2016 build 1607 by John Billekens</displayname>
-    <description>OS optimizations for Windows Server 2016 by John Billekens</description>
+    <version>1.0</version>
+    <id>34FEAED2-1233-4779-9889-237F59ED7907</id>
+    <displayname>Windows Server 2022 build 2009 by John Billekens</displayname>
+    <description>OS optimizations for Windows Server 2022 by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
     <lastupdatedate>7/8/2022</lastupdatedate>
@@ -46,18 +46,6 @@
         <plugin>Services</plugin>
         <params>
           <name>bthserv</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Computer Browser</name>
-      <description>Maintains an updated list of computers on the network and supplies this list to computers designated as browsers.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>Browser</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -154,18 +142,6 @@
         <plugin>Services</plugin>
         <params>
           <name>FDResPub</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Interactive Services Detection</name>
-      <description>Enables user notification of user input for interactive services, which enables access to dialogs created by interactive services when they appear. If this service is stopped, notifications of new interactive service dialogs will no longer function and there might not be access to interactive service dialogs.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>UI0Detect</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -292,25 +268,49 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
       </action>
     </entry>
     <entry>
-      <name>Xbox Live Auth Manager</name>
-      <description>Provides authentication and authorization services for interacting with Xbox Live.</description>
+      <name>Bluetooth Audio Gateway Service</name>
+      <description>Service supporting the audio gateway role of the Bluetooth Handsfree Profile</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>XblAuthManager</name>
+          <name>BTAGService</name>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Xbox Live Game Save</name>
-      <description>This service syncs save data for Xbox Live save enabled games.</description>
+      <name>Payments and NFC/SE Manager</name>
+      <description>Manages payments and Near Field Communication (NFC) based secure elements.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>XblGameSave</name>
+          <name>SEMgrSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Shared PC Account Manager</name>
+      <description>Manages profiles and accounts on a SharedPC configured device</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>shpamsvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Media Player Network Sharing Service</name>
+      <description>Shares Windows Media Player libraries to other networked players and media devices using Universal Plug and Play</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>WMPNetworkSvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -381,19 +381,6 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         <params>
           <name>IndexerAutomaticMaintenance</name>
           <path>\Microsoft\Windows\Shell</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>KernelCeipTask</name>
-      <description>Collects additional information about the system and sends to Microsoft if opted-in to Windows Customer Experience Improvement Program.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>KernelCeipTask</name>
-          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -633,19 +620,6 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
       </action>
     </entry>
     <entry>
-      <name>SmartScreenSpecific</name>
-      <description>Task that collects data for SmartScreen in Windows.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>SmartScreenSpecific</name>
-          <path>\Microsoft\Windows\AppID</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>StartComponentCleanup</name>
       <description>This job clean up components automatically when the system is not in use. This task is known to cause excessive CPU usage.</description>
       <execute>1</execute>
@@ -802,27 +776,27 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
       </action>
     </entry>
     <entry>
-      <name>XblGameSaveTask</name>
-      <description>XblGameSave Standby Task</description>
+      <name>Windows Media Sharing</name>
+      <description>This task updates the cached list of folders and the security permissions on any new files in a user’s shared media library.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>XblGameSaveTask</name>
-          <path>\Microsoft\XblGameSave</path>
+          <name>UpdateLibrary</name>
+          <path>\Microsoft\Windows\Windows Media Sharing</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>XblGameSaveTaskLogon</name>
-      <description>XblGameSave Logon Task</description>
+      <name>Workspace Join Recovery Check</name>
+      <description>Performs recovery check.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>XblGameSaveTaskLogon</name>
-          <path>\Microsoft\XblGameSave</path>
+          <name>Recovery-Check</name>
+          <path>\Microsoft\Windows\Workplace Join</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -975,7 +949,7 @@ For more information, please refer to official Microsoft documentation: https://
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value><![CDATA[
+          <value>
 [Array]$EventLogs = wevtutil enum-logs
 
 Write-Host -ForegroundColor Yellow  'Clear event logs'
@@ -989,7 +963,7 @@ wevtutil cl "System"
 
 $Global:CTXOE_Result = $True;
 $Global:CTXOE_Details = "Successfully cleaned the event logs";
-          ]]></value>
+          </value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -1063,7 +1037,7 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
       </action>
     </entry>
     <entry>
-      <name>Windows Defender Cache Maintenance</name>
+	      <name>Windows Defender Cache Maintenance</name>
       <description>Periodic maintenance task.</description>
       <execute>1</execute>
       <action>

@@ -12,6 +12,9 @@ With this template you can optimize Windows Server 2016
 ## Windows 10 1909 Template (JohnBillekens_Windows_Server_2019_1809)
 With this template you can optimize Windows Server 2019
 
+## Windows 10 1909 Template (JohnBillekens_Windows_Server_2022_2009)
+With this template you can optimize Windows Server 2022
+
 ## Windows 10 1903 Template (JohnBillekens_Windows_10_1903)
 With this template you can optimize Windows 10 1903
 
@@ -19,5 +22,11 @@ With this template you can optimize Windows 10 1903
 With this template you can optimize Windows 10 1909
 
 ## Windows 10 1909 Template (JohnBillekens_Windows_10_2004)
-With this template you can optimize Windows 10 2004
+With this template you can optimize Windows 10 20H1 (2004)
+
+## Windows 10 1909 Template (JohnBillekens_Windows_10_2009)
+With this template you can optimize Windows 10 20H2, 21H1, 21H2
+
+## Windows 10 1909 Template (JohnBillekens_Windows_11_2009)
+With this template you can optimize Windows 11 21H2
 

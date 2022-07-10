@@ -2,13 +2,13 @@
 <root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>0.2</version>
+    <version>1.1</version>
     <id>9F6F8353-6BA1-47D7-815D-51C5B2CC83ED</id>
-    <displayname>Windows 10 build 1903 (John Billekens)</displayname>
-    <description>OS optimizations for Windows 10 build 1903 (John Billekens)</description>
+    <displayname>Windows 10 build 1903 by John Billekens</displayname>
+    <description>OS optimizations for Windows 10 build 1903 by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>1/28/2020</lastupdatedate>
+    <lastupdatedate>7/8/2022</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
