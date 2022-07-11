@@ -3,10 +3,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.2</version>
-    <id>DAA5039B-1961-4931-9490-583FD7255AA9</id>
-    <displayname>Windows 10 build 1909 by John Billekens</displayname>
-    <description>OS optimizations for Windows 10 build 1909 by John Billekens</description>
+    <version>1.1</version>
+    <id>C30B41FA-1044-41CD-A3B6-B7C3DAD6A16A</id>
+    <displayname>Windows 11 21H2 (2009) by John Billekens</displayname>
+    <description>OS optimizations for Windows 11 21H2 (2009) by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
     <lastupdatedate>7/08/2022</lastupdatedate>
@@ -112,6 +112,32 @@
       </action>
     </entry>
     <entry>
+      <name>Cellular Time service</name>
+      <description>This service sets time based on NITZ messages from a Mobile Network.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>autotimesvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Connected User Experiences and Telemetry</name>
+      <description>The Connected User Experiences and Telemetry service enables features that support in-application and connected user experiences. Additionally, this service manages the event driven collection and transmission of diagnostic and usage information (used to improve the experience and quality of the Windows Platform) when the diagnostics and usage privacy option settings are enabled under Feedback and Diagnostics.
+
+NOTE: Stopping this service prevents Microsoft Defender ATP from working properly.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DiagTrack</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Contact Data</name>
       <description>Indexes contact data for fast contact searching. If you stop or disable this service, contacts might be missing from your search results.</description>
       <execute>1</execute>
@@ -131,6 +157,18 @@
         <plugin>Services</plugin>
         <params>
           <name>DusmSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostic Execution Service</name>
+      <description>Diagnostic Execution Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DiagSvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -167,6 +205,30 @@
         <plugin>Services</plugin>
         <params>
           <name>WdiSystemHost</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Distributed Link Tracking Client</name>
+      <description>Maintains links between NTFS files within a computer or across computers in a network domain.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>TrkWks</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Downloaded Maps Manager</name>
+      <description>Windows service for application access to downloaded maps. This service is started on-demand by application accessing downloaded maps. Disabling this service will prevent apps from accessing maps.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>MapsBroker</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -232,6 +294,19 @@
       </action>
     </entry>
     <entry>
+      <name>Geolocation Service</name>
+      <description>This service monitors the current location of the system and manages geofences (a geographical location with associated events).
+If you turn off this service, applications will be unable to use or receive notifications for geolocation or geofences.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>lfsvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Internet Connection Sharing (ICS)</name>
       <description>Provides network address translation, addressing, name resolution and/or intrusion prevention services for a home or small office network.</description>
       <execute>1</execute>
@@ -251,6 +326,18 @@
         <plugin>Services</plugin>
         <params>
           <name>MessagingService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft Windows SMS Router Service</name>
+      <description>Routes messages based on rules to appropriate clients.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SmsRouter</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -280,8 +367,34 @@
       </action>
     </entry>
     <entry>
+      <name>OneCore capture service</name>
+      <description>Enables optional screen capture functionality for applications that call the Windows.Graphics.Capture API.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CaptureService</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>OneSync Service</name>
+      <description>This (per-user) service synchronizes mail, contacts, calendar and various other user data.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>OneSyncSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Optimize drives</name>
-      <description>Helps the computer run more efficiently by optimizing files on storage drives.</description>
+      <description>Helps the computer run more efficiently by optimizing files on storage drives.
+
+NOTE:Disabling this service prevents defragmentation (UI) from working.</description>
       <execute>1</execute>
       <action>
         <plugin>Services</plugin>
@@ -299,6 +412,18 @@
         <plugin>Services</plugin>
         <params>
           <name>WpcMonSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Payments and NFC/SE Manager</name>
+      <description>Manages payments and Near Field Communication (NFC) based secure elements.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>SEMgrSvc</name>
           <value>Disabled</value>
         </params>
       </action>
@@ -329,8 +454,10 @@
     </entry>
     <entry>
       <name>Shell Hardware Detection</name>
-      <description>Provides notifications for AutoPlay hardware events.</description>
-      <execute>1</execute>
+      <description>Provides notifications for AutoPlay hardware events.
+
+NOTE: Disabling this service impacts some UI elements (e.g. Format menu for DVD writers) and can also cause event log entries by AppX packages.</description>
+      <execute>0</execute>
       <action>
         <plugin>Services</plugin>
         <params>
@@ -484,30 +611,6 @@ Recommended by Microsoft to disable: https://docs.microsoft.com/en-us/windows-se
         </params>
       </action>
     </entry>
-    <entry>
-      <name>Distributed Link Tracking Client</name>
-      <description>Maintains links between NTFS files within a computer or across computers in a network domain.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>TrkWks</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Downloaded Maps Manager</name>
-      <description>Windows service for application access to downloaded maps. This service is started on-demand by application accessing downloaded maps. Disabling this service will prevent apps from accessing maps.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>MapsBroker</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
   </group>
   <group>
     <id>RemoveApplications</id>
@@ -559,13 +662,13 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.Messaging</name>
-      <description>Microsoft.Messaging</description>
+      <name>Microsoft.HEIFImageExtension</name>
+      <description>Adds support for High Efficiency Image File (HEIF) format, usually with .heif extension.</description>
       <execute>1</execute>
       <action>
         <plugin>UWP</plugin>
         <params>
-          <name>Microsoft.Messaging</name>
+          <name>Microsoft.HEIFImageExtension</name>
         </params>
       </action>
     </entry>
@@ -614,6 +717,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.MixedReality.Portal</name>
+      <description>Provides access to mixed reality games and VR experiences.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.MixedReality.Portal</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.MSPaint</name>
       <description>Microsoft.MSPaint</description>
       <execute>1</execute>
@@ -636,17 +750,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.OneConnect</name>
-      <description>Microsoft.OneConnect</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.OneConnect</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>Microsoft.People</name>
       <description>Microsoft.People</description>
       <execute>1</execute>
@@ -658,13 +761,13 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.Print3D</name>
-      <description>Microsoft.Print3D</description>
+      <name>Microsoft.ScreenSketch</name>
+      <description>Removes "Snip &amp; Sketch" application. Provides functionality of Snipping Tool with additional improvements.</description>
       <execute>1</execute>
       <action>
         <plugin>UWP</plugin>
         <params>
-          <name>Microsoft.Print3D</name>
+          <name>Microsoft.ScreenSketch</name>
         </params>
       </action>
     </entry>
@@ -676,6 +779,30 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.SkypeApp</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.StorePurchaseApp</name>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.StorePurchaseApp</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.VP9VideoExtensions</name>
+      <description>Adds support for video codec VP9 (part of WebM project by Google)
+
+Note: This is required to support HDR video streaming</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.VP9VideoExtensions</name>
         </params>
       </action>
     </entry>
@@ -702,6 +829,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.WebpImageExtension</name>
+      <description>Adds support for image format WebP.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WebpImageExtension</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.Windows.Photos</name>
       <description>Microsoft.Windows.Photos</description>
       <execute>1</execute>
@@ -724,6 +862,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.WindowsCalculator</name>
+      <description>Built-in Windows Calculator. If your users are using it (mostly desktop sessions rather than published applications), do not remove it unless you have a replacement calculator app.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WindowsCalculator</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.WindowsCamera</name>
       <description>Microsoft.WindowsCamera</description>
       <execute>1</execute>
@@ -731,6 +880,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.WindowsCamera</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WindowsCommunicationsApps</name>
+      <description>Disable Windows Mail and Calendar functionality</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>microsoft.windowscommunicationsapps</name>
         </params>
       </action>
     </entry>
@@ -764,6 +924,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.WindowsSoundRecorder</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft.WindowsStore</name>
+      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.WindowsStore</name>
         </params>
       </action>
     </entry>
@@ -834,6 +1005,17 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Microsoft.YourPhone</name>
+      <description>Provides access to remotely send text messages or access images on Android-based phone.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.YourPhone</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Microsoft.ZuneMusic</name>
       <description>Microsoft.ZuneMusic</description>
       <execute>1</execute>
@@ -852,72 +1034,6 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <plugin>UWP</plugin>
         <params>
           <name>Microsoft.ZuneVideo</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.MixedReality.Portal</name>
-      <description>Provides access to mixed reality games and VR experiences.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.MixedReality.Portal</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.YourPhone</name>
-      <description>Provides access to remotely send text messages or access images on Android-based phone.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.YourPhone</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WindowsCommunicationsApps</name>
-      <description>Disable Windows Mail and Calendar functionality</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>microsoft.windowscommunicationsapps</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.HEIFImageExtension</name>
-      <description>Adds support for High Efficiency Image File (HEIF) format, usually with .heif extension.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.HEIFImageExtension</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.VP9VideoExtensions</name>
-      <description>Adds support for video codec VP9 (part of WebM project by Google)</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.VP9VideoExtensions</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WebpImageExtension</name>
-      <description>Adds support for image format WebP.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.WebpImageExtension</name>
         </params>
       </action>
     </entry>
@@ -953,6 +1069,21 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Cellular</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Cellular</name>
+          <path>\Microsoft\Windows\Management\Provisioning\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Consolidator</name>
       <description>Collects and sends usage data to Microsoft if opted-in to the Windows Customer Experience Improvement Program.</description>
       <execute>1</execute>
@@ -961,6 +1092,21 @@ DOES NOT SUPPORT ROLLBACK!</description>
         <params>
           <name>Consolidator</name>
           <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Diagnostics</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Diagnostics</name>
+          <path>\Microsoft\Windows\DiskFootprint\</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1005,21 +1151,8 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>Location Notifications</name>
-      <description>Location Notifications</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Notifications</name>
-          <path>\Microsoft\Windows\Location</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Location Notifications 2</name>
-      <description>Location Notifications 2</description>
+      <name>Location - Actions Dialog</name>
+      <description>Location - Actions Dialog</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1031,8 +1164,21 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
+      <name>Location - Notifications</name>
+      <description>Location - Notifications</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Notifications</name>
+          <path>\Microsoft\Windows\Location</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>MapsToastTask</name>
-      <description>MapsToastTask</description>
+      <description>Collects program telemetry information if opted-in to the Microsoft Customer Experience Improvement Program.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1097,13 +1243,28 @@ DOES NOT SUPPORT ROLLBACK!</description>
     </entry>
     <entry>
       <name>Mobile Broadband Accounts</name>
-      <description>Mobile Broadband Accounts</description>
+      <description>Mobile broadband account experience metadata parser</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
           <name>MNO Metadata Parser</name>
           <path>\Microsoft\Windows\Mobile Broadband Accounts</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>NotificationTask</name>
+      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
+
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>NotificationTask</name>
+          <path>\Microsoft\Windows\WwanSvc\</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1161,237 +1322,10 @@ DOES NOT SUPPORT ROLLBACK!</description>
       </action>
     </entry>
     <entry>
-      <name>RegIdleBackup</name>
-      <description>Registry idle backup task.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>RegIdleBackup</name>
-          <path>\Microsoft\Windows\Registry</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>ResolutionHost</name>
-      <description>The Windows Diagnostic Infrastructure Resolution host enables interactive resolutions for system problems detected by the Diagnostic Policy Service. It is triggered when necessary by the Diagnostic Policy Service in the appropriate user session. If the Diagnostic Policy Service is not running, the task will not run.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>ResolutionHost</name>
-          <path>\Microsoft\Windows\WDI</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>RunFullMemoryDiagnostic</name>
-      <description>Detects and mitigates problems in physical memory (RAM).</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>RunFullMemoryDiagnostic</name>
-          <path>\Microsoft\Windows\MemoryDiagnostic</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Scheduled</name>
-      <description>Performs periodic maintenance of the computer system by fixing problems automatically or reporting them through the Action Center.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Scheduled</name>
-          <path>\Microsoft\Windows\Diagnosis</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>ScheduledDefrag</name>
-      <description>This task defragments the computers hard disk drives.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>ScheduledDefrag</name>
-          <path>\Microsoft\Windows\Defrag</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>SR</name>
-      <description>This task creates regular system protection points.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>SR</name>
-          <path>\Microsoft\Windows\SystemRestore</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>StartComponentCleanup</name>
-      <description>This job clean up components automatically when the system is not in use. This task is known to cause excessive CPU usage.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>StartComponentCleanup</name>
-          <path>\Microsoft\Windows\Servicing</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>StartupAppTask</name>
-      <description>Scans startup entries and raises notification to the user if there are too many startup entries.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>StartupAppTask</name>
-          <path>\Microsoft\Windows\Application Experience</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>UsbCeip</name>
-      <description>Collects Universal Serial Bus related statistics and information about your machine and sends to the Windows Device Connectivity engineering group at Microsoft, if opted-in to Windows Customer Experience Improvement Program.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>UsbCeip</name>
-          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>VerifyWinRE</name>
-      <description>Validates the Windows Recovery Environment.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>VerifyWinRE</name>
-          <path>\Microsoft\Windows\RecoveryEnvironment</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Error Reporting</name>
-      <description>Windows Error Reporting task to process queued reports.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>QueueReporting</name>
-          <path>\Microsoft\Windows\Windows Error Reporting</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Media Sharing</name>
-      <description>This task updates the cached list of folders and the security permissions on any new files in a user’s shared media library.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>UpdateLibrary</name>
-          <path>\Microsoft\Windows\Windows Media Sharing</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>WinSAT</name>
-      <description>Measures a system’s performance and capabilities.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>WinSAT</name>
-          <path>\Microsoft\Windows\Maintenance</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>XblGameSaveTask</name>
-      <description>XblGameSave Standby Task</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>XblGameSaveTask</name>
-          <path>\Microsoft\XblGameSave</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Cellular</name>
-      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
-
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Cellular</name>
-          <path>\Microsoft\Windows\Management\Provisioning\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Diagnostics</name>
-      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
-
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Diagnostics</name>
-          <path>\Microsoft\Windows\DiskFootprint\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>NotificationTask</name>
-      <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
-
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>NotificationTask</name>
-          <path>\Microsoft\Windows\WwanSvc\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>RecommendedTroubleshootingScanner</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1448,6 +1382,32 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>RegIdleBackup</name>
+      <description>Registry idle backup task.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>RegIdleBackup</name>
+          <path>\Microsoft\Windows\Registry</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ResolutionHost</name>
+      <description>The Windows Diagnostic Infrastructure Resolution host enables interactive resolutions for system problems detected by the Diagnostic Policy Service. It is triggered when necessary by the Diagnostic Policy Service in the appropriate user session. If the Diagnostic Policy Service is not running, the task will not run.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ResolutionHost</name>
+          <path>\Microsoft\Windows\WDI</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>ResPriStaticDbSync</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
@@ -1463,10 +1423,23 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>RunFullMemoryDiagnostic</name>
+      <description>Detects and mitigates problems in physical memory (RAM).</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>RunFullMemoryDiagnostic</name>
+          <path>\Microsoft\Windows\MemoryDiagnostic</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>ScanForUpdates</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1481,7 +1454,7 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       <name>ScanForUpdatesAsUser</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1493,10 +1466,36 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>Scheduled</name>
+      <description>Performs periodic maintenance of the computer system by fixing problems automatically or reporting them through the Action Center.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Scheduled</name>
+          <path>\Microsoft\Windows\Diagnosis</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ScheduledDefrag</name>
+      <description>This task defragments the computers hard disk drives.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>ScheduledDefrag</name>
+          <path>\Microsoft\Windows\Defrag</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>SilentCleanup</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1556,7 +1555,7 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       <name>SpeechModelDownloadTask</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
@@ -1571,13 +1570,52 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       <name>Sqm-Tasks</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
-Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds_vdi-recommendations-1909</description>
+Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-vdi-recommendations-2004</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
           <name>Sqm-Tasks</name>
           <path>\Microsoft\Windows\PI\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>SR</name>
+      <description>This task creates regular system protection points.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>SR</name>
+          <path>\Microsoft\Windows\SystemRestore</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>StartComponentCleanup</name>
+      <description>This job clean up components automatically when the system is not in use. This task is known to cause excessive CPU usage.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>StartComponentCleanup</name>
+          <path>\Microsoft\Windows\Servicing</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>StartupAppTask</name>
+      <description>Scans startup entries and raises notification to the user if there are too many startup entries.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>StartupAppTask</name>
+          <path>\Microsoft\Windows\Application Experience</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1613,6 +1651,19 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>UsbCeip</name>
+      <description>Collects Universal Serial Bus related statistics and information about your machine and sends to the Windows Device Connectivity engineering group at Microsoft, if opted-in to Windows Customer Experience Improvement Program.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>UsbCeip</name>
+          <path>\Microsoft\Windows\Customer Experience Improvement Program</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Usb-Notifications</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
@@ -1623,6 +1674,19 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
         <params>
           <name>Usb-Notifications</name>
           <path>\Microsoft\Windows\USB\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>VerifyWinRE</name>
+      <description>Validates the Windows Recovery Environment.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>VerifyWinRE</name>
+          <path>\Microsoft\Windows\RecoveryEnvironment</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -1643,6 +1707,45 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>Windows Error Reporting</name>
+      <description>Windows Error Reporting task to process queued reports.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>QueueReporting</name>
+          <path>\Microsoft\Windows\Windows Error Reporting</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Media Sharing</name>
+      <description>This task updates the cached list of folders and the security permissions on any new files in a user’s shared media library.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>UpdateLibrary</name>
+          <path>\Microsoft\Windows\Windows Media Sharing</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WinSAT</name>
+      <description>Measures a system’s performance and capabilities.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>WinSAT</name>
+          <path>\Microsoft\Windows\Maintenance</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>WsSwapAssessmentTask</name>
       <description>One of scheduled tasks that perform optimizations or data collections on computers that maintain their state across reboots. When a VDI VM task reboots and discards all changes since last boot, optimizations intended for physical computers are not helpful.
 
@@ -1657,11 +1760,106 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
         </params>
       </action>
     </entry>
+    <entry>
+      <name>XblGameSaveTask</name>
+      <description>XblGameSave Standby Task</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>XblGameSaveTask</name>
+          <path>\Microsoft\XblGameSave</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
   </group>
   <group>
     <id>Miscellaneous</id>
     <displayname>Miscellaneous</displayname>
     <description>Various optimizations and tweaks for VDI\RDS virtual machines</description>
+    <entry>
+      <name>Cortana</name>
+      <description>Remove the Cortana UWP App</description>
+      <execute>0</execute>
+      <action>
+        <plugin>UWP</plugin>
+        <params>
+          <name>Microsoft.549981C3F5F10</name>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Cortana (Turn off)</name>
+      <description>Turn off Cortana.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AllowCortana</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>DeleteUserAppContainersOnLogoff</name>
+      <description>When new user logs in to Windows OS, new per-user firewall rules are created. These rules are not deleted when user logs off.
+
+This can have significant impact on performance.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DeleteUserAppContainersOnLogoff</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Automatic Maintenance</name>
+      <description>When you are not using your PC, Windows 10 performs automatic maintenance. It is a daily scheduled task that runs out-of-the-box. When enabled, it performs various tasks like app updates, Windows updates, security scans and many other things.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MaintenanceDisabled</name>
+          <path>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Autoreset FTA</name>
+      <description>Sometimes certain Windows application can reclaim their file type association. This will generate message popups at logon. By disabling "autoreset" this behaviour will be disabled.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <executeparams>
+          <value><![CDATA[$out = fsutil resource setautoreset false C:\ 2>&1 | Out-String
+if ($LASTEXITCODE -eq 0) {
+    $Global:CTXOE_Result = $true
+} else {
+    $Global:CTXOE_Result = $false
+}
+$Global:CTXOE_Details = $out.Trim()]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$out = fsutil resource setautoreset true C:\ 2>&1 | Out-String
+if ($LASTEXITCODE -eq 0) {
+    $Global:CTXOE_Result = $true
+} else {
+    $Global:CTXOE_Result = $false
+}
+$Global:CTXOE_Details = $out.Trim()]]></value>
+        </rollbackparams>
+      </action>
+      <analyze_not_supported />
+    </entry>
     <entry>
       <name>Disable background auto-layout</name>
       <description>Disabling background auto-layout can help improve EWF performance.</description>
@@ -1705,6 +1903,20 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
       </action>
     </entry>
     <entry>
+      <name>Disable Hibernate</name>
+      <description>Disable Hibernate.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>HibernateEnabled</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\Power</path>
+          <value>0</value>
+          <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Disable memory dump creation</name>
       <description>Disable memory dump creation.</description>
       <execute>1</execute>
@@ -1727,7 +1939,21 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
         <params>
           <name>NtfsDisableLastAccessUpdate</name>
           <path>HKLM\SYSTEM\CurrentControlSet\Control\FileSystem</path>
-          <value>80000001</value>
+          <value>2147483651</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Storage Sense</name>
+      <description>Disable Storage Sense.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>AllowStorageSenseGlobal</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense</path>
+          <value>0</value>
           <valuetype>DWORD</valuetype>
         </params>
       </action>
@@ -1743,6 +1969,20 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
           <path>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System</path>
           <value>0</value>
           <valuetype>DWORD</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Windows Customer Experience Improvement program</name>
+      <description>Disable Windows Customer Experience Improvement program.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>CEIPEnable</name>
+          <path>HKLM\SOFTWARE\Microsoft\SQMClient\Windows</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
@@ -1773,68 +2013,6 @@ Source: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-se
           <valuetype>DWORD</valuetype>
         </params>
       </action>
-    </entry>
-    <entry>
-      <name>Turn off Cortana</name>
-      <description>Turn off Cortana.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Registry</plugin>
-        <params>
-          <name>AllowCortana</name>
-          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search</path>
-          <value>0</value>
-          <valuetype>DWORD</valuetype>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Disable Hibernate</name>
-      <description>Disable Hibernate.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Registry</plugin>
-        <params>
-          <name>HibernateEnabled</name>
-          <path>HKLM\SYSTEM\CurrentControlSet\Control\Power</path>
-          <value>0</value>
-          <valuetype>DWORD</valuetype>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Disable Storage Sense</name>
-      <description>Disable Storage Sense.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Registry</plugin>
-        <params>
-          <name>AllowStorageSenseGlobal</name>
-          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense</path>
-          <value>0</value>
-          <valuetype>DWORD</valuetype>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Windows Update</name>
-      <description>Enables the detection, download, and installation of updates for Windows and other programs.
-NOTE: This read-only entry is analyzing if Windows Update has been disabled using Group Policy. This entry does NOT support disabling Windows Update.
-All of the relevant policies are under the path Computer configuration &gt; Administrative Templates &gt; Windows Components &gt; Windows Update.
-For more information, please refer to official Microsoft documentation: https://docs.microsoft.com/en-us/windows/deployment/update/waas-wufb-group-policy
-      </description>
-      <execute>1</execute>
-      <action>
-        <plugin>Registry</plugin>
-        <params>
-          <name>NoAutoUpdate</name>
-          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
-          <value>1</value>
-          <valuetype>DWORD</valuetype>
-        </params>
-      </action>
-      <execute_not_supported />
-      <rollback_not_supported />
     </entry>
     <entry>
       <name>Set power plan to High Performance</name>
@@ -1926,16 +2104,26 @@ $Global:CTXOE_Details = "Wrong mode is selected. Power management schema ID: $m_
       </action>
     </entry>
     <entry>
-      <name>DeleteUserAppContainersOnLogoff</name>
-      <description>When new user logs in to Windows OS, new per-user firewall rules are created. These rules are not deleted when user logs off.
-
-This can have significant impact on performance.</description>
+      <name>Update Orchestrator Service</name>
+      <description>Update Orchestrator service, manages Windows Updates. If stopped, your devices will not be able to download and install the latest updates.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>UsoSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Windows Update</name>
+      <description>Disables the detection, download, and installation of updates for Windows and other programs.</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>DeleteUserAppContainersOnLogoff</name>
-          <path>HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy</path>
+          <name>NoAutoUpdate</name>
+          <path>HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</path>
           <value>1</value>
           <valuetype>Dword</valuetype>
         </params>
@@ -1954,6 +2142,7 @@ This can have significant impact on performance.</description>
         <plugin>PowerShell</plugin>
         <executeparams>
           <value><![CDATA[[Array]$EventLogs = wevtutil enum-logs
+
 Write-Host -ForegroundColor Yellow  'Clear event logs'
 # Clear all event log entries
 ForEach ($EventLog in $EventLogs) {
@@ -1962,8 +2151,10 @@ ForEach ($EventLog in $EventLogs) {
 }
 # System event log contains events ID 104 ("Log Clear"), so it needs to be cleared as the last one again
 wevtutil cl "System"
+
 $Global:CTXOE_Result = $True;
-$Global:CTXOE_Details = "Successfully cleaned the event logs";]]></value>
+$Global:CTXOE_Details = "Successfully cleaned the event logs";
+]]>          </value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -2020,60 +2211,125 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";]]></value>
     <displayname>Optional Components</displayname>
     <description>Contains components that are often disabled for VDI\RDS machines, however can impact other applications or user experience. It is recommended to review these settings before applying them. </description>
     <entry>
-      <name>Connected User Experiences and Telemetry</name>
-      <description>The Connected User Experiences and Telemetry service enables features that support in-application and connected user experiences. Additionally, this service manages the event driven collection and transmission of diagnostic and usage information (used to improve the experience and quality of the Windows Platform) when the diagnostics and usage privacy option settings are enabled under Feedback and Diagnostics.
-
-NOTE: This service is required for Microsoft Defender ATP. Do not disable it if you are planning to use it: https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/minimum-requirements#diagnostic-data-settings</description>
-      <execute>0</execute>
+      <name>MS Edge - ActiveSetup</name>
+      <description>Remove the ActiveSetup value</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}</path>
+          <value>CTXOE_DeleteValue</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - ActiveSetup (WOW6432)</name>
+      <description>Remove the ActiveSetup value</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}</path>
+          <value>CTXOE_DeleteValue</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Allow installation default Registry</name>
+      <description>You can specify the default behavior of all channels to allow or block Microsoft Edge updates when Microsoft Edge Update is used.
+(0) Installs disabled
+(1) Always allow installs
+(4) Always allow Machine-Wide</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>InstallDefault</name>
+          <path>HKLM\Software\Policies\Microsoft\EdgeUpdate</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Microsoft Edge Elevation Service (MicrosoftEdgeElevationService)</name>
+      <description>Keeps Microsoft Edge up to update. If this service is disabled, the application will not be kept up to date.</description>
+      <execute>1</execute>
       <action>
         <plugin>Services</plugin>
         <params>
-          <name>DiagTrack</name>
+          <name>MicrosoftEdgeElevationService</name>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.ScreenSketch</name>
-      <description>Removes "Snip &amp; Sketch" application. Provides functionality of Snipping Tool with additional improvements.</description>
+      <name>MS Edge - Microsoft Edge Update Service (edgeupdate)</name>
+      <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
-        <plugin>UWP</plugin>
+        <plugin>Services</plugin>
         <params>
-          <name>Microsoft.ScreenSketch</name>
+          <name>edgeupdate</name>
+          <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Microsoft.WindowsStore</name>
-      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
-      <execute>0</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.WindowsStore</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.StorePurchaseApp</name>
-      <description>Microsoft Store application. Do not remove it if you're planning to use UWP applications. After removed, it is not possible to fix it without reverting to previous backup / snapshot or resetting operating system.</description>
-      <execute>0</execute>
-      <action>
-        <plugin>UWP</plugin>
-        <params>
-          <name>Microsoft.StorePurchaseApp</name>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Microsoft.WindowsCalculator</name>
-      <description>Built-in Windows Calculator. If your users are using it (mostly desktop sessions rather than published applications), do not remove it unless you have a replacement calculator app.</description>
+      <name>MS Edge - Microsoft Edge Update Service (edgeupdatem)</name>
+      <description>Keeps your Microsoft software up to date. If this service is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This service uninstalls itself when there is no Microsoft software using it.</description>
       <execute>1</execute>
       <action>
-        <plugin>UWP</plugin>
+        <plugin>Services</plugin>
         <params>
-          <name>Microsoft.WindowsCalculator</name>
+          <name>edgeupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - MicrosoftEdgeUpdateTaskMachineCore Task</name>
+      <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MicrosoftEdgeUpdateTaskMachineCore</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - MicrosoftEdgeUpdateTaskMachineUA Task</name>
+      <description>Keeps your Microsoft software up to date. If this task is disabled or stopped, your Microsoft software will not be kept up to date, meaning security vulnerabilities that may arise cannot be fixed and features may not work. This task uninstalls itself when there is no Microsoft software using it.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>MicrosoftEdgeUpdateTaskMachineUA</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Update policy override default Registry</name>
+      <description>Lets you specify the default behavior for all channels concerning the way Microsoft Edge Update handles available updates for Microsoft Edge.
+(0) Updates disabled
+(1) Always allow updates
+(2) Manual updates only
+(3) Automatic silent updates only</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>UpdateDefault</name>
+          <path>HKLM\Software\Policies\Microsoft\EdgeUpdate</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
@@ -2113,31 +2369,193 @@ NOTE: This service is required for Microsoft Defender ATP. Do not disable it if 
         </params>
       </action>
     </entry>
+  </group>
+  <group>
+    <id>Disable Windows Traces</id>
+    <displayname>Optional Disable Windows Traces</displayname>
+    <description>Disable Windows Traces</description>
     <entry>
-      <name>Disable Windows Customer Experience Improvement program</name>
-      <description>Disable Windows Customer Experience Improvement program.</description>
+      <name>Cellcore Trace</name>
+      <description>The “Cellcore” trace has “SMSRouter” in the trace properties.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/cellular-architecture-and-driver-model</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>CEIPEnable</name>
-          <path>HKLM\SOFTWARE\Microsoft\SQMClient\Windows</path>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Cellcore</path>
           <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
     <entry>
-      <name>Disable Automatic Maintenance</name>
-      <description>When you are not using your PC, Windows 10 performs automatic maintenance. It is a daily scheduled task that runs out-of-the-box. When enabled, it performs various tasks like app updates, Windows updates, security scans and many other things.</description>
+      <name>Cloud Experience Host Trace</name>
+      <description>A log generated by the Diagnostic Policy Service.
+DPS enables problem detection, troubleshooting and resolution for Windows components.
+If this service is stopped, diagnostics will no longer function”.
+https://docs.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server</description>
       <execute>1</execute>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>MaintenanceDisabled</name>
-          <path>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance</path>
-          <value>1</value>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog</path>
+          <value>0</value>
           <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Microsoft NFC devices Trace</name>
+      <description>Microsoft NFC devices, one function of which is to enable 'Airplane Mode'.
+This functionality covers Wi-Fi and GPS devices.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/nfc/what-s-new-in-nfc-device-drivers</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\RadioMgr</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>ReadyBoot Trace</name>
+      <description>“ReadyBoot is boot acceleration technology that maintains an in-RAM cache used to service disk reads faster than a slower storage medium such as a disk drive”. 
+VDI does not use “normal” computer disk devices, but usually segments of a shared storage medium.
+ReadyBoot and other optimizations designed to assist normal disk devices do not have equivalent effects on shared storage devices.  And further, for non-persistent VDI, 99.999% of computer state is discarded when the user logs off.  
+This includes any optimizations performed by the OS during runtime.  Therefore, why allow Windows “normal” optimizations when all that computer and I/O work will be discarded at logoff for NP VDI?
+For persistent, the choice is yours.  Another consideration is again, pooled VDI. 
+The users will normally not log into the same VM twice.
+Therefore, any RAM caching of predicted I/O will have unknown impact because the underlying disk extent being utilized for that logon session will be different from session to session.
+https://docs.microsoft.com/en-us/previous-versions/windows/desktop/xperf/readyboot-analysis</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\ReadyBoot</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Continuous Startup Trace</name>
+      <description>This is a startup trace that runs all the time, with these loggers: "Microsoft-Windows-Kernel-PnP":0x48000:0x4
+"Microsoft-Windows-Kernel-WDI":0x100000000:0xff
+"Microsoft-Windows-Wininit":0x20000:0x4
+"Microsoft-Windows-Kernel-BootDiagnostics":0xffffffffffffffff:0x4
+"Microsoft-Windows-Kernel-Power":0x1:0x4
+"Microsoft-Windows-Winlogon":0x20000:0x4
+"Microsoft-Windows-Shell-Core":0x6000000:0x4
+On a clean state VM, this trace is running and using a very small amount of resources.  Current buffers are 4, buffer size is 16.  Those numbers reflect the amount of physical RAM reserved for this trace.  Because the VM does not use WLAN, AKA “wireless”, this trace is doing nothing for my VM now, and will not as long as I do not use wireless.  Therefore the recommendation to disable this trace and free these resources.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/wifi-universal-driver-model</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WDIContextLog</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>User-Initiated Feedback Trace</name>
+      <description>This log is a container for “user-initiated feedback” for wireless networking (Wi-Fi).  If the VMs were to emulate wireless networking, you might just leave this one alone.  Also, this trace is enabled by default, but not run until triggered, presumably from a user-initiated feedback for a wireless issue.  The Windows diagnostics would run, gather some information from the current system including an event trace, and then send that information to Microsoft.
+https://docs.microsoft.com/en-us/windows-hardware/drivers/network/user-initiated-feedback-normal-mode</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WiFiDriverIHVSession</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WiFiSession Trace</name>
+      <description>Not documented, but not hard to understand.
+This is another diagnostic log for the Windows Diagnostics. If your VMs are not using Wi-Fi, this log is not needed.
+You could though leave this alone as it would almost never be started unless a user started a troubleshooter, and troubleshooters are usually disabled in VDI environments.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WiFiSession</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>WinPhoneCritical Trace</name>
+      <description>Not documented, but not hard to determine its use: diagnostics for phone.
+If not using or allowing phones to be attached to your VMs, no need to leave a trace enabled that will never be used.
+Or just leave this one alone.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Start</name>
+          <path>HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WinPhoneCritical</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Rollback</id>
+    <displayname>Rollback</displayname>
+    <description>Contains optimizations for which recommendations have changed, for example for compatibility reasons. This reverts those changes to original state.</description>
+    <entry>
+      <name>Connected User Experiences and Telemetry</name>
+      <description>11/17/2020 - Stopping this service prevents Microsoft Defender ATP from working properly.
+
+This entry restores the system to the original state and fixes this issue.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>DiagTrack</name>
+          <value>Automatic</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Optimize drives</name>
+      <description>11/17/2020 - Disabling this service prevents defragmentation (UI) from working.
+
+This entry restores the system to the original state and fixes this issue.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>defragsvc</name>
+          <value>Manual</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Shell Hardware Detection</name>
+      <description>11/17/2020 - Disabling this service impacts some UI elements (e.g. Format menu for DVD writers) and can also cause event log entries by AppX packages.
+
+This entry restores the system to the original state and fixes this issue.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>ShellHWDetection</name>
+          <value>Automatic</value>
         </params>
       </action>
     </entry>

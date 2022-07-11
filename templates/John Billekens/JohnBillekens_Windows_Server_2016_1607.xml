@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.0</version>
+    <version>1.2</version>
     <id>1BEAA349-54F8-4E9A-B1E1-7779A0A3CEA7</id>
-    <displayname>Windows Server 2016 build 1607 (JohnBillekens)</displayname>
-    <description>OS optimizations for Windows Server 2016</description>
+    <displayname>Windows Server 2016 build 1607 by John Billekens</displayname>
+    <description>OS optimizations for Windows Server 2016 by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>5/16/2020</lastupdatedate>
+    <lastupdatedate>7/08/2022</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
@@ -975,23 +976,21 @@ For more information, please refer to official Microsoft documentation: https://
       <action>
         <plugin>PowerShell</plugin>
         <executeparams>
-          <value>$EAOriginal = $ErrorActionPreference
-$ErrorActionPreference = "SilentlyContinue"
+          <value><![CDATA[
 [Array]$EventLogs = wevtutil enum-logs
 
 Write-Host -ForegroundColor Yellow  'Clear event logs'
 # Clear all event log entries
 ForEach ($EventLog in $EventLogs) {
     Write-Host "Clearing $EventLog"
-    wevtutil cl "$EventLog"
+    wevtutil cl "$EventLog" 2>$null
 }
 # System event log contains events ID 104 ("Log Clear"), so it needs to be cleared as the last one again
 wevtutil cl "System"
-$ErrorActionPreference = $EAOriginal
 
 $Global:CTXOE_Result = $True;
 $Global:CTXOE_Details = "Successfully cleaned the event logs";
-          </value>
+          ]]>          </value>
         </executeparams>
       </action>
       <analyze_not_supported />
@@ -1065,7 +1064,7 @@ $Global:CTXOE_Details = "Successfully cleaned the event logs";
       </action>
     </entry>
     <entry>
-	      <name>Windows Defender Cache Maintenance</name>
+      <name>Windows Defender Cache Maintenance</name>
       <description>Periodic maintenance task.</description>
       <execute>1</execute>
       <action>

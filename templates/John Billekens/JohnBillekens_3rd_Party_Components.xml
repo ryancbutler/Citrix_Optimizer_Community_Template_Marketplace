@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
-    <version>1.0</version>
+    <version>1.5</version>
     <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
-    <displayname>Disable 3rd Party Components (John Billekens)</displayname>
-    <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
+    <displayname>Disable 3rd Party Components by John Billekens</displayname>
+    <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>5/26/2020</lastupdatedate>
+    <lastupdatedate>7/08/2022</lastupdatedate>
   </metadata>
   <group>
     <id>Adobe</id>
     <displayname>Adobe</displayname>
     <description>Configures Adobe items</description>
-    <entry>
-      <name>Adobe Acrobat Update Task</name>
-      <description>This task keeps your Adobe Reader and Acrobat applications up to date with the latest enhancements and security fixes</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Adobe Acrobat Update Task</name>
-          <path>\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
     <entry>
       <name>Adobe Acrobat Update Service (AdobeARMservice)</name>
       <description>Adobe Acrobat Updater keeps your Adobe software up to date.</description>
@@ -40,13 +28,13 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Flash Player PPAPI Notifier Task</name>
-      <description>This task keeps your Adobe Flash PPAPI Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
+      <name>Adobe Acrobat Update Task</name>
+      <description>This task keeps your Adobe Reader and Acrobat applications up to date with the latest enhancements and security fixes</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Adobe Flash Player PPAPI Notifier</name>
+          <name>Adobe Acrobat Update Task</name>
           <path>\</path>
           <value>Disabled</value>
         </params>
@@ -66,13 +54,13 @@
       </action>
     </entry>
     <entry>
-      <name>Adobe Flash Player Updater Task</name>
-      <description>This task keeps your Adobe Flash Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
+      <name>Adobe Flash Player PPAPI Notifier Task</name>
+      <description>This task keeps your Adobe Flash PPAPI Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Adobe Flash Player Updater</name>
+          <name>Adobe Flash Player PPAPI Notifier</name>
           <path>\</path>
           <value>Disabled</value>
         </params>
@@ -86,6 +74,19 @@
         <plugin>Services</plugin>
         <params>
           <name>AdobeFlashPlayerUpdateSvc</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Adobe Flash Player Updater Task</name>
+      <description>This task keeps your Adobe Flash Player installation up to date with the latest enhancements and security fixes. If this task is disabled or removed, Adobe Flash Player will be unable to automatically secure your machine with the latest security fixes.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Adobe Flash Player Updater</name>
+          <path>\</path>
           <value>Disabled</value>
         </params>
       </action>
@@ -115,6 +116,32 @@
       </action>
     </entry>
     <entry>
+      <name>AdobeCCAppRegistration-AdobeNotificationClient*</name>
+      <description>Register package for current user</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>AdobeCCAppRegistration-AdobeNotificationClient*</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>AdobeGCInvoker-1.0</name>
+      <description>Part of Adobe Invoker Utility</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>AdobeGCInvoker-1.0</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>Creative Cloud desktop app Update Service (AdobeUpdateService)</name>
       <description>Creative Cloud desktop app Update Service</description>
       <execute>1</execute>
@@ -128,9 +155,423 @@
     </entry>
   </group>
   <group>
+    <id>AobeReaderDC</id>
+    <displayname>Adobe - Reader DC</displayname>
+    <description>Specific configuration for Adobe Reader DC</description>
+    <entry>
+      <name>Accept browser-based EULA (default user)</name>
+      <description>Reader uses the key EULA. If the EULA is not accepted, the application stops running after a set period of time. Possible values include:
+0: Show the EULA because it has not been accepted.
+1: Don't show the EULA.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EULAAcceptedForBrowser</name>
+          <path>HKDU\Software\Adobe\Acrobat Reader\DC\AdobeViewer</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Accept EULA (default user)</name>
+      <description>If the EULA is not accepted, the application stops running after a set period of time. Possible values include:
+0: Show the EULA because it has not been accepted.
+1: Don't show the EULA because it has not been accepted.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EULA</name>
+          <path>HKDU\Software\Adobe\Acrobat Reader\DC\AdobeViewer</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Adobe Send and Track plugin for Outlook</name>
+      <description>When enabled, an Adobe Send and Track button appears in Outlook when composing an email. It enables sending large files as public links through Outlook. The attached files are uploaded to Adobe Document Cloud and public links to the files are inserted in the email body. Recipients can click the link to preview the file in a browser window and can download the file if needed. Possible values include:
+0: Enable Adobe Send and Track.
+1: Disable Adobe Send and Track.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bAdobeSendPluginToggle</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cCloud</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable both updates to the product's web-plugin components as well as all services</name>
+      <description>For product versions after 11.x, this new preference replaces the now deprecated HKCU services master switch bEnableAcrobatHS . It disables both updates to the product's web-plugin components as well as all services without exception, including any sign-in screen. The setting is not the same as bUpdater which resides directly under FeatureLockDown and disables product updates. Possible values include:
+0: Disable services and service component updates.
+1: Enable services.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bUpdater</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable cloud storage connectors</name>
+      <description>Only supported on the Continuous track.
+Allows controlling in-product access to third party services for file storage. Dropbox support began with the Oct. 13, 2015 release. May 9, 2016: The preference now controls all the third-party connectors, including Box, OneDrive, and Dropbox (not SharePoint). When disabled, Possible values include: Possible values include:
+0: Enable 3rd party connectors.
+1: Disable 3rd party connectors.
+This preference disables 3rd party web connectors and their entry points from the product's UI, including in the Home view's left hand pane and under Add Account as well as custom Open/Save dialogs. If Document Cloud is also disabled, Open and Save dialogs revert to platform dialogs.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bToggleWebConnectors</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable collecion of usage data for some of Acrobat's dialogs</name>
+      <description>Disable collecion of usage data for some of Acrobat's dialogs. Possible values include:
+0: Disable data collection ADM dialogs.
+1 or null: Enable data collection.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bProtectedMode</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Document Cloud service access</name>
+      <description>This setting does not affect Adobe Send for Signature (Adobe Sign), preference synchronization, or third party connectors. For the base release, it also did not disable Send and Track (Share); however, it does control Send and Track with the July, 2015 release. For Acrobat Reader, this preference removes Create PDF, Export PDF, Organize, and Combine even if the ID has a subscription to those services. To disable all services, use bUpdater . Possible values include:
+0: Enable Document Cloud services.
+1: Disable Document Cloud services.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bUpdater</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Document Cloud service access except those features controlled by the other preferences</name>
+      <description>This setting does not affect Adobe Send for Signature (Adobe Sign), preference synchronization, or third party connectors. For the base release, it also did not disable Send and Track (Share); however, it does control Send and Track with the July, 2015 release. For Acrobat Reader, this preference removes Create PDF, Export PDF, Organize, and Combine even if the ID has a subscription to those services. To disable all services, use bUpdater . Possible values include:
+0: Enable Document Cloud services.
+1: Disable Document Cloud services.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bToggleAdobeDocumentServices</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Document Cloud storage</name>
+      <description>DC storage is enabled by default. Possible values include:
+0: Enable Document Cloud storage.
+1: Disable Document Cloud storage.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bToggleAdobeDocumentServices</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable JavaScript execution in PDFs</name>
+      <description>Toggles JavaScript execution off globally; when off, the PDF cannot execute JavaScript.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bEnableJS</name>
+          <path>HKLM\Software\Adobe\Acrobat Reader\DC\FeatureLockDown\bDisableJavaScript</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Protected Mode which sandboxes Acrobat and Reader processes</name>
+      <description>Protected Mode should be enabled to protect user systems and data. Possible values include:
+0: Don't enable protected mode.
+1: Do enable protected mode.</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bProtectedMode</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Repairs 1/2</name>
+      <description>When working with virtualized installations, users should not be able to run repair from the help menu. Only an administrator should be able to invoke actions that may require a reboot of a Citrix server, WT server, and so on. To disable the menu item, create this preference and set the value to 1.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Disable_Repair</name>
+          <path>HKLM\Software\Adobe\Acrobat Reader\DC\Installer</path>
+          <value>1</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable Repairs 2/2</name>
+      <description>Specifies whether to disable the Help &gt; Repair Installation menu for all users on virtual and and regular installs.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DisableMaintenance</name>
+          <path>HKLM\Software\Adobe\Acrobat Reader\DC\Installer</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable the Scan tab in Home view</name>
+      <description>When enabled, links to scans appear under the Scan tab in the Home view. Possible values include:
+0: Hide the scan tab.
+1: Show the Scan tab.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bShowScanTabInHomeView</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable the SharePoint and Office 365 integration features</name>
+      <description>Controls the application's ability to detect that a file came from a Sharepoint server, disables the check-out prompt, and removes the SharePoint specific menu items. Possible values include:
+0: Same as "null." Don't disable SharePoint and Office 365 integration.
+1: Disable SharePoint and Office 365 integration.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bDisableSharePointFeatures</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cSharePoint</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable the Updater and removes associated user interface items</name>
+      <description>Manually this preference to disable updates. For 11.x products and earlier, this preference overrides any bDeclined value. For DC products, this setting overrides Mode.
+0: Disables and locks the Updater.
+1: No effect.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bUpdater</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disable to automatically save documents (default user)</name>
+      <description>Specifies whether or not to automatically save documents. Possible values include:
+0: Don't auto save documents
+1: Auto save documents.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bAutoSaveDocsEnabled</name>
+          <path>HKDU\Software\Adobe\Acrobat Reader\DC\AutoSaveDocs</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Disables upgrade product messages</name>
+      <description>Products that don't provide the full set of features by default provide the user the opportunity to upgrade. For example, Reader users can purchase additional tools and features, and Acrobat Standard users can upgrade to Acrobat Professional. Possible values include:
+0 or null: Don't disable upsell.
+1: Disable upsell.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bAcroSuppressUpsell</name>
+          <path>HKLM\Software\Adobe\Acrobat Reader\DC\Installer</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide "make Adobe Acrobat the default PDF application" popup (default user)</name>
+      <description>When Acrobat is not set as the default PDF handler and it is launched, a dialog prompts  whether to make Adobe Acrobat the default PDF application.
+Possible values of this registry key are:
+1: Do not show this message again
+0: Show this message every time Acrobat is launched until it is set as the default PDF handler.
+You can create the key manually or use it using deployment to suppress the message.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>iAppDoNotTakePDFOwnershipAtLaunch</name>
+          <path>HKDU\Software\Adobe\Acrobat Reader\DC\AVAlert\cCheckBox</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide messages from Adobe when a document opens</name>
+      <description>This preference also controls messages in the right-hand pane for DC products as well as the "Learn More" link, including the "Start Free Trial" message promoting Acrobat. Possible values include:
+0: Don't show messages from Adobe when a document opens.
+1: Show messages from Adobe when a document opens.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bDontShowMsgWhenViewingDoc</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cIPM</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide messages from Adobe when the product launches</name>
+      <description>This preference also hides the Share Feedback icon, removes messages such as the 11.x "end-of-life" warning, and disables the dialog prompt that urges users to complete their profile. In later product versions, this preference removes the Home banner (top message area) from the Home view. Possible values include:
+0: Don't show messages from Adobe when the product launches.
+1: Show messages from Adobe when the product launches.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bShowMsgAtLaunch</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cIPM</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide the Save Signature UI</name>
+      <description>When a user creates a new signature, the dialog offers the option to store the signature in the cloud for later use. This preference also controls saving user initials. Possible values include:
+0: Show the Save Signature UI
+1: Hide the Save Signature UI</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bToggleAdobeSign</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Locks the features associated with bShowMsgAtLaunch and bDontShowMsgWhenViewingDoc</name>
+      <description>Locks the features associated with bShowMsgAtLaunch and bDontShowMsgWhenViewingDoc so that ends users can't change the settings.
+Possible values include:
+0: Locks the feature so end users can't change the settings.
+1: Allows users to change the settings. A value of 1 has the same affect as this key not existing at all.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>bAllowUserToChangeMsgPrefs</name>
+          <path>HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cIPM</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>User - Hide "make Adobe Acrobat the default PDF application" (Windows 10) popup (default user)</name>
+      <description>When Acrobat is not set as the default PDF handler and it is launched, a dialog prompts  whether to make Adobe Acrobat the default PDF application.
+Possible values of this registry key are:
+1: Do not show this message again
+0: Show this message every time Acrobat is launched until it is set as the default PDF handler.
+You can create the key manually or use it using deployment to suppress the message.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>iAppDoNotTakePDFOwnershipAtLaunchWin10</name>
+          <path>HKDU\Software\Adobe\Acrobat Reader\DC\AVAlert\cCheckBox</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
     <id>DropBox</id>
     <displayname>DropBox</displayname>
     <description>Configure DropBox items</description>
+    <entry>
+      <name>Dropbox Update Service (dbupdate)</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>dbupdate</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Dropbox Update Service (dbupdatem)</name>
+      <description>Keeps the Dropbox software updated.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>dbupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
     <entry>
       <name>DropboxUpdateTaskMachineCore Task</name>
       <description>Keeps the Dropbox software updated.</description>
@@ -157,82 +598,34 @@
         </params>
       </action>
     </entry>
-    <entry>
-      <name>Dropbox Update Service (dbupdate)</name>
-      <description>Keeps the Dropbox software updated.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>dbupdate</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Dropbox Update Service (dbupdatem)</name>
-      <description>Keeps the Dropbox software updated.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>dbupdatem</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
   </group>
   <group>
     <id>Google</id>
     <displayname>Google</displayname>
     <description>Configures Google items</description>
     <entry>
-      <name>GoogleUpdateTaskMachineUA Task</name>
-      <description>Google Automatic Update Service</description>
+      <name>Google Chome - ActiveSetup</name>
+      <description>Remove the ActiveSetup value</description>
       <execute>1</execute>
       <action>
-        <plugin>SchTasks</plugin>
+        <plugin>Registry</plugin>
         <params>
-          <name>GoogleUpdateTaskMachineUA</name>
-          <path>\</path>
-          <value>Disabled</value>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\{8A69D345-D564-463c-AFF1-A69D9E530F96}</path>
+          <value>CTXOE_DeleteValue</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>GoogleUpdateTaskMachineCore Task</name>
-      <description>Google Automatic Update Core</description>
+      <name>Google Chome - ActiveSetup (WOW6432)</name>
+      <description>Remove the ActiveSetup value</description>
       <execute>1</execute>
       <action>
-        <plugin>SchTasks</plugin>
+        <plugin>Registry</plugin>
         <params>
-          <name>GoogleUpdateTaskMachineCore</name>
-          <path>\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Google Update Service (gupdate)</name>
-      <description>Google Update Service</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>gupdate</name>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
-      <name>Google Update Service (gupdatem)</name>
-      <description>Google Update Service</description>
-      <execute>1</execute>
-      <action>
-        <plugin>Services</plugin>
-        <params>
-          <name>gupdatem</name>
-          <value>Disabled</value>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components\{8A69D345-D564-463c-AFF1-A69D9E530F96}</path>
+          <value>CTXOE_DeleteValue</value>
         </params>
       </action>
     </entry>
@@ -249,8 +642,8 @@
       </action>
     </entry>
     <entry>
-      <name>Google Update - Update policy override default Registry</name>
-      <description>Specifies the default policy for software updates from Google.
+      <name>Google Chrome Update - Update policy override Registry</name>
+      <description>Specifies how Google Update handles available Google Chrome updates from Google.
 (0) Updates disabled
 (1) Always allow updates
 (2) Manual updates only
@@ -259,7 +652,7 @@
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>UpdateDefault</name>
+          <name>Update{8A69D345-D564-463C-AFF1-A69D9E530F96}</name>
           <path>HKLM\SOFTWARE\Policies\Google\Update</path>
           <value>0</value>
           <valuetype>Dword</valuetype>
@@ -298,8 +691,8 @@ Set the value to 0 if you want to disable all auto-update checks</description>
       </action>
     </entry>
     <entry>
-      <name>Google Chrome Update - Update policy override Registry</name>
-      <description>Specifies how Google Update handles available Google Chrome updates from Google.
+      <name>Google Update - Update policy override default Registry</name>
+      <description>Specifies the default policy for software updates from Google.
 (0) Updates disabled
 (1) Always allow updates
 (2) Manual updates only
@@ -308,11 +701,149 @@ Set the value to 0 if you want to disable all auto-update checks</description>
       <action>
         <plugin>Registry</plugin>
         <params>
-          <name>Update{8A69D345-D564-463C-AFF1-A69D9E530F96}</name>
+          <name>UpdateDefault</name>
           <path>HKLM\SOFTWARE\Policies\Google\Update</path>
           <value>0</value>
           <valuetype>Dword</valuetype>
         </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update Service (gupdate)</name>
+      <description>Google Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>gupdate</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Google Update Service (gupdatem)</name>
+      <description>Google Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>gupdatem</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>GoogleUpdateTaskMachineCore Task</name>
+      <description>Google Automatic Update Core</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>GoogleUpdateTaskMachineCore</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>GoogleUpdateTaskMachineUA Task</name>
+      <description>Google Automatic Update Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>GoogleUpdateTaskMachineUA</name>
+          <path>\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Rename Google Chrome Updater (Program Files (x86) directory)</name>
+      <description>Rename the updater executable for Google Chrome</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe";
+if (Test-Path -Path $updaterFilename) {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Updater present";
+} else {
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Updater not present";
+}]]></value>
+        </analyzeparams>
+        <executeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe";
+$updateNewName = "GoogleUpdate.original";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Google\Update\GoogleUpdate.original";
+$updateNewName = "GoogleUpdate.exe";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed to original";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>Rename Google Chrome Updater (Program Files directory)</name>
+      <description>Rename the updater executable for Google Chrome</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Google\Update\GoogleUpdate.exe";
+if (Test-Path -Path $updaterFilename) {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Updater present";
+} else {
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Updater not present";
+}]]></value>
+        </analyzeparams>
+        <executeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Google\Update\GoogleUpdate.exe";
+$updateNewName = "GoogleUpdate.original";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Google\Update\GoogleUpdate.original";
+$updateNewName = "GoogleUpdate.exe";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed to original";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </rollbackparams>
       </action>
     </entry>
   </group>
@@ -364,66 +895,97 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
     <displayname>Microsoft</displayname>
     <description>Configure Microsoft items</description>
     <entry>
-      <name>MS SCCM - Configuration Manager Health Evaluation Task</name>
-      <description>System Center Configuration Manager</description>
+      <name>MS Defender - Windows Defender Cache Maintenance Task</name>
+      <description>Periodic maintenance task.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Configuration Manager Health Evaluation</name>
-          <path>\Microsoft\Configuration Manager\</path>
+          <name>Windows Defender Cache Maintenance</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS SCCM - Configuration Manager Idle Detection Task</name>
-      <description>Configuration Manager Idle Detection</description>
+      <name>MS Defender - Windows Defender Cleanup Task</name>
+      <description>Periodic cleanup task.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Configuration Manager Idle Detection</name>
-          <path>\Microsoft\Configuration Manager\</path>
+          <name>Windows Defender Cleanup</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS SCCM - Configuration Manager Maintenance Task</name>
-      <description>Configuration Manager Maintenance</description>
+      <name>MS Defender - Windows Defender Scheduled Scan Task</name>
+      <description>Periodic scan task.</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Configuration Manager Maintenance</name>
-          <path>\microsoft\Configuration Manager\</path>
+          <name>Windows Defender Scheduled Scan</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS SCCM - System Center SMS Agent Host Service (CCMExec)</name>
-      <description>System Center SMS Agent Host Service</description>
+      <name>MS Defender - Windows Defender Verification Task</name>
+      <description>Periodic verification task.</description>
       <execute>1</execute>
       <action>
-        <plugin>Services</plugin>
+        <plugin>SchTasks</plugin>
         <params>
-          <name>CCMExec</name>
+          <name>Windows Defender Verification</name>
+          <path>\Microsoft\Windows\Windows Defender</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS OneDrive - OneDrive Per-Machine Standalone Update Task</name>
-      <description>OneDrive Per-Machine Standalone Update Task</description>
+      <name>MS Edge - ActiveSetup</name>
+      <description>Remove the ActiveSetup value</description>
       <execute>1</execute>
       <action>
-        <plugin>SchTasks</plugin>
+        <plugin>Registry</plugin>
         <params>
-          <name>OneDrive Per-Machine Standalone Update Task</name>
-          <path>\</path>
-          <value>Disabled</value>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}</path>
+          <value>CTXOE_DeleteValue</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - ActiveSetup (WOW6432)</name>
+      <description>Remove the ActiveSetup value</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>StubPath</name>
+          <path>HKLM\SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}</path>
+          <value>CTXOE_DeleteValue</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Allow installation default Registry</name>
+      <description>You can specify the default behavior of all channels to allow or block Microsoft Edge updates when Microsoft Edge Update is used.
+(0) Installs disabled
+(1) Always allow installs
+(4) Always allow Machine-Wide</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>InstallDefault</name>
+          <path>HKLM\Software\Policies\Microsoft\EdgeUpdate</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
         </params>
       </action>
     </entry>
@@ -478,6 +1040,112 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
+      <name>MS Edge - Rename Edge Updater (Program Files (x86) directory)</name>
+      <description>Rename the updater executable for Microsoft Edge Chromium</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe";
+if (Test-Path -Path $updaterFilename) {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Updater present";
+} else {
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Updater not present";
+}]]></value>
+        </analyzeparams>
+        <executeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe";
+$updateNewName = "MicrosoftEdgeUpdate.original";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.original";
+$updateNewName = "MicrosoftEdgeUpdate.exe";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed to original";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Rename Edge Updater (Program Files directory)</name>
+      <description>Rename the updater executable for Microsoft Edge Chromium</description>
+      <execute>1</execute>
+      <action>
+        <plugin>PowerShell</plugin>
+        <analyzeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe";
+if (Test-Path -Path $updaterFilename) {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Updater present";
+} else {
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Updater not present";
+}]]></value>
+        </analyzeparams>
+        <executeparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe";
+$updateNewName = "MicrosoftEdgeUpdate.original";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </executeparams>
+        <rollbackparams>
+          <value><![CDATA[$updaterFilename = "C:\Program Files\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.original";
+$updateNewName = "MicrosoftEdgeUpdate.exe";
+
+try {
+    Rename-Item -Path $updaterFilename -NewName $updateNewName -Force;
+    $Global:CTXOE_Result = $True;
+    $Global:CTXOE_Details = "Update renamed to original";
+} catch {
+    $Global:CTXOE_Result = $False;
+    $Global:CTXOE_Details = "Error while renaming";
+}]]></value>
+        </rollbackparams>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Edge - Update policy override default Registry</name>
+      <description>Lets you specify the default behavior for all channels concerning the way Microsoft Edge Update handles available updates for Microsoft Edge.
+(0) Updates disabled
+(1) Always allow updates
+(2) Manual updates only
+(3) Automatic silent updates only</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>UpdateDefault</name>
+          <path>HKLM\Software\Policies\Microsoft\EdgeUpdate</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
       <name>MS O365 - Office Automatic Updates 2.0 Task</name>
       <description>This task ensures that your Microsoft Office installation can check for updates.</description>
       <execute>1</execute>
@@ -504,19 +1172,6 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>MS O365 - Office Feature Updates Task</name>
-      <description>This task ensures that your Microsoft Office installation can check for feature updates.</description>
-      <execute>1</execute>
-      <action>
-        <plugin>SchTasks</plugin>
-        <params>
-          <name>Office Feature Updates</name>
-          <path>\Microsoft\Office\</path>
-          <value>Disabled</value>
-        </params>
-      </action>
-    </entry>
-    <entry>
       <name>MS O365 - Office Feature Updates Logon Task</name>
       <description>This task ensures that your Microsoft Office installation can check for feature updates.</description>
       <execute>1</execute>
@@ -524,6 +1179,19 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
         <plugin>SchTasks</plugin>
         <params>
           <name>Office Feature Updates Logon</name>
+          <path>\Microsoft\Office\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS O365 - Office Feature Updates Task</name>
+      <description>This task ensures that your Microsoft Office installation can check for feature updates.</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Office Feature Updates</name>
           <path>\Microsoft\Office\</path>
           <value>Disabled</value>
         </params>
@@ -595,54 +1263,92 @@ NOTE: the Desktop Ready Event logged by Citrix Profile Management (EventID 1000)
       </action>
     </entry>
     <entry>
-      <name>MS Defender - Windows Defender Cache Maintenance Task</name>
-      <description>Periodic maintenance task.</description>
+      <name>MS OneDrive - OneDrive Per-Machine Standalone Update Task</name>
+      <description>OneDrive Per-Machine Standalone Update Task</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Windows Defender Cache Maintenance</name>
-          <path>\Microsoft\Windows\Windows Defender</path>
+          <name>OneDrive Per-Machine Standalone Update Task</name>
+          <path>\</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS Defender - Windows Defender Cleanup Task</name>
-      <description>Periodic cleanup task.</description>
+      <name>MS OneDrive - OneDrive Per-Machine Standalone Update Task LocalSystem</name>
+      <description>OneDrive Per-Machine Standalone Update Task, LocalSystem User</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Windows Defender Cleanup</name>
-          <path>\Microsoft\Windows\Windows Defender</path>
+          <name>OneDrive Standalone Update Task-S-1-5-18</name>
+          <path>\</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS Defender - Windows Defender Scheduled Scan Task</name>
-      <description>Periodic scan task.</description>
+      <name>MS SCCM - Configuration Manager Health Evaluation Task</name>
+      <description>System Center Configuration Manager</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Windows Defender Scheduled Scan</name>
-          <path>\Microsoft\Windows\Windows Defender</path>
+          <name>Configuration Manager Health Evaluation</name>
+          <path>\Microsoft\Configuration Manager\</path>
           <value>Disabled</value>
         </params>
       </action>
     </entry>
     <entry>
-      <name>MS Defender - Windows Defender Verification Task</name>
-      <description>Periodic verification task.</description>
+      <name>MS SCCM - Configuration Manager Idle Detection Task</name>
+      <description>Configuration Manager Idle Detection</description>
       <execute>1</execute>
       <action>
         <plugin>SchTasks</plugin>
         <params>
-          <name>Windows Defender Verification</name>
-          <path>\Microsoft\Windows\Windows Defender</path>
+          <name>Configuration Manager Idle Detection</name>
+          <path>\Microsoft\Configuration Manager\</path>
           <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS SCCM - Configuration Manager Maintenance Task</name>
+      <description>Configuration Manager Maintenance</description>
+      <execute>1</execute>
+      <action>
+        <plugin>SchTasks</plugin>
+        <params>
+          <name>Configuration Manager Maintenance</name>
+          <path>\microsoft\Configuration Manager\</path>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS SCCM - System Center SMS Agent Host Service (CCMExec)</name>
+      <description>System Center SMS Agent Host Service</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Services</plugin>
+        <params>
+          <name>CCMExec</name>
+          <value>Disabled</value>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>MS Teams - Disable AutoRun</name>
+      <description>Disable AutoRun for MS Teams</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>Teams</name>
+          <path>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</path>
+          <value>CTXOE_DeleteValue</value>
         </params>
       </action>
     </entry>
