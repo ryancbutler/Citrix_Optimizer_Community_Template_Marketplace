@@ -97,68 +97,101 @@
     </template>
     <template>
       <id>D096E1F1-D90A-4BC3-8A67-EFD252708FF6</id>
-      <version>1.0</version>
-      <displayname>Disable 3rd Party Components (John Billekens)</displayname>
-      <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google (John Billekens)</description>
+      <version>1.5</version>
+      <displayname>Disable 3rd Party Components by John Billekens</displayname>
+      <description>Disables 3rd party components (scheduled tasks and services) added by Adobe and Google by John Billekens</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/26/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_3rd_Party_Components.xml</url>
       <checksum />
     </template>
     <template>
       <id>9F6F8353-6BA1-47D7-815D-51C5B2CC83ED</id>
-      <version>0.2</version>
-      <displayname>Windows 10 build 1903 (John Billekens)</displayname>
-      <description>OS optimizations for Windows 10 build 1903 (John Billekens)</description>
+      <version>1.1</version>
+      <displayname>Windows 10 build 1903 by John Billekens</displayname>
+      <description>OS optimizations for Windows 10 build 1903 by John Billekens</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>1/28/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1903.xml</url>
       <checksum />
     </template>
     <template>
       <id>DAA5039B-1961-4931-9490-583FD7255AA9</id>
-      <version>1.0</version>
-      <displayname>Windows 10 build 1909 (John Billekens)</displayname>
-      <description>OS optimizations for Windows 10 build 1909</description>
+      <version>1.2</version>
+      <displayname>Windows 10 build 1909 by John Billekens</displayname>
+      <description>OS optimizations for Windows 10 build 1909 by John Billekens</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/16/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_1909.xml</url>
       <checksum />
     </template>
     <template>
       <id>11149C90-A067-46F4-A687-10E93FE4A3F3</id>
-      <version>1.0</version>
-      <displayname>Windows 10 build 2004 (John Billekens)</displayname>
-      <description>OS optimizations for Windows 10 build 1909</description>
+      <version>1.4</version>
+      <displayname>Windows 10 build 2004 by John Billekens</displayname>
+      <description>OS optimizations for Windows 10 build 1909 by John Billekens</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/16/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_2004.xml</url>
       <checksum />
     </template>
     <template>
-      <id>1BEAA349-54F8-4E9A-B1E1-7779A0A3CEA7</id>
-      <version>1.0</version>
-      <displayname>Windows Server 2016 build 1607 (JohnBillekens)</displayname>
-      <description>OS optimizations for Windows Server 2016</description>
+      <id>8ADABDD6-6342-4F85-B4DC-8338655DDBFD</id>
+      <version>1.1</version>
+      <displayname>Windows 10 20H2, 21H1, 21H2 (2009) by John Billekens</displayname>
+      <description>OS optimizations for Windows 10 20H2, 21H1, 21H2 (2009) by John Billekens</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/16/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_10_2009.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>C30B41FA-1044-41CD-A3B6-B7C3DAD6A16A</id>
+      <version>1.1</version>
+      <displayname>Windows 11 21H2 (2009) by John Billekens</displayname>
+      <description>OS optimizations for Windows 11 21H2 (2009) by John Billekens</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>7/08/2022</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_11_2009.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>1BEAA349-54F8-4E9A-B1E1-7779A0A3CEA7</id>
+      <version>1.2</version>
+      <displayname>Windows Server 2016 build 1607 by John Billekens</displayname>
+      <description>OS optimizations for Windows Server 2016 by John Billekens</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_Server_2016_1607.xml</url>
       <checksum />
     </template>
     <template>
       <id>7F301791-A057-48D6-8A50-F74DBF11D32A</id>
-      <version>1.0</version>
-      <displayname>Windows Server 2019 build 1809 (John Billekens)</displayname>
+      <version>1.2</version>
+      <displayname>Windows Server 2019 build 1809 by John Billekens</displayname>
       <description>OS optimizations for Windows Server 2019</description>
       <category>OS Optimizations</category>
       <author>John Billekens</author>
-      <updatedate>5/16/2020</updatedate>
+      <updatedate>7/08/2022</updatedate>
       <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_Server_2019_1809.xml</url>
+      <checksum />
+    </template>
+    <template>
+      <id>34FEAED2-1233-4779-9889-237F59ED7907</id>
+      <version>1.0</version>
+      <displayname>Windows Server 2022 build 2009 by John Billekens</displayname>
+      <description>OS optimizations for Windows Server 2022 by John Billekens</description>
+      <category>OS Optimizations</category>
+      <author>John Billekens</author>
+      <updatedate>7/08/2022</updatedate>
+      <url>https://raw.githubusercontent.com/ryancbutler/Citrix_Optimizer_Community_Template_Marketplace/master/templates/John%20Billekens/JohnBillekens_Windows_Server_2022_2209.xml</url>
       <checksum />
     </template>
     <template>
