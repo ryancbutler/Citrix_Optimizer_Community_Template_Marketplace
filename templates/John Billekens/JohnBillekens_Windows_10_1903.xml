@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <schemaversion>2.0</schemaversion>
     <version>1.1</version>
@@ -8,7 +9,7 @@
     <description>OS optimizations for Windows 10 build 1903 by John Billekens</description>
     <category>OS Optimizations</category>
     <author>John Billekens</author>
-    <lastupdatedate>7/8/2022</lastupdatedate>
+    <lastupdatedate>7/08/2022</lastupdatedate>
   </metadata>
   <group>
     <id>DisableServices</id>
@@ -1748,7 +1749,7 @@ Does not support analyze/rollback modes, but it is generally safe to use.</descr
  $Global:CTXOE_Details = "Skipping, not 64 bit NGEN not found";
 }
 $Global:CTXOE_Result = $True;
-</value>
+          </value>
         </executeparams>
         <params>
           <value>Write-Host "This optimization does not support analyze or rollback modes, skipping...";
