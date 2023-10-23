@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata>
+    <schemaversion>2.0</schemaversion>
+    <version>1.1</version>
+    <id>Anetys_Windows_10_Default_User_Profile</id>
+    <displayname>Windows 10 - Default user profile</displayname>
+    <description>Tips to configure the Default User Profile on Windows 10.</description>
+    <category>Anetys - Default user profile</category>
+    <author>Frédéric FRESLON</author>
+    <lastupdatedate>2/28/2022</lastupdatedate>
+  </metadata>
+  <condition>
+    <conditioncode>$Target_OS = "Windows 10"
+
+$Detected_OS = (Get-WmiObject -class Win32_OperatingSystem).Caption
+
+If ((Select-String -InputObject $Detected_OS -SimpleMatch "$Target_OS") -eq $Null)
+{ 
+    $Global:CTXOE_Condition = $False
+    $Global:CTXOE_ConditionMessage ="Detected OS: $Detected_OS"
+}
+Else
+{
+    $Global:CTXOE_Condition = $True
+    $Global:CTXOE_ConditionMessage ="Detected OS: $Detected_OS"
+}</conditioncode>
+    <conditionfailedmessage>This configuation is only available for Microsoft Windows 10 Operating System.</conditionfailedmessage>
+  </condition>
+  <group>
+    <id>Windows Taskbar Settings</id>
+    <displayname>Windows Taskbar Settings</displayname>
+    <description>Microsoft Windows 10 taskbar settings.</description>
+    <entry>
+      <name>Show Modern apps on the taskbar</name>
+      <description>Show or hide moderne apps on the taskbar.
+
+	Show Modern apps on the taskbar:
+	StoreAppsOnTaskbar=1
+
+	Hide Modern apps from the taskbar: 
+	StoreAppsOnTaskbar=0</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>StoreAppsOnTaskbar</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Turn off taskbar animation</name>
+      <description>Disable or enable animations in the Windows taskbar
+
+	Turn off taskbar animation:
+	TaskbarAnimations=0
+
+	Enable taskbar animation:
+ 	TaskbarAnimations=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>TaskbarAnimations</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Never combine taskbar buttons</name>
+      <description>Disable the grouping of windows in the taskbar.  
+
+	Always combine - standard:
+	TaskbarGlomLevel=0 
+
+	Combine when the taskbar is full:
+	TaskbarGlomLevel=1 
+
+	Never combine:
+	TaskbarGlomLevel=2</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>TaskbarGlomLevel</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>2</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Use small taskbar buttons</name>
+      <description>Use small buttons on the taskbar.
+
+	Large taskbar buttons:
+	TaskbarSmallIcons=0
+
+	Small taskbar buttons:
+	TaskbarSmallIcons=1</description>
+      <execute>0</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>TaskbarSmallIcons</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Always show all icons in the notification area</name>
+      <description>Always show all icons in the notification area (System Tray).
+
+	Show all icons:
+	EnableAutoTray=0
+
+	Hide inactive icons:
+	EnableAutoTray=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>EnableAutoTray</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>Windows Explorer Settings</id>
+    <displayname>Windows Explorer Settings</displayname>
+    <description>Microsoft Windows 10 explorer settings</description>
+    <entry>
+      <name>Quick Access - Disable show frequently used folders</name>
+      <description>Show frequently used folders in Quick access.
+
+	Disabled
+	ShowFrequent=0
+
+	Enabled
+	ShowFrequent=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ShowFrequent</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Quick Access - Disable show recently used files</name>
+      <description>Show recently used files in Quick access.
+
+	Disabled:
+	ShowRecent=0
+
+	Enabled:
+	ShowRecent=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>ShowRecent</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer</path>
+          <value>0</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Open File Explorer to "This PC"</name>
+      <description>When Windows File Explorer is starting, root directory is "This PC" instead of "Quick Access".
+
+	For "This PC":
+	LaunchTo=1
+
+	For "Quick Access":
+	LaunchTo=2</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>LaunchTo</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Explorer View - Expand to open folder</name>
+      <description>Expand the directory explorer view to open folder. 
+
+	Disabled:
+	NavPaneExpandToCurrentFolder=0
+
+	Enabled:
+	NavPaneExpandToCurrentFolder=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>NavPaneExpandToCurrentFolder</name>
+          <path>HKDU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</path>
+          <value>1</value>
+          <valuetype>Dword</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+  <group>
+    <id>W2019_Windows_Visual_Effects</id>
+    <displayname>Windows visual effects</displayname>
+    <description>Configure Microsoft Windows 10 visual effects.</description>
+    <entry>
+      <name>Disable Animating Windows</name>
+      <description>Disable animating windows when minimizing and maximizing.
+
+	Do not Animate windows when minimizing and maximizing:
+	MinAnimate=0
+
+	Animate windows when minimizing and maximizing:
+	MinAnimate=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>MinAnimate</name>
+          <path>HKDU\Control Panel\Desktop\WindowMetrics</path>
+          <value>0</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+    <entry>
+      <name>Hide window contents while dragging</name>
+      <description>Hide window contents while dragging.
+
+	Hide:
+	DragFullWindows=0
+
+	Show:
+	DragFullWindows=1</description>
+      <execute>1</execute>
+      <action>
+        <plugin>Registry</plugin>
+        <params>
+          <name>DragFullWindows</name>
+          <path>HKDU\Control Panel\Desktop</path>
+          <value>0</value>
+          <valuetype>String</valuetype>
+        </params>
+      </action>
+    </entry>
+  </group>
+</root>
