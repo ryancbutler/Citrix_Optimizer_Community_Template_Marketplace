@@ -7,7 +7,7 @@
     <displayname>Windows Server 2016 - Default User Profile</displayname>
     <description>Tips for configuring the Default User Profile on Windows Server 2016.</description>
     <category>Anetys - Default user profile</category>
-    <author>Frédéric FRESLON</author>
+    <author>Frederic FRESLON</author>
     <lastupdatedate>2/28/2022</lastupdatedate>
   </metadata>
   <condition>
