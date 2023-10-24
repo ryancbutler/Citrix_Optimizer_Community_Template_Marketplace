@@ -7,7 +7,7 @@
     <displayname>Windows Server 2022 - Default User Profile</displayname>
     <description>Tips to configure the Default User Profile on Windows Server 2022.</description>
     <category>Anetys - Default user profile</category>
-    <author>Frédéric FRESLON</author>
+    <author>Frederic FRESLON</author>
     <lastupdatedate>03/12/2022</lastupdatedate>
   </metadata>
   <condition>
